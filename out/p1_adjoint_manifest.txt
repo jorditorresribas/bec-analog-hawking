@@ -1,0 +1,8 @@
+P1 MANIFIESTO — 2026-11-16 02:05:10 CET
+comando: python3 residual_anatomy/gates/gate_P1_adjoint_cert.py
+python 3.9.6  numpy 2.0.2  scipy 1.13.1
+plataforma: macOS-12.7.6-x86_64-i386-64bit
+BLAS/LAPACK: {'name': 'scipy-openblas', 'found': True, 'version': '0.3.27', 'detection method': 'pkgconfig', 'include directory': '/private/var/folders/zf/5wcpcvh91p9g4jn5srhsmzv40000gn/T/cibw-run-sga6lkph/cp39-macosx_x86_64/build/venv/lib/python3.9/site-packages/scipy_openblas64/include', 'lib directory': '/private/var/folders/zf/5wcpcvh91p9g4jn5srhsmzv40000gn/T/cibw-run-sga6lkph/cp39-macosx_x86_64/build/venv/lib/python3.9/site-packages/scipy_openblas64/lib', 'openblas configuration': 'OpenBLAS 0.3.27  USE64BITINT DYNAMIC_ARCH NO_AFFINITY Sandybridge MAX_THREADS=64', 'pc file directory': '/Users/runner/work/numpy/numpy/.openblas'}
+sha256 gate_P1_adjoint_cert.py: 2d70851c4ae11a9fc2ebd96a3a2d0b8d82a40f9aa47fb85a658cd58e93ae2fdf
+sha256 gate_B2_1_algebraic.py: e1414feb97dcb33070561ecf1ce932a29f4e81b4489874cdf865e7b6fe46bbc5
+sha256 gate_B2_2_conditioning.py: 0481dc8ef56e3f6723acb8a15313f433339d0edb4ce7140724057eaf9d4a02cd

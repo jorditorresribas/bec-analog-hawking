@@ -1,0 +1,8 @@
+prueba,m_u,valor,criterio,ok
+I1_regresion_v1.0,,0.0,<= 1e-08,True
+I2_residuo_GP_max,0.5,2.370e-04;5.964e-05;1.493e-05,"decrece; ordenes 1.99,2.00",True
+I4_canales,0.5,todas las omega,3 in / 3 out,True
+I3_defecto_pu_max_W1,0.5,6.375e-03;1.749e-03;4.502e-04; p_obs=1.958; extrap=0.00e+00,"monotono y p in [0.8,2.4]",True
+I2_residuo_GP_max,0.7,3.502e-05;8.776e-06;2.195e-06,"decrece; ordenes 2.00,2.00",True
+I4_canales,0.7,todas las omega,3 in / 3 out,True
+I3_defecto_pu_max_W1,0.7,4.857e-03;1.290e-03;3.278e-04; p_obs=1.976; extrap=-5.42e-20,"monotono y p in [0.8,2.4]",True

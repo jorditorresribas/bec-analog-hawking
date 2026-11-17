@@ -1,0 +1,38 @@
+# MANIFIESTO DEL PAQUETE DE REVISIÓN — FP-benchmark v1.0 (congelado 2026-11-15)
+# SHA-256 de cada artefacto entregado. Vincula cualquier observación del revisor a un
+# contenido exacto. Verificar: grep '^[0-9a-f]' FP_REVIEW_MANIFEST.txt | shasum -a 256 -c
+# Generado: 2026-11-15 01:15:47 CET  Host: Darwin 21.6.0 x86_64  Python: Python 3.9.6
+# (este manifiesto no se incluye a sí mismo)
+#
+# --- Documentación ---
+3f871e782514ed009158de5c0eec3220c0f16f5df919df45c6bbe15a73ae2888  README_FP_BENCHMARK.md
+b605099038cf332bc0bd301672c382911543841ba966a51c530c7e25aafc392e  FP_BENCHMARK.md
+8c77203a53bec928cf793b0551e65519645d38f1e3e2b52853cfdd19c2a41063  FP_SCALES.md
+852c93824bb0d7029a57c6b84c270f6910b91b7f4295a66bfb3a84a87aebfdc7  FP_STEP2.md
+927a6cb4abf59d3f80ef1d37befb4de4a3f007b5cab9257441e281f821bd95e8  FP_STEP3.md
+ca4f2bb182e3971a0ac504d24834615301f1a61e0994a0e69ca4db1744ab0534  FP_STEP4.md
+0e6ef2d3e46af5de32f7a5f6c6158a4a78ea944b98902736c041c66a5176e9f8  REPRODUCE.md
+c65b1ee0659f3d31bf771801355a6267ee550ae6b4ece1dee43abb2da3e94d9f  PROVENANCE.txt
+# --- Entorno ---
+c472649dbb177ebd76709890f343fe715c8e1414f07612fac8e69f8288f927f1  requirements.txt
+05566dceb1394c0ba52e28e74b18cfc0efb325b12d58183db953af94e4a9e27d  .python-version
+# --- Scripts (benchmark, controles, solver) ---
+4eb246a83192365c5e21796dd0d807da0ecc143135e86ea0d9411476559537e0  FP_benchmark_table.py
+f2846c3bd7fad13226f345d7c2964e490ca7fbbca74e5dd593924fd7d6c093d3  FP_check_reproduction.py
+c805934f026072e5a842f0124ef7846380e576100ffed3fa02cc39035449c0fe  FP_step1_scales.py
+9a3aff3f7f9fbf7454adba1eaa1be085ce1ef443a4020712d15eebee4691afea  FP_step2_kappabar.py
+39d43e8b02ac06596eef79c83821151e70b4b38ed286f78bc48f2c67e7c2b25d  FP_step2_audit.py
+06c02a64f739b8ade4d6a5852fb9376356e1ef280f388765fef714473e5c13fb  FP_step3_origin.py
+41a724e7b210f2555c6bd6289e1fce485cf1e85eded667bddc63a1d0d81894b1  FP_step3_audit.py
+b5108804baddf3aa21914941d0751a4669cda7b27c74f8cd4e28f7e2890ff648  FP_step4_upstream_robust.py
+7860da7c2ccba437d1e986f577feffa6e595f91d3f8ac99baaf3d35f68e1ac7d  mode_matching.py
+25aaef7b8a72a2e0e28ab9763b8255180796ae242fbc2e5e549bd4244e324c6b  kappa_derive.py
+fede3ababe3b02512498df153470ca1f8acb31c85efd1933017113d9bbd2f802  bdg_smatrix.py
+0e3ec0f75bcbb221cf1371186384a71defcc6db66236a24412416ae4ced7a440  correlations.py
+083f2a822e91b14401bf1388306ddc3d67daae712ba87a06b763d107517262b8  fd_bdg_operator.py
+# --- Datos (referencia + dependencias) ---
+47fe742af4bb4e3ee5addcf8c21b24d9ab691727251eeec3694cbac0b433d955  reference/fp_benchmark_reference.csv
+47fe742af4bb4e3ee5addcf8c21b24d9ab691727251eeec3694cbac0b433d955  out/fp_benchmark.csv
+b9ec916ec3467525da1723cd3970dc4f729befbe50815358ac77f8f929ab2819  out/fp_step2_kappabar.csv
+080e637c158f2d9a6cfa7f282a45df482fd2e1d42ba9fff370d592fd66e2d6cd  out/fp_step3_origin.csv
+55ec9eafd43007057c298061af416a1434464a5d6a824b87cbebde2cbe319c05  out/waterfall_state.npz

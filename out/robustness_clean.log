@@ -1,0 +1,21 @@
+/Users/mba15/bec-gpe-solver/robustness_clean_metric.py:65: DeprecationWarning: `trapz` is deprecated. Use `trapezoid` instead, or one of the numerical integration functions in `scipy.integrate`.
+  env_int = np.trapz(E, s)                 # fuerza limpia (envolvente integrada)
+pendiente predicha compañero = -1.260  (v_d-c_d=0.630, v_u-c_u=-0.500)
+
+Extendiendo lam a {0.25, 0.5, 1, 2, 4} con metrica LIMPIA (envolvente ridge)
+  lam   omax |    env_int  env_peak   ir_tail | neg_int(viejo)
+ 0.25  0.937 |  2.837e-02  6.51e-03  1.24e-03 |    -1.394e-01
+  0.5  0.662 |  3.742e-02  7.67e-03  2.16e-03 |    -1.894e-01
+  1.0  0.468 |  3.946e-02  7.23e-03  2.79e-03 |    -1.853e-01
+  2.0  0.331 |  3.189e-02  6.50e-03  2.01e-03 |    -1.694e-01
+  4.0  0.234 |  2.562e-02  4.20e-03  1.52e-03 |    -1.466e-01
+
+--- ROBUSTEZ: cocientes normalizados a lam=1 ---
+  lam | env_int/1 ir_tail/1 | neg_int/1 (viejo)
+ 0.25 |     0.719     0.445 |            0.752
+  0.5 |     0.948     0.775 |            1.022
+  1.0 |     1.000     1.000 |            1.000
+  2.0 |     0.808     0.722 |            0.914
+  4.0 |     0.649     0.547 |            0.791
+
+Fig -> out/robustness_clean.png   Datos -> out/robustness_clean.npz

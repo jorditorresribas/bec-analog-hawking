@@ -1,0 +1,25 @@
+Banda termica comun: omega in [1.0, 4.0]*T_H(w)
+w |  kappa   T_H   |  L    N   | banda omega(lam=1)   | pseudo-unit(lam=1)
+
+========================================================================
+FUERZA DE LA LENGUA con banda escalada a T_H(w)  (metrica integral, d2)
+========================================================================
+w=2.0: kappa=0.271 T_H=0.0431  L=40 N=4000  banda(l1)=[0.043,0.172]  pu(l1)=1.1e-03
+w=4.0: kappa=0.135 T_H=0.0215  L=48 N=4800  banda(l1)=[0.022,0.086]  pu(l1)=1.4e-03
+w=6.0: kappa=0.090 T_H=0.0143  L=64 N=6400  banda(l1)=[0.014,0.057]  pu(l1)=1.2e-03
+
+   w | str(l=0.5) str(l=1.0) str(l=2.0) | r(l=0.5) r(l=1.0) r(l=2.0) | spread | max pseudo-unit
+ 2.0 | -2.316e-01 -1.890e-01 -1.698e-01 | 1.225 1.000 0.898 | 0.225  | 1.4e-03
+ 4.0 | -2.716e-01 -2.279e-01 -1.943e-01 | 1.192 1.000 0.852 | 0.192  | 2.7e-03
+ 6.0 | -3.044e-01 -2.656e-01 -2.263e-01 | 1.146 1.000 0.852 | 0.148  | 2.8e-03
+
+========================================================================
+HIPOTESIS (ChatGPT/A): spread (sensibilidad a lambda) DECRECE al crecer w.
+========================================================================
+  w=2.0: spread=0.225
+  w=4.0: spread=0.192
+  w=6.0: spread=0.148
+
+  Tendencia (w fiables 2.0->6.0): 0.225 -> 0.148  => DECRECE (confirma)
+
+Fig -> out/w_dependence_v2.png   Datos -> out/w_dependence_v2.npz

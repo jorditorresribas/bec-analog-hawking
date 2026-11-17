@@ -1,0 +1,8 @@
+# Entorno fijado del benchmark Finazzi-Parentani (congelado 2026-11-15).
+# Python 3.9.6 (ver .python-version). Reproducibilidad estricta: fijar estas versiones.
+# NOTA: la reproducibilidad float EXACTA puede depender del BLAS/LAPACK de scipy; por eso
+# la comparacion con la referencia es por TOLERANCIA (ver FP_check_reproduction.py), no
+# por igualdad textual de la salida.
+numpy==2.0.2
+scipy==1.13.1
+sympy==1.14.0

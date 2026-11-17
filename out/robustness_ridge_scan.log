@@ -1,0 +1,17 @@
+Escaneo de pendiente de la cresta (envolvente integrada) por lam:
+  lam   omax | slope_opt   env@opt  env@-1.26 opt/fix
+ 0.25  0.937 |     -0.80 3.330e-02  2.837e-02    1.17
+  0.5  0.662 |     -0.80 4.225e-02  3.742e-02    1.13
+  1.0  0.468 |     -0.87 4.170e-02  3.946e-02    1.06
+  2.0  0.331 |     -0.80 3.424e-02  3.190e-02    1.07
+  4.0  0.234 |     -0.93 2.754e-02  2.562e-02    1.07
+
+--- ROBUSTEZ con metrica limpia EN LA CRESTA REAL (sin sesgo de pendiente) ---
+  lam | slope_opt | env_opt/lam1
+ 0.25 |     -0.80 |        0.799
+  0.5 |     -0.80 |        1.013
+  1.0 |     -0.87 |        1.000
+  2.0 |     -0.80 |        0.821
+  4.0 |     -0.93 |        0.660
+
+Fig -> out/robustness_ridge_scan.png

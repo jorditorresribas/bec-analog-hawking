@@ -1,0 +1,110 @@
+== E1
+I1 regresion driver vs v1.0 solve_inject (omega=0.1): n_L 9.983509700409e-02 vs 9.983509700409e-02  rel 0.00e+00
+
+=== m_u=0.5  a_th=0.131734  b_th=-0.489796  T_H=0.134479 ===
+I2 residuo GP (max interior) dx=(0.02, 0.01, 0.005): [0.00023704342501207343, 5.963904947270393e-05, 1.493349164338742e-05]  ordenes [np.float64(1.9908222076497541), np.float64(1.9977057384645251)]
+I3 W1 defecto pu (max) dx=(0.02, 0.01, 0.005): ['6.375e-03', '1.749e-03', '4.502e-04']  p_grueso=1.866 p_fino=1.958  extrap(p=2 declarado)=1.74e-05  OK
+I3 W2 defecto pu (max) dx=(0.02, 0.01, 0.005): ['1.625e-02', '4.252e-03', '1.078e-03']  p_grueso=1.934 p_fino=1.980  extrap(p=2 declarado)=2.02e-05  OK
+  a: num=0.131737  th=0.131734  err_rel=2.41e-05  delta_rel=1.29e-04 (N 3.2e-06, L 8.8e-07, est 1.7e-05; p=2.00)  -> PASA
+  b: num=-0.490187  th=-0.489796  err_rel=7.98e-04  delta_rel=3.07e-03 (N 1.1e-05, L 7.3e-07, est 1.5e-03; p=2.07)  -> PASA
+  derivados: Gamma=0.98037 (th 0.97959)  T_H=0.13437 (Ec.57 0.13448)
+
+=== m_u=0.7  a_th=0.066908  b_th=-0.497974  T_H=0.067180 ===
+I2 residuo GP (max interior) dx=(0.02, 0.01, 0.005): [3.5022398035100544e-05, 8.77551901259932e-06, 2.195123957882128e-06]  ordenes [np.float64(1.996721511897117), np.float64(1.999182043049675)]
+I3 W1 defecto pu (max) dx=(0.02, 0.01, 0.005): ['4.857e-03', '1.290e-03', '3.278e-04']  p_grueso=1.913 p_fino=1.976  extrap(p=2 declarado)=7.13e-06  OK
+I3 W2 defecto pu (max) dx=(0.02, 0.01, 0.005): ['1.413e-02', '3.664e-03', '9.332e-04']  p_grueso=1.947 p_fino=1.973  extrap(p=2 declarado)=2.29e-05  OK
+  a: num=0.066910  th=0.066908  err_rel=2.85e-05  delta_rel=1.41e-04 (N 5.2e-07, L 2.4e-07, est 9.4e-06; p=2.03)  -> PASA
+  b: num=-0.498434  th=-0.497974  err_rel=9.24e-04  delta_rel=3.40e-03 (N 2.1e-06, L 1.4e-06, est 1.7e-03; p=1.84)  -> PASA
+  derivados: Gamma=0.99687 (th 0.99595)  T_H=0.06712 (Ec.57 0.06718)
+
+INTEGRIDAD: PASS   CLASIFICACION: PASS   (46 s)
+python3 residual_anatomy/gates/gate_E1_lrcp.py  54,80s user 2,19s system 100% cpu 56,460 total
+exit 0
+== T2
+T2  w=2.0 L=40.0 N=9600 kloc/2pi=0.0430168865
+I1 max|envoltorio(1)-original(1)| = 0.0e+00   I2 |Tup/kloc2pi - ref| = 4.55e-11  -> OK
+  N= 9600 QP_FIJO  lam=0.25  Teff/TH= -0.00562  (lin -0.02050, cub -0.00182)  cons=1.6e-03  nval=9
+  N= 9600 QP_FIJO  lam=0.50  Teff/TH= -0.02671  (lin -0.05420, cub -0.00298)  cons=5.7e-04  nval=9
+  N= 9600 QP_FIJO  lam=1.00  Teff/TH=  0.95724  (lin  0.95727, cub  0.95724)  cons=2.8e-03  nval=9
+  N= 9600 QP_FIJO  lam=2.00  Teff/TH= -0.05323  (lin -0.06629, cub -0.00933)  cons=2.1e-04  nval=9
+  N= 9600 QP_FIJO  lam=4.00  Teff/TH= -0.01706  (lin -0.04292, cub -0.00225)  cons=4.1e-05  nval=9
+  N= 9600 QP_LAM   lam=0.25  Teff/TH=  0.97900  (lin  0.97903, cub  0.97900)  cons=6.5e-03  nval=9
+  N= 9600 QP_LAM   lam=0.50  Teff/TH=  0.97139  (lin  0.97141, cub  0.97138)  cons=6.7e-03  nval=9
+  N= 9600 QP_LAM   lam=1.00  Teff/TH=  0.95724  (lin  0.95727, cub  0.95724)  cons=2.8e-03  nval=9
+  N= 9600 QP_LAM   lam=2.00  Teff/TH=  0.93241  (lin  0.93244, cub  0.93241)  cons=1.2e-03  nval=9
+  N= 9600 QP_LAM   lam=4.00  Teff/TH=  0.89175  (lin  0.89177, cub  0.89174)  cons=1.1e-04  nval=9
+  N=14400 QP_FIJO  lam=0.25  Teff/TH= -0.00562  (lin -0.02050, cub -0.00182)  cons=7.3e-04  nval=9
+  N=14400 QP_FIJO  lam=0.50  Teff/TH= -0.02671  (lin -0.05420, cub -0.00298)  cons=2.5e-04  nval=9
+  N=14400 QP_FIJO  lam=1.00  Teff/TH=  0.95723  (lin  0.95726, cub  0.95723)  cons=1.2e-03  nval=9
+  N=14400 QP_FIJO  lam=2.00  Teff/TH= -0.05323  (lin -0.06629, cub -0.00933)  cons=9.3e-05  nval=9
+  N=14400 QP_FIJO  lam=4.00  Teff/TH= -0.01706  (lin -0.04292, cub -0.00225)  cons=1.8e-05  nval=9
+  N=14400 QP_LAM   lam=0.25  Teff/TH=  0.97895  (lin  0.97897, cub  0.97895)  cons=3.0e-03  nval=9
+  N=14400 QP_LAM   lam=0.50  Teff/TH=  0.97136  (lin  0.97139, cub  0.97136)  cons=3.0e-03  nval=9
+  N=14400 QP_LAM   lam=1.00  Teff/TH=  0.95723  (lin  0.95726, cub  0.95723)  cons=1.2e-03  nval=9
+  N=14400 QP_LAM   lam=2.00  Teff/TH=  0.93241  (lin  0.93243, cub  0.93240)  cons=5.9e-04  nval=9
+  N=14400 QP_LAM   lam=4.00  Teff/TH=  0.89174  (lin  0.89176, cub  0.89174)  cons=4.8e-05  nval=9
+fin (62 s)  integridad=PASS
+python3 residual_anatomy/diag_T2_qp_consistent.py  59,67s user 3,15s system 100% cpu 1:02,36 total
+exit 0
+== Goldstone
+DIAGNOSTICO GOLDSTONE  (Phi_G = (sqrt n, -sqrt n))
+  A v1.0 build_MBdG            lam=1.00 N= 2000  ||M Phi||/||Phi|| = 1.505e-06
+  B build_op_lambda (Qp fijo)  lam=0.25 N= 2000  ||M Phi||/||Phi|| = 2.561e-03   pred = 2.560e-03  ratio = 1.0001
+  B' idem, Qp_lam=sqrt(lam)Qp  lam=0.25 N= 2000  ||M Phi||/||Phi|| = 1.393e-06
+  B build_op_lambda (Qp fijo)  lam=0.50 N= 2000  ||M Phi||/||Phi|| = 1.500e-03   pred = 1.500e-03  ratio = 1.0002
+  B' idem, Qp_lam=sqrt(lam)Qp  lam=0.50 N= 2000  ||M Phi||/||Phi|| = 1.431e-06
+  B build_op_lambda (Qp fijo)  lam=1.00 N= 2000  ||M Phi||/||Phi|| = 1.505e-06
+  B' idem, Qp_lam=sqrt(lam)Qp  lam=1.00 N= 2000  ||M Phi||/||Phi|| = 1.505e-06
+  B build_op_lambda (Qp fijo)  lam=2.00 N= 2000  ||M Phi||/||Phi|| = 2.121e-03   pred = 2.121e-03  ratio = 0.9997
+  B' idem, Qp_lam=sqrt(lam)Qp  lam=2.00 N= 2000  ||M Phi||/||Phi|| = 1.642e-06
+  B build_op_lambda (Qp fijo)  lam=4.00 N= 2000  ||M Phi||/||Phi|| = 5.120e-03   pred = 5.121e-03  ratio = 0.9998
+  B' idem, Qp_lam=sqrt(lam)Qp  lam=4.00 N= 2000  ||M Phi||/||Phi|| = 1.886e-06
+  termino de conveccion sobre sqrt n: 1.354e-06
+  A v1.0 build_MBdG            lam=1.00 N= 4000  ||M Phi||/||Phi|| = 3.761e-07
+  B build_op_lambda (Qp fijo)  lam=0.25 N= 4000  ||M Phi||/||Phi|| = 2.561e-03   pred = 2.561e-03  ratio = 1.0000
+  B' idem, Qp_lam=sqrt(lam)Qp  lam=0.25 N= 4000  ||M Phi||/||Phi|| = 3.482e-07
+  B build_op_lambda (Qp fijo)  lam=0.50 N= 4000  ||M Phi||/||Phi|| = 1.500e-03   pred = 1.500e-03  ratio = 1.0001
+  B' idem, Qp_lam=sqrt(lam)Qp  lam=0.50 N= 4000  ||M Phi||/||Phi|| = 3.578e-07
+  B build_op_lambda (Qp fijo)  lam=1.00 N= 4000  ||M Phi||/||Phi|| = 3.761e-07
+  B' idem, Qp_lam=sqrt(lam)Qp  lam=1.00 N= 4000  ||M Phi||/||Phi|| = 3.761e-07
+  B build_op_lambda (Qp fijo)  lam=2.00 N= 4000  ||M Phi||/||Phi|| = 2.121e-03   pred = 2.121e-03  ratio = 0.9999
+  B' idem, Qp_lam=sqrt(lam)Qp  lam=2.00 N= 4000  ||M Phi||/||Phi|| = 4.104e-07
+  B build_op_lambda (Qp fijo)  lam=4.00 N= 4000  ||M Phi||/||Phi|| = 5.121e-03   pred = 5.122e-03  ratio = 1.0000
+  B' idem, Qp_lam=sqrt(lam)Qp  lam=4.00 N= 4000  ||M Phi||/||Phi|| = 4.715e-07
+  termino de conveccion sobre sqrt n: 3.384e-07
+  A v1.0 build_MBdG            lam=1.00 N= 8000  ||M Phi||/||Phi|| = 9.401e-08
+  B build_op_lambda (Qp fijo)  lam=0.25 N= 8000  ||M Phi||/||Phi|| = 2.561e-03   pred = 2.561e-03  ratio = 1.0000
+  B' idem, Qp_lam=sqrt(lam)Qp  lam=0.25 N= 8000  ||M Phi||/||Phi|| = 8.704e-08
+  B build_op_lambda (Qp fijo)  lam=0.50 N= 8000  ||M Phi||/||Phi|| = 1.500e-03   pred = 1.500e-03  ratio = 1.0000
+  B' idem, Qp_lam=sqrt(lam)Qp  lam=0.50 N= 8000  ||M Phi||/||Phi|| = 8.942e-08
+  B build_op_lambda (Qp fijo)  lam=1.00 N= 8000  ||M Phi||/||Phi|| = 9.401e-08
+  B' idem, Qp_lam=sqrt(lam)Qp  lam=1.00 N= 8000  ||M Phi||/||Phi|| = 9.401e-08
+  B build_op_lambda (Qp fijo)  lam=2.00 N= 8000  ||M Phi||/||Phi|| = 2.122e-03   pred = 2.122e-03  ratio = 1.0000
+  B' idem, Qp_lam=sqrt(lam)Qp  lam=2.00 N= 8000  ||M Phi||/||Phi|| = 1.026e-07
+  B build_op_lambda (Qp fijo)  lam=4.00 N= 8000  ||M Phi||/||Phi|| = 5.122e-03   pred = 5.122e-03  ratio = 1.0000
+  B' idem, Qp_lam=sqrt(lam)Qp  lam=4.00 N= 8000  ||M Phi||/||Phi|| = 1.178e-07
+  termino de conveccion sobre sqrt n: 8.459e-08
+  C Weyl no local (Qp fijo)    lam=0.25 N=  400  ||M Phi||/||Phi|| = 1.144e-03   pred = 1.144e-03  ratio = 1.0001
+  D Pade 2o orden (Qp fijo)    lam=0.25 N=  400  ||M Phi||/||Phi|| = 8.570e-04   pred = 8.464e-04  ratio = 1.0125
+  C Weyl no local (Qp fijo)    lam=0.50 N=  400  ||M Phi||/||Phi|| = 1.351e-03   pred = 7.010e-04  ratio = 1.9267
+  D Pade 2o orden (Qp fijo)    lam=0.50 N=  400  ||M Phi||/||Phi|| = 5.661e-04   pred = 5.556e-04  ratio = 1.0190
+  C Weyl no local (Qp fijo)    lam=1.00 N=  400  ||M Phi||/||Phi|| = 1.794e-03
+  D Pade 2o orden (Qp fijo)    lam=1.00 N=  400  ||M Phi||/||Phi|| = 1.379e-05
+  C Weyl no local (Qp fijo)    lam=2.00 N=  400  ||M Phi||/||Phi|| = 2.675e-03   pred = 1.127e-03  ratio = 2.3731
+  D Pade 2o orden (Qp fijo)    lam=2.00 N=  400  ||M Phi||/||Phi|| = 9.983e-04   pred = 1.009e-03  ratio = 0.9898
+  C Weyl no local (Qp fijo)    lam=4.00 N=  400  ||M Phi||/||Phi|| = 4.282e-03   pred = 2.947e-03  ratio = 1.4531
+  D Pade 2o orden (Qp fijo)    lam=4.00 N=  400  ||M Phi||/||Phi|| = 2.628e-03   pred = 2.638e-03  ratio = 0.9962
+  C Weyl no local (Qp fijo)    lam=0.25 N=  800  ||M Phi||/||Phi|| = 1.146e-03   pred = 1.146e-03  ratio = 1.0000
+  D Pade 2o orden (Qp fijo)    lam=0.25 N=  800  ||M Phi||/||Phi|| = 8.520e-04   pred = 8.494e-04  ratio = 1.0031
+  C Weyl no local (Qp fijo)    lam=0.50 N=  800  ||M Phi||/||Phi|| = 1.354e-03   pred = 7.022e-04  ratio = 1.9280
+  D Pade 2o orden (Qp fijo)    lam=0.50 N=  800  ||M Phi||/||Phi|| = 5.601e-04   pred = 5.575e-04  ratio = 1.0047
+  C Weyl no local (Qp fijo)    lam=1.00 N=  800  ||M Phi||/||Phi|| = 1.798e-03
+  D Pade 2o orden (Qp fijo)    lam=1.00 N=  800  ||M Phi||/||Phi|| = 3.446e-06
+  C Weyl no local (Qp fijo)    lam=2.00 N=  800  ||M Phi||/||Phi|| = 2.681e-03   pred = 1.129e-03  ratio = 2.3754
+  D Pade 2o orden (Qp fijo)    lam=2.00 N=  800  ||M Phi||/||Phi|| = 1.009e-03   pred = 1.012e-03  ratio = 0.9974
+  C Weyl no local (Qp fijo)    lam=4.00 N=  800  ||M Phi||/||Phi|| = 4.291e-03   pred = 2.951e-03  ratio = 1.4541
+  D Pade 2o orden (Qp fijo)    lam=4.00 N=  800  ||M Phi||/||Phi|| = 2.642e-03   pred = 2.645e-03  ratio = 0.9991
+
+CSV -> <repo>/out/diag_goldstone.csv  (414 s)
+python3 residual_anatomy/diag_goldstone.py  576,44s user 12,39s system 103% cpu 9:29,56 total
+exit 0

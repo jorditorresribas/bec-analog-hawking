@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this software or its results, please cite it as below."
+title: "Simulating analogue Hawking radiation with cross-review between two AIs"
+abstract: >-
+  Numerical solver for analogue Hawking radiation in a 1D Bose-Einstein condensate
+  (stationary Bogoliubov-de Gennes, exact modal matching), validated against
+  Finazzi and Parentani (2011) and against the exact waterfall results of
+  Larré, Recati, Carusotto and Pavloff (2012), with a documented investigation of
+  a spurious result caused by an inconsistent background.
+authors:
+  - family-names: "Torres Ribas"
+    given-names: "Jordi"
+repository-code: "https://github.com/jorditorresribas/bec-analog-hawking"
+version: "1.4"
+date-released: "2026-11-17"
+license: [MIT, CC-BY-4.0]
+keywords:
+  - analogue gravity
+  - Hawking radiation
+  - Bose-Einstein condensate
+  - Bogoliubov-de Gennes
+  - reproducibility

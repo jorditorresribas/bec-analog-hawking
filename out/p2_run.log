@@ -1,0 +1,34 @@
+inicio: lunes, 16 de noviembre de 2026, 04:11:41 CET
+  w=0.1 X0= 8.0 N=  800  I-C0=True I-C1=True I-C4=True  eta=5.8e-17  12s
+  w=0.1 X0=10.0 N= 1000  I-C0=True I-C1=True I-C4=True  eta=6.0e-17  18s
+  w=0.1 X0=12.0 N= 1200  I-C0=True I-C1=True I-C4=True  eta=5.5e-17  24s
+  w=0.1 X0=14.0 N= 1400  I-C0=True I-C1=True I-C4=True  eta=5.9e-17  35s
+  w=0.1 X0=16.0 N= 1600  I-C0=True I-C1=True I-C4=True  eta=5.7e-17  50s
+  w=0.1 X0=20.0 N= 2000  I-C0=True I-C1=True I-C4=True  eta=5.5e-17  87s
+  w=0.1 X0=24.0 N= 2400  I-C0=True I-C1=True I-C4=True  eta=6.2e-17  133s
+  w=0.1 X0=28.0 N= 2800  I-C0=True I-C1=True I-C4=True  eta=5.7e-17  199s
+  w=0.1 X0=12.0 N=  500 (dx)  I-C0=True I-C1=True I-C4=True  eta=5.6e-17  2s
+  w=0.1 X0=12.0 N= 1000 (dx)  I-C0=True I-C1=True I-C4=True  eta=5.5e-17  16s
+  w=0.1 X0=12.0 N= 2000 (dx)  I-C0=True I-C1=True I-C4=True  eta=5.4e-17  81s
+  w=0.1 X0=16.0 N=  500 (dx)  I-C0=True I-C1=True I-C4=True  eta=5.4e-17  3s
+  w=0.1 X0=16.0 N= 1000 (dx)  I-C0=True I-C1=True I-C4=True  eta=5.3e-17  15s
+  w=0.1 X0=16.0 N= 2000 (dx)  I-C0=True I-C1=True I-C4=True  eta=5.9e-17  82s
+  w=0.1: C2=FALLA C3=False (ratio indicativo_ok) C5=FALLA -> clasificacion C 
+  w=0.05 X0= 8.0 N=  800  I-C0=True I-C1=True I-C4=True  eta=4.4e-17  9s
+  w=0.05 X0=10.0 N= 1000  I-C0=True I-C1=True I-C4=True  eta=4.1e-17  15s
+  w=0.05 X0=12.0 N= 1200  I-C0=True I-C1=True I-C4=True  eta=4.0e-17  22s
+  w=0.05 X0=14.0 N= 1400  I-C0=True I-C1=True I-C4=True  eta=4.1e-17  30s
+  w=0.05 X0=16.0 N= 1600  I-C0=True I-C1=True I-C4=True  eta=3.9e-17  44s
+  w=0.05 X0=20.0 N= 2000  I-C0=True I-C1=True I-C4=True  eta=3.9e-17  77s
+  w=0.05 X0=24.0 N= 2400  I-C0=True I-C1=True I-C4=True  eta=3.9e-17  122s
+  w=0.05 X0=28.0 N= 2800  I-C0=True I-C1=True I-C4=True  eta=3.8e-17  186s
+  w=0.05 X0=12.0 N=  500 (dx)  I-C0=True I-C1=True I-C4=True  eta=3.9e-17  2s
+  w=0.05 X0=12.0 N= 1000 (dx)  I-C0=True I-C1=True I-C4=True  eta=4.1e-17  15s
+  w=0.05 X0=12.0 N= 2000 (dx)  I-C0=True I-C1=True I-C4=True  eta=4.4e-17  80s
+  w=0.05 X0=16.0 N=  500 (dx)  I-C0=True I-C1=True I-C4=True  eta=3.9e-17  2s
+  w=0.05 X0=16.0 N= 1000 (dx)  I-C0=True I-C1=True I-C4=True  eta=3.8e-17  13s
+  w=0.05 X0=16.0 N= 2000 (dx)  I-C0=True I-C1=True I-C4=True  eta=4.1e-17  75s
+  w=0.05: C2=FALLA C3=True (ratio indicativo_ok) C5=FALLA -> clasificacion C 
+
+  manifiesto -> /Users/mba15/bec-gpe-solver/out/p2_manifest.json  (integridad=PASS, exit=0)
+fin: lunes, 16 de noviembre de 2026, 04:35:51 CET  exit_code=0

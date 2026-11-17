@@ -1,0 +1,31 @@
+{
+ "tipo": "DIAGNOSTICO (no gate)",
+ "script": "residual_anatomy/diag_goldstone.py",
+ "timestamp": "2026-11-16 10:19:19 CET",
+ "segundos": 442.59229493141174,
+ "lams": [
+  0.25,
+  0.5,
+  1.0,
+  2.0,
+  4.0
+ ],
+ "w": 2.0,
+ "csv": {
+  "path": "out/diag_goldstone.csv",
+  "sha256": "58be9738a05af7827de12d2dc97180c038c05ca7a60f0a509d09502ccb2852f1"
+ },
+ "dependencias_sha256": {
+  "fd_bdg_operator.py": "083f2a822e91b14401bf1388306ddc3d67daae712ba87a06b763d107517262b8",
+  "correlations.py": "0e3ec0f75bcbb221cf1371186384a71defcc6db66236a24412416ae4ced7a440",
+  "residual_anatomy/gate0_pseudoherm.py": "a258b57ddd10f74da2adfa4abab394075ebe8bd86cb9d38f88d92341530c4aea",
+  "residual_anatomy/gate_pade_audit2.py": "0b48a4a110b062b918314e756cbe9dc2584cb27142660a79c1a89fbb9259e5e7",
+  "residual_anatomy/diag_goldstone.py": "aa6f4bb536133c4640726cc3a0f13c423e370c19ae4a3b1b6717193f9bbc0847"
+ },
+ "entorno": {
+  "python": "3.9.6",
+  "numpy": "2.0.2",
+  "scipy": "1.13.1",
+  "platform": "macOS-12.7.6-x86_64-i386-64bit"
+ }
+}

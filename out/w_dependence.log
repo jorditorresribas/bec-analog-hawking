@@ -1,0 +1,31 @@
+Sanity (lam=1, omega=0.1): nchan y flujo por w
+  w=2.0: nchan=2  flux_out=-1.0007  eta_in=-1
+  w=4.0: nchan=2  flux_out=-0.9994  eta_in=-1
+  w=6.0: nchan=2  flux_out=-1.0011  eta_in=-1
+
+omega_max(lam) (asintotico, indep. de w): lam=0.5:0.662  lam=1.0:0.468  lam=2.0:0.331
+
+kappa(w) (gravedad superficial, ~1/w):
+  w=2.0: kappa=0.2705  (x_H=+0.470)  T_H=kappa/2pi=0.0431
+  w=4.0: kappa=0.1352  (x_H=+0.930)  T_H=kappa/2pi=0.0215
+  w=6.0: kappa=0.0901  (x_H=+1.390)  T_H=kappa/2pi=0.0143
+
+================================================================
+FUERZA DE LA LENGUA str(w,lam) y cociente str/str(lam=1) por w
+================================================================
+   w | str(lam=0.5) str(lam=1.0) str(lam=2.0) | r(lam=0.5) r(lam=1.0) r(lam=2.0) | spread
+ 2.0 | -1.894e-01 -1.853e-01 -1.694e-01 | 1.022 1.000 0.914 | 0.086
+ 4.0 | -5.258e-02 -6.977e-02 -7.410e-02 | 0.754 1.000 1.062 | 0.246
+ 6.0 | -1.809e-02 -2.884e-02 -3.466e-02 | 0.627 1.000 1.202 | 0.373
+
+================================================================
+HIPOTESIS: la DISPERSION del cociente (sensibilidad a lambda) debe DECRECER
+al crecer w (horizonte mas hidrodinamico -> mas robusto frente al UV k^4).
+================================================================
+  w=2.0: spread (max|r-1|) = 0.086  = sensibilidad a lambda sobre x4
+  w=4.0: spread (max|r-1|) = 0.246  = sensibilidad a lambda sobre x4
+  w=6.0: spread (max|r-1|) = 0.373  = sensibilidad a lambda sobre x4
+
+  Tendencia w=2 -> w=6: 0.086 -> 0.373  => NO decrece (revisar)
+
+Fig -> out/w_dependence.png   Datos -> out/w_dependence.npz

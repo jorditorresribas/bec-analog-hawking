@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/Users/mba15/bec-gpe-solver/residual_anatomy/gates/gate_E1_lrcp.py", line 17, in <module>
+    import mode_matching as MM
+  File "/Users/mba15/bec-gpe-solver/mode_matching.py", line 194, in <module>
+    import bdg_smatrix as B
+  File "/Users/mba15/bec-gpe-solver/bdg_smatrix.py", line 18, in <module>
+    d = np.load("out/waterfall_state.npz")
+  File "/Users/mba15/Library/Python/3.9/lib/python/site-packages/numpy/lib/_npyio_impl.py", line 455, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+FileNotFoundError: [Errno 2] No such file or directory: 'out/waterfall_state.npz'
+rc=1

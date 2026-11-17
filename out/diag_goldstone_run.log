@@ -1,0 +1,59 @@
+DIAGNOSTICO GOLDSTONE  (Phi_G = (sqrt n, -sqrt n))
+  A v1.0 build_MBdG            lam=1.00 N= 2000  ||M Phi||/||Phi|| = 1.505e-06
+  B build_op_lambda (Qp fijo)  lam=0.25 N= 2000  ||M Phi||/||Phi|| = 2.561e-03   pred = 2.560e-03  ratio = 1.0001
+  B' idem, Qp_lam=sqrt(lam)Qp  lam=0.25 N= 2000  ||M Phi||/||Phi|| = 1.393e-06
+  B build_op_lambda (Qp fijo)  lam=0.50 N= 2000  ||M Phi||/||Phi|| = 1.500e-03   pred = 1.500e-03  ratio = 1.0002
+  B' idem, Qp_lam=sqrt(lam)Qp  lam=0.50 N= 2000  ||M Phi||/||Phi|| = 1.431e-06
+  B build_op_lambda (Qp fijo)  lam=1.00 N= 2000  ||M Phi||/||Phi|| = 1.505e-06
+  B' idem, Qp_lam=sqrt(lam)Qp  lam=1.00 N= 2000  ||M Phi||/||Phi|| = 1.505e-06
+  B build_op_lambda (Qp fijo)  lam=2.00 N= 2000  ||M Phi||/||Phi|| = 2.121e-03   pred = 2.121e-03  ratio = 0.9997
+  B' idem, Qp_lam=sqrt(lam)Qp  lam=2.00 N= 2000  ||M Phi||/||Phi|| = 1.642e-06
+  B build_op_lambda (Qp fijo)  lam=4.00 N= 2000  ||M Phi||/||Phi|| = 5.120e-03   pred = 5.121e-03  ratio = 0.9998
+  B' idem, Qp_lam=sqrt(lam)Qp  lam=4.00 N= 2000  ||M Phi||/||Phi|| = 1.886e-06
+  termino de conveccion sobre sqrt n: 1.354e-06
+  A v1.0 build_MBdG            lam=1.00 N= 4000  ||M Phi||/||Phi|| = 3.761e-07
+  B build_op_lambda (Qp fijo)  lam=0.25 N= 4000  ||M Phi||/||Phi|| = 2.561e-03   pred = 2.561e-03  ratio = 1.0000
+  B' idem, Qp_lam=sqrt(lam)Qp  lam=0.25 N= 4000  ||M Phi||/||Phi|| = 3.482e-07
+  B build_op_lambda (Qp fijo)  lam=0.50 N= 4000  ||M Phi||/||Phi|| = 1.500e-03   pred = 1.500e-03  ratio = 1.0001
+  B' idem, Qp_lam=sqrt(lam)Qp  lam=0.50 N= 4000  ||M Phi||/||Phi|| = 3.578e-07
+  B build_op_lambda (Qp fijo)  lam=1.00 N= 4000  ||M Phi||/||Phi|| = 3.761e-07
+  B' idem, Qp_lam=sqrt(lam)Qp  lam=1.00 N= 4000  ||M Phi||/||Phi|| = 3.761e-07
+  B build_op_lambda (Qp fijo)  lam=2.00 N= 4000  ||M Phi||/||Phi|| = 2.121e-03   pred = 2.121e-03  ratio = 0.9999
+  B' idem, Qp_lam=sqrt(lam)Qp  lam=2.00 N= 4000  ||M Phi||/||Phi|| = 4.104e-07
+  B build_op_lambda (Qp fijo)  lam=4.00 N= 4000  ||M Phi||/||Phi|| = 5.121e-03   pred = 5.122e-03  ratio = 1.0000
+  B' idem, Qp_lam=sqrt(lam)Qp  lam=4.00 N= 4000  ||M Phi||/||Phi|| = 4.715e-07
+  termino de conveccion sobre sqrt n: 3.384e-07
+  A v1.0 build_MBdG            lam=1.00 N= 8000  ||M Phi||/||Phi|| = 9.401e-08
+  B build_op_lambda (Qp fijo)  lam=0.25 N= 8000  ||M Phi||/||Phi|| = 2.561e-03   pred = 2.561e-03  ratio = 1.0000
+  B' idem, Qp_lam=sqrt(lam)Qp  lam=0.25 N= 8000  ||M Phi||/||Phi|| = 8.704e-08
+  B build_op_lambda (Qp fijo)  lam=0.50 N= 8000  ||M Phi||/||Phi|| = 1.500e-03   pred = 1.500e-03  ratio = 1.0000
+  B' idem, Qp_lam=sqrt(lam)Qp  lam=0.50 N= 8000  ||M Phi||/||Phi|| = 8.942e-08
+  B build_op_lambda (Qp fijo)  lam=1.00 N= 8000  ||M Phi||/||Phi|| = 9.401e-08
+  B' idem, Qp_lam=sqrt(lam)Qp  lam=1.00 N= 8000  ||M Phi||/||Phi|| = 9.401e-08
+  B build_op_lambda (Qp fijo)  lam=2.00 N= 8000  ||M Phi||/||Phi|| = 2.122e-03   pred = 2.122e-03  ratio = 1.0000
+  B' idem, Qp_lam=sqrt(lam)Qp  lam=2.00 N= 8000  ||M Phi||/||Phi|| = 1.026e-07
+  B build_op_lambda (Qp fijo)  lam=4.00 N= 8000  ||M Phi||/||Phi|| = 5.122e-03   pred = 5.122e-03  ratio = 1.0000
+  B' idem, Qp_lam=sqrt(lam)Qp  lam=4.00 N= 8000  ||M Phi||/||Phi|| = 1.178e-07
+  termino de conveccion sobre sqrt n: 8.459e-08
+  C Weyl no local (Qp fijo)    lam=0.25 N=  400  ||M Phi||/||Phi|| = 1.144e-03   pred = 1.144e-03  ratio = 1.0001
+  D Pade 2o orden (Qp fijo)    lam=0.25 N=  400  ||M Phi||/||Phi|| = 8.570e-04   pred = 8.464e-04  ratio = 1.0125
+  C Weyl no local (Qp fijo)    lam=0.50 N=  400  ||M Phi||/||Phi|| = 1.351e-03   pred = 7.010e-04  ratio = 1.9267
+  D Pade 2o orden (Qp fijo)    lam=0.50 N=  400  ||M Phi||/||Phi|| = 5.661e-04   pred = 5.556e-04  ratio = 1.0190
+  C Weyl no local (Qp fijo)    lam=1.00 N=  400  ||M Phi||/||Phi|| = 1.794e-03
+  D Pade 2o orden (Qp fijo)    lam=1.00 N=  400  ||M Phi||/||Phi|| = 1.379e-05
+  C Weyl no local (Qp fijo)    lam=2.00 N=  400  ||M Phi||/||Phi|| = 2.675e-03   pred = 1.127e-03  ratio = 2.3731
+  D Pade 2o orden (Qp fijo)    lam=2.00 N=  400  ||M Phi||/||Phi|| = 9.983e-04   pred = 1.009e-03  ratio = 0.9898
+  C Weyl no local (Qp fijo)    lam=4.00 N=  400  ||M Phi||/||Phi|| = 4.282e-03   pred = 2.947e-03  ratio = 1.4531
+  D Pade 2o orden (Qp fijo)    lam=4.00 N=  400  ||M Phi||/||Phi|| = 2.628e-03   pred = 2.638e-03  ratio = 0.9962
+  C Weyl no local (Qp fijo)    lam=0.25 N=  800  ||M Phi||/||Phi|| = 1.146e-03   pred = 1.146e-03  ratio = 1.0000
+  D Pade 2o orden (Qp fijo)    lam=0.25 N=  800  ||M Phi||/||Phi|| = 8.520e-04   pred = 8.494e-04  ratio = 1.0031
+  C Weyl no local (Qp fijo)    lam=0.50 N=  800  ||M Phi||/||Phi|| = 1.354e-03   pred = 7.022e-04  ratio = 1.9280
+  D Pade 2o orden (Qp fijo)    lam=0.50 N=  800  ||M Phi||/||Phi|| = 5.601e-04   pred = 5.575e-04  ratio = 1.0047
+  C Weyl no local (Qp fijo)    lam=1.00 N=  800  ||M Phi||/||Phi|| = 1.798e-03
+  D Pade 2o orden (Qp fijo)    lam=1.00 N=  800  ||M Phi||/||Phi|| = 3.446e-06
+  C Weyl no local (Qp fijo)    lam=2.00 N=  800  ||M Phi||/||Phi|| = 2.681e-03   pred = 1.129e-03  ratio = 2.3754
+  D Pade 2o orden (Qp fijo)    lam=2.00 N=  800  ||M Phi||/||Phi|| = 1.009e-03   pred = 1.012e-03  ratio = 0.9974
+  C Weyl no local (Qp fijo)    lam=4.00 N=  800  ||M Phi||/||Phi|| = 4.291e-03   pred = 2.951e-03  ratio = 1.4541
+  D Pade 2o orden (Qp fijo)    lam=4.00 N=  800  ||M Phi||/||Phi|| = 2.642e-03   pred = 2.645e-03  ratio = 0.9991
+
+CSV -> /Users/mba15/bec-gpe-solver/out/diag_goldstone.csv  (439 s)

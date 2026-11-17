@@ -1,0 +1,24 @@
+T2  w=2.0 L=40.0 N=9600 kloc/2pi=0.0430168865
+I1 max|envoltorio(1)-original(1)| = 0.0e+00   I2 |Tup/kloc2pi - ref| = 4.55e-11  -> OK
+  N= 9600 QP_FIJO  lam=0.25  Teff/TH= -0.00562  (lin -0.02050, cub -0.00182)  cons=1.6e-03  nval=9
+  N= 9600 QP_FIJO  lam=0.50  Teff/TH= -0.02671  (lin -0.05420, cub -0.00298)  cons=5.7e-04  nval=9
+  N= 9600 QP_FIJO  lam=1.00  Teff/TH=  0.95724  (lin  0.95727, cub  0.95724)  cons=2.8e-03  nval=9
+  N= 9600 QP_FIJO  lam=2.00  Teff/TH= -0.05323  (lin -0.06629, cub -0.00933)  cons=2.1e-04  nval=9
+  N= 9600 QP_FIJO  lam=4.00  Teff/TH= -0.01706  (lin -0.04292, cub -0.00225)  cons=4.1e-05  nval=9
+  N= 9600 QP_LAM   lam=0.25  Teff/TH=  0.97900  (lin  0.97903, cub  0.97900)  cons=6.5e-03  nval=9
+  N= 9600 QP_LAM   lam=0.50  Teff/TH=  0.97139  (lin  0.97141, cub  0.97138)  cons=6.7e-03  nval=9
+  N= 9600 QP_LAM   lam=1.00  Teff/TH=  0.95724  (lin  0.95727, cub  0.95724)  cons=2.8e-03  nval=9
+  N= 9600 QP_LAM   lam=2.00  Teff/TH=  0.93241  (lin  0.93244, cub  0.93241)  cons=1.2e-03  nval=9
+  N= 9600 QP_LAM   lam=4.00  Teff/TH=  0.89175  (lin  0.89177, cub  0.89174)  cons=1.1e-04  nval=9
+  N=14400 QP_FIJO  lam=0.25  Teff/TH= -0.00562  (lin -0.02050, cub -0.00182)  cons=7.3e-04  nval=9
+  N=14400 QP_FIJO  lam=0.50  Teff/TH= -0.02671  (lin -0.05420, cub -0.00298)  cons=2.5e-04  nval=9
+  N=14400 QP_FIJO  lam=1.00  Teff/TH=  0.95723  (lin  0.95726, cub  0.95723)  cons=1.2e-03  nval=9
+  N=14400 QP_FIJO  lam=2.00  Teff/TH= -0.05323  (lin -0.06629, cub -0.00933)  cons=9.3e-05  nval=9
+  N=14400 QP_FIJO  lam=4.00  Teff/TH= -0.01706  (lin -0.04292, cub -0.00225)  cons=1.8e-05  nval=9
+  N=14400 QP_LAM   lam=0.25  Teff/TH=  0.97895  (lin  0.97897, cub  0.97895)  cons=3.0e-03  nval=9
+  N=14400 QP_LAM   lam=0.50  Teff/TH=  0.97136  (lin  0.97139, cub  0.97136)  cons=3.0e-03  nval=9
+  N=14400 QP_LAM   lam=1.00  Teff/TH=  0.95723  (lin  0.95726, cub  0.95723)  cons=1.2e-03  nval=9
+  N=14400 QP_LAM   lam=2.00  Teff/TH=  0.93241  (lin  0.93243, cub  0.93240)  cons=5.9e-04  nval=9
+  N=14400 QP_LAM   lam=4.00  Teff/TH=  0.89174  (lin  0.89176, cub  0.89174)  cons=4.8e-05  nval=9
+fin (65 s)  integridad=PASS
+rc=0

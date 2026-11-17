@@ -1,0 +1,51 @@
+{
+ "tipo": "DIAGNOSTICO T2 (no gate)",
+ "script": "residual_anatomy/diag_T2_qp_consistent.py",
+ "timestamp": "2026-11-16 10:34:09 CET",
+ "segundos": 65.22576808929443,
+ "integridad": "PASS",
+ "I1_max_abs": 0.0,
+ "I2_regresion": 4.548350585054095e-11,
+ "ref": 0.9572413965031795,
+ "w": 2.0,
+ "L": 40.0,
+ "N": [
+  9600,
+  14400
+ ],
+ "lams": [
+  0.25,
+  0.5,
+  1.0,
+  2.0,
+  4.0
+ ],
+ "XR": [
+  0.05,
+  0.065,
+  0.08,
+  0.1,
+  0.12,
+  0.15,
+  0.18,
+  0.22,
+  0.27
+ ],
+ "kloc_over_2pi": 0.04301688647587249,
+ "dependencias_sha256": {
+  "correlations.py": "0e3ec0f75bcbb221cf1371186384a71defcc6db66236a24412416ae4ced7a440",
+  "fd_bdg_operator.py": "083f2a822e91b14401bf1388306ddc3d67daae712ba87a06b763d107517262b8",
+  "residual_anatomy/residual_gate.py": "bb74b36653a116fc53af18c105833053800f1e774f60e0ae7b5c4221a2ed160d",
+  "residual_anatomy/diag_T2_qp_consistent.py": "ec77ca44b50351200a9f0e62b39c032cbadde96fd24ff58ebcaa1bdfba3adc85"
+ },
+ "entorno": {
+  "python": "3.9.6",
+  "numpy": "2.0.2",
+  "scipy": "1.13.1",
+  "platform": "macOS-12.7.6-x86_64-i386-64bit"
+ },
+ "csv": {
+  "diag_T2.csv": "709de6548f45ba50f10ac6040a837ee03617e7ea67070de823b64c5e52327d88",
+  "diag_T2_nL.csv": "7f5fd8762a819f02e0ecc121202755eac57110343b54cea86070ce88c8cd1f40"
+ }
+}

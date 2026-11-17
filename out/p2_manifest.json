@@ -1,0 +1,3249 @@
+{
+  "gate": "P2 phase reference",
+  "design": "residual_anatomy/P2_DESIGN.md (congelado 2026-11-16) + P2_DESIGN_ADDENDUM_1.md (C2 parcial -> clase I)",
+  "timestamp": "2026-11-16 04:35:51 CET",
+  "command": "/Library/Developer/CommandLineTools/usr/bin/python3 gate_P2_phase_reference.py",
+  "cwd": "/Users/mba15/bec-gpe-solver/residual_anatomy/gates",
+  "exit_code": 0,
+  "integrity": "PASS",
+  "note": "",
+  "error": null,
+  "seconds_total": 1449.1197102069855,
+  "peak_rss_bytes": 6267437056,
+  "environment": {
+    "python": "3.9.6",
+    "numpy": "2.0.2",
+    "scipy": "1.13.1",
+    "platform": "macOS-12.7.6-x86_64-i386-64bit",
+    "blas": "{'name': 'scipy-openblas', 'found': True, 'version': '0.3.27', 'detection method': 'pkgconfig', 'include directory': '/private/var/folders/zf/5wcpcvh91p9g4jn5srhsmzv40000gn/T/cibw-run-sga6lkph/cp39-macosx_x86_64/build/venv/lib/python3.9/site-packages/scipy_openblas64/include', 'lib directory': '/private/var/folders/zf/5wcpcvh91p9g4jn5srhsmzv40000gn/T/cibw-run-sga6lkph/cp39-macosx_x86_64/build/venv/lib/python3.9/site-packages/scipy_openblas64/lib', 'openblas configuration': 'OpenBLAS 0.3.27  USE64BITINT DYNAMIC_ARCH NO_AFFINITY Sandybridge MAX_THREADS=64', 'pc file directory': '/Users/runner/work/numpy/numpy/.openblas'}"
+  },
+  "sha256": {
+    "scripts": {
+      "gate_P2_phase_reference.py": "a0c73727d5a2d7589b948a25ca357d6777058630d49db1cf67079a839f42c51a",
+      "gate_B2_1_algebraic.py": "e1414feb97dcb33070561ecf1ce932a29f4e81b4489874cdf865e7b6fe46bbc5",
+      "gate_B2_2_conditioning.py": "0481dc8ef56e3f6723acb8a15313f433339d0edb4ce7140724057eaf9d4a02cd",
+      "gate_B2_4_X0_convergence.py": "556e0da51557d8a22b7ed3d5125bd7973cccb1e339405e9d57d2664b5df82002"
+    },
+    "design_P2_DESIGN_md": "06b504f9d7d4628824b5c7b2c309b9563c2e6bf16f413ed307e570dbf40064ab",
+    "design_P2_DESIGN_ADDENDUM_1_md": "5d663ab1256547856f6d9e3013ec349ea8f1c1b4155da14cc36f20b2a0ed556a",
+    "input_npz": "55ec9eafd43007057c298061af416a1434464a5d6a824b87cbebde2cbe319c05",
+    "outputs": {
+      "p2_modal_ref.csv": "5ede578c2dacdef5a2b572ab4aad178e2c7213265c49689cb11bf79efba6a283",
+      "p2_kbox_check.csv": "b429bc9cee8071ba3fd84787d92a805e40192f3a545b52daff01d3d304e0a79e",
+      "p2_X0_sweep.csv": "27b213a7f664f105b08d87efa6adc301c62c1c9ebc0fcc077bd24854988c7e49",
+      "p2_invariants.csv": "bcca1bd43f451fc838e094bfc0804f383f9ca443dd1059f87d2f3ea3b933800e",
+      "p2_dx_sweep.csv": "31ca750bad08131f27185220543518afbaf7c39647a32d11fe68d19cdfcb8612"
+    },
+    "Xi_ref": {
+      "0.1": {
+        "L": "9c04f6daf3d9848efdab61b7757400f816f390d2e3cdd3c8574fa0182b51cca9",
+        "R": "6d3dfeabe1a91e76413c8c379c4f4b07f2a33582840732c464cdc5bf64723e5a"
+      },
+      "0.05": {
+        "L": "0eba59bdd35c11875a90c6ef0037b2e53d55b4e4d0a0af1cb6a6137237bd67da",
+        "R": "4ead0eb80388df2c4575b44b810340b691a23106d1d4186ba03d8bf0d05e28e4"
+      }
+    }
+  },
+  "parameters": {
+    "omegas": [
+      0.1,
+      0.05
+    ],
+    "dx_X0sweep": 0.02,
+    "X0_list": [
+      8.0,
+      10.0,
+      12.0,
+      14.0,
+      16.0,
+      20.0,
+      24.0,
+      28.0
+    ],
+    "X_ref": 16.0,
+    "X0_pre": [
+      8.0,
+      10.0,
+      12.0,
+      14.0
+    ],
+    "X0_post": [
+      16.0,
+      20.0,
+      24.0,
+      28.0
+    ],
+    "dx_sweep_X0": [
+      12.0,
+      16.0
+    ],
+    "dx_sweep_N": [
+      500,
+      1000,
+      2000
+    ],
+    "k3_npairs": 10,
+    "k3syn_ncells": 20,
+    "k3_filter": 0.001,
+    "phase_def": 0.001,
+    "seed_k3syn": 20261116,
+    "sigma_in": [
+      -1.0,
+      1.0,
+      1.0
+    ],
+    "sigma_out": [
+      -1.0,
+      1.0,
+      1.0
+    ],
+    "eta_back_repr": "representacion fisica B2.2, ||M|| = sigma_max (potencia)"
+  },
+  "thresholds": {
+    "eta_back": 1e-12,
+    "mu_K12": 1e-13,
+    "dxk_K12": 1e-13,
+    "absmu": 1e-13,
+    "k3syn_factor": 10.0,
+    "nyquist": 0.7853981633974483,
+    "recon": 1e-14,
+    "ident": 1e-12,
+    "C2": 1e-06,
+    "C3": 1e-06,
+    "C3_ratio": 100.0,
+    "C3_floor_factor": 10.0,
+    "p_lo": 1.8,
+    "p_hi": 2.2,
+    "p_floor": 1e-10,
+    "E_ref": 5e-05,
+    "degen": 0.001,
+    "match_gap_warn": 0.1,
+    "k3syn_min_samples": 1
+  },
+  "results": {
+    "0.1": {
+      "classification": "C",
+      "classification_note": "",
+      "C2": false,
+      "C2_state": "FALLA",
+      "C2_detail": {
+        "post_mod": true,
+        "mono_mod_strict": true,
+        "phases": "FALLO",
+        "phases_post": "FALLO",
+        "phases_pre_strict_monotone": "OK",
+        "any_plaquette_defined": true,
+        "Q_post": [
+          "I_11",
+          "I_12",
+          "I_21",
+          "I_22"
+        ],
+        "Q_pre": [
+          "I_11",
+          "I_12",
+          "I_21",
+          "I_22"
+        ],
+        "E_I_post": {
+          "16.0": 0.0,
+          "20.0": 3.0852647432411118e-06,
+          "24.0": 3.1409915841607017e-06,
+          "28.0": 3.1400411288906582e-06
+        },
+        "E_I_pre": {
+          "8.0": 0.0062923474757257125,
+          "10.0": 0.001277498725946291,
+          "12.0": 0.0001051752720662158,
+          "14.0": 2.119905821373891e-05
+        },
+        "rate_informativa": 1.0911339577915924
+      },
+      "est_converged_28_16": true,
+      "C3": false,
+      "C3_ratio": 2851.18790423719,
+      "C3_ratio_status": "indicativo_ok",
+      "eps_pair": 4.061361954457172e-12,
+      "C5": "FALLA",
+      "E_ref_12_16_box": 8.065884397658949e-05,
+      "C5_detail": {
+        "12.0": {
+          "n_material": 9,
+          "material_estimable": true,
+          "material_in_range": true,
+          "E_ref_box_cont": 3.770172275846462e-06,
+          "excluded_nonmaterial": []
+        },
+        "16.0": {
+          "n_material": 9,
+          "material_estimable": true,
+          "material_in_range": true,
+          "E_ref_box_cont": 2.4485078282685794e-05,
+          "excluded_nonmaterial": []
+        }
+      }
+    },
+    "0.05": {
+      "classification": "C",
+      "classification_note": "",
+      "C2": false,
+      "C2_state": "FALLA",
+      "C2_detail": {
+        "post_mod": true,
+        "mono_mod_strict": true,
+        "phases": "FALLO",
+        "phases_post": "FALLO",
+        "phases_pre_strict_monotone": "OK",
+        "any_plaquette_defined": true,
+        "Q_post": [
+          "I_11",
+          "I_12",
+          "I_21",
+          "I_22"
+        ],
+        "Q_pre": [
+          "I_11",
+          "I_12",
+          "I_21",
+          "I_22"
+        ],
+        "E_I_post": {
+          "16.0": 0.0,
+          "20.0": 1.362839443519448e-06,
+          "24.0": 1.3248601167248353e-06,
+          "28.0": 1.3257673945332726e-06
+        },
+        "E_I_pre": {
+          "8.0": 0.02371232724005834,
+          "10.0": 0.0008419613873313914,
+          "12.0": 0.0002086328400499049,
+          "14.0": 3.613896777343584e-05
+        },
+        "rate_informativa": 1.0803852068222823
+      },
+      "est_converged_28_16": true,
+      "C3": true,
+      "C3_ratio": 6423.793175513953,
+      "C3_ratio_status": "indicativo_ok",
+      "eps_pair": 8.811502197486727e-12,
+      "C5": "FALLA",
+      "E_ref_12_16_box": 0.00010524105775121877,
+      "C5_detail": {
+        "12.0": {
+          "n_material": 9,
+          "material_estimable": true,
+          "material_in_range": true,
+          "E_ref_box_cont": 3.6778974680924584e-06,
+          "excluded_nonmaterial": []
+        },
+        "16.0": {
+          "n_material": 9,
+          "material_estimable": true,
+          "material_in_range": true,
+          "E_ref_box_cont": 2.4089119587255208e-05,
+          "excluded_nonmaterial": []
+        }
+      }
+    }
+  },
+  "k3_coverage": [
+    {
+      "omega": 0.1,
+      "tag": "X0sweep",
+      "X0": 8.0,
+      "N": 800,
+      "k3syn_total": {
+        "L": [
+          40,
+          80,
+          20,
+          20
+        ],
+        "R": [
+          40,
+          40,
+          80,
+          80
+        ]
+      },
+      "k3syn_coverage_ok": true,
+      "k3syn_valid": true,
+      "k3syn_invalid": [],
+      "k3syn_by_avec": {
+        "L:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "L:real_p0": [
+          20,
+          20,
+          0,
+          0
+        ],
+        "L:real_p1": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "L:real_p2": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "R:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "R:real_p0": [
+          0,
+          0,
+          20,
+          20
+        ],
+        "R:real_p1": [
+          20,
+          0,
+          20,
+          20
+        ],
+        "R:real_p2": [
+          0,
+          20,
+          20,
+          20
+        ]
+      },
+      "k3real_diag": {
+        "L": [
+          10,
+          10,
+          0,
+          0
+        ],
+        "R": [
+          10,
+          10,
+          10,
+          10
+        ]
+      },
+      "k3real_invalid_diag_no_decide": [],
+      "k1k2_match_quality": {
+        "L": {
+          "min_overlap": 0.9999999999999999,
+          "min_gap": 0.036181618707089025,
+          "ambiguous": true,
+          "bijective": true
+        },
+        "R": {
+          "min_overlap": 1.0,
+          "min_gap": 0.01947278438248623,
+          "ambiguous": true,
+          "bijective": true
+        }
+      },
+      "integrity_ok": {
+        "ic0": true,
+        "ic1": true,
+        "ic4": true
+      }
+    },
+    {
+      "omega": 0.1,
+      "tag": "X0sweep",
+      "X0": 10.0,
+      "N": 1000,
+      "k3syn_total": {
+        "L": [
+          40,
+          80,
+          20,
+          20
+        ],
+        "R": [
+          40,
+          40,
+          80,
+          80
+        ]
+      },
+      "k3syn_coverage_ok": true,
+      "k3syn_valid": true,
+      "k3syn_invalid": [],
+      "k3syn_by_avec": {
+        "L:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "L:real_p0": [
+          20,
+          20,
+          0,
+          0
+        ],
+        "L:real_p1": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "L:real_p2": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "R:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "R:real_p0": [
+          0,
+          0,
+          20,
+          20
+        ],
+        "R:real_p1": [
+          20,
+          0,
+          20,
+          20
+        ],
+        "R:real_p2": [
+          0,
+          20,
+          20,
+          20
+        ]
+      },
+      "k3real_diag": {
+        "L": [
+          10,
+          10,
+          0,
+          0
+        ],
+        "R": [
+          10,
+          10,
+          10,
+          10
+        ]
+      },
+      "k3real_invalid_diag_no_decide": [],
+      "k1k2_match_quality": {
+        "L": {
+          "min_overlap": 0.9999999999999999,
+          "min_gap": 0.036181618707089025,
+          "ambiguous": true,
+          "bijective": true
+        },
+        "R": {
+          "min_overlap": 1.0,
+          "min_gap": 0.01947278438248623,
+          "ambiguous": true,
+          "bijective": true
+        }
+      },
+      "integrity_ok": {
+        "ic0": true,
+        "ic1": true,
+        "ic4": true
+      }
+    },
+    {
+      "omega": 0.1,
+      "tag": "X0sweep",
+      "X0": 12.0,
+      "N": 1200,
+      "k3syn_total": {
+        "L": [
+          40,
+          80,
+          20,
+          20
+        ],
+        "R": [
+          40,
+          40,
+          80,
+          80
+        ]
+      },
+      "k3syn_coverage_ok": true,
+      "k3syn_valid": true,
+      "k3syn_invalid": [],
+      "k3syn_by_avec": {
+        "L:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "L:real_p0": [
+          20,
+          20,
+          0,
+          0
+        ],
+        "L:real_p1": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "L:real_p2": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "R:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "R:real_p0": [
+          0,
+          0,
+          20,
+          20
+        ],
+        "R:real_p1": [
+          20,
+          0,
+          20,
+          20
+        ],
+        "R:real_p2": [
+          0,
+          20,
+          20,
+          20
+        ]
+      },
+      "k3real_diag": {
+        "L": [
+          10,
+          10,
+          0,
+          0
+        ],
+        "R": [
+          10,
+          10,
+          10,
+          10
+        ]
+      },
+      "k3real_invalid_diag_no_decide": [],
+      "k1k2_match_quality": {
+        "L": {
+          "min_overlap": 0.9999999999999999,
+          "min_gap": 0.036181618707089025,
+          "ambiguous": true,
+          "bijective": true
+        },
+        "R": {
+          "min_overlap": 1.0,
+          "min_gap": 0.01947278438248623,
+          "ambiguous": true,
+          "bijective": true
+        }
+      },
+      "integrity_ok": {
+        "ic0": true,
+        "ic1": true,
+        "ic4": true
+      }
+    },
+    {
+      "omega": 0.1,
+      "tag": "X0sweep",
+      "X0": 14.0,
+      "N": 1400,
+      "k3syn_total": {
+        "L": [
+          40,
+          80,
+          20,
+          20
+        ],
+        "R": [
+          40,
+          40,
+          80,
+          80
+        ]
+      },
+      "k3syn_coverage_ok": true,
+      "k3syn_valid": true,
+      "k3syn_invalid": [],
+      "k3syn_by_avec": {
+        "L:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "L:real_p0": [
+          20,
+          20,
+          0,
+          0
+        ],
+        "L:real_p1": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "L:real_p2": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "R:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "R:real_p0": [
+          0,
+          0,
+          20,
+          20
+        ],
+        "R:real_p1": [
+          20,
+          0,
+          20,
+          20
+        ],
+        "R:real_p2": [
+          0,
+          20,
+          20,
+          20
+        ]
+      },
+      "k3real_diag": {
+        "L": [
+          10,
+          10,
+          0,
+          0
+        ],
+        "R": [
+          10,
+          10,
+          10,
+          10
+        ]
+      },
+      "k3real_invalid_diag_no_decide": [],
+      "k1k2_match_quality": {
+        "L": {
+          "min_overlap": 0.9999999999999999,
+          "min_gap": 0.036181618707089025,
+          "ambiguous": true,
+          "bijective": true
+        },
+        "R": {
+          "min_overlap": 1.0,
+          "min_gap": 0.01947278438248623,
+          "ambiguous": true,
+          "bijective": true
+        }
+      },
+      "integrity_ok": {
+        "ic0": true,
+        "ic1": true,
+        "ic4": true
+      }
+    },
+    {
+      "omega": 0.1,
+      "tag": "X0sweep",
+      "X0": 16.0,
+      "N": 1600,
+      "k3syn_total": {
+        "L": [
+          40,
+          80,
+          20,
+          20
+        ],
+        "R": [
+          40,
+          40,
+          80,
+          80
+        ]
+      },
+      "k3syn_coverage_ok": true,
+      "k3syn_valid": true,
+      "k3syn_invalid": [],
+      "k3syn_by_avec": {
+        "L:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "L:real_p0": [
+          20,
+          20,
+          0,
+          0
+        ],
+        "L:real_p1": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "L:real_p2": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "R:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "R:real_p0": [
+          0,
+          0,
+          20,
+          20
+        ],
+        "R:real_p1": [
+          20,
+          0,
+          20,
+          20
+        ],
+        "R:real_p2": [
+          0,
+          20,
+          20,
+          20
+        ]
+      },
+      "k3real_diag": {
+        "L": [
+          10,
+          10,
+          0,
+          0
+        ],
+        "R": [
+          10,
+          10,
+          10,
+          10
+        ]
+      },
+      "k3real_invalid_diag_no_decide": [],
+      "k1k2_match_quality": {
+        "L": {
+          "min_overlap": 0.9999999999999999,
+          "min_gap": 0.036181618707089025,
+          "ambiguous": true,
+          "bijective": true
+        },
+        "R": {
+          "min_overlap": 1.0,
+          "min_gap": 0.01947278438248623,
+          "ambiguous": true,
+          "bijective": true
+        }
+      },
+      "integrity_ok": {
+        "ic0": true,
+        "ic1": true,
+        "ic4": true
+      }
+    },
+    {
+      "omega": 0.1,
+      "tag": "X0sweep",
+      "X0": 20.0,
+      "N": 2000,
+      "k3syn_total": {
+        "L": [
+          40,
+          80,
+          20,
+          20
+        ],
+        "R": [
+          40,
+          40,
+          80,
+          80
+        ]
+      },
+      "k3syn_coverage_ok": true,
+      "k3syn_valid": true,
+      "k3syn_invalid": [],
+      "k3syn_by_avec": {
+        "L:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "L:real_p0": [
+          20,
+          20,
+          0,
+          0
+        ],
+        "L:real_p1": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "L:real_p2": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "R:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "R:real_p0": [
+          0,
+          0,
+          20,
+          20
+        ],
+        "R:real_p1": [
+          20,
+          0,
+          20,
+          20
+        ],
+        "R:real_p2": [
+          0,
+          20,
+          20,
+          20
+        ]
+      },
+      "k3real_diag": {
+        "L": [
+          10,
+          10,
+          0,
+          0
+        ],
+        "R": [
+          10,
+          10,
+          10,
+          10
+        ]
+      },
+      "k3real_invalid_diag_no_decide": [],
+      "k1k2_match_quality": {
+        "L": {
+          "min_overlap": 0.9999999999999999,
+          "min_gap": 0.036181618707089025,
+          "ambiguous": true,
+          "bijective": true
+        },
+        "R": {
+          "min_overlap": 1.0,
+          "min_gap": 0.01947278438248623,
+          "ambiguous": true,
+          "bijective": true
+        }
+      },
+      "integrity_ok": {
+        "ic0": true,
+        "ic1": true,
+        "ic4": true
+      }
+    },
+    {
+      "omega": 0.1,
+      "tag": "X0sweep",
+      "X0": 24.0,
+      "N": 2400,
+      "k3syn_total": {
+        "L": [
+          40,
+          80,
+          20,
+          20
+        ],
+        "R": [
+          40,
+          40,
+          80,
+          80
+        ]
+      },
+      "k3syn_coverage_ok": true,
+      "k3syn_valid": true,
+      "k3syn_invalid": [],
+      "k3syn_by_avec": {
+        "L:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "L:real_p0": [
+          20,
+          20,
+          0,
+          0
+        ],
+        "L:real_p1": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "L:real_p2": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "R:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "R:real_p0": [
+          0,
+          0,
+          20,
+          20
+        ],
+        "R:real_p1": [
+          20,
+          0,
+          20,
+          20
+        ],
+        "R:real_p2": [
+          0,
+          20,
+          20,
+          20
+        ]
+      },
+      "k3real_diag": {
+        "L": [
+          10,
+          10,
+          0,
+          0
+        ],
+        "R": [
+          10,
+          10,
+          10,
+          10
+        ]
+      },
+      "k3real_invalid_diag_no_decide": [],
+      "k1k2_match_quality": {
+        "L": {
+          "min_overlap": 0.9999999999999999,
+          "min_gap": 0.036181618707089025,
+          "ambiguous": true,
+          "bijective": true
+        },
+        "R": {
+          "min_overlap": 1.0,
+          "min_gap": 0.01947278438248623,
+          "ambiguous": true,
+          "bijective": true
+        }
+      },
+      "integrity_ok": {
+        "ic0": true,
+        "ic1": true,
+        "ic4": true
+      }
+    },
+    {
+      "omega": 0.1,
+      "tag": "X0sweep",
+      "X0": 28.0,
+      "N": 2800,
+      "k3syn_total": {
+        "L": [
+          40,
+          80,
+          20,
+          20
+        ],
+        "R": [
+          40,
+          40,
+          80,
+          80
+        ]
+      },
+      "k3syn_coverage_ok": true,
+      "k3syn_valid": true,
+      "k3syn_invalid": [],
+      "k3syn_by_avec": {
+        "L:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "L:real_p0": [
+          20,
+          20,
+          0,
+          0
+        ],
+        "L:real_p1": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "L:real_p2": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "R:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "R:real_p0": [
+          0,
+          0,
+          20,
+          20
+        ],
+        "R:real_p1": [
+          20,
+          0,
+          20,
+          20
+        ],
+        "R:real_p2": [
+          0,
+          20,
+          20,
+          20
+        ]
+      },
+      "k3real_diag": {
+        "L": [
+          10,
+          10,
+          0,
+          0
+        ],
+        "R": [
+          10,
+          10,
+          10,
+          10
+        ]
+      },
+      "k3real_invalid_diag_no_decide": [],
+      "k1k2_match_quality": {
+        "L": {
+          "min_overlap": 0.9999999999999999,
+          "min_gap": 0.036181618707089025,
+          "ambiguous": true,
+          "bijective": true
+        },
+        "R": {
+          "min_overlap": 1.0,
+          "min_gap": 0.01947278438248623,
+          "ambiguous": true,
+          "bijective": true
+        }
+      },
+      "integrity_ok": {
+        "ic0": true,
+        "ic1": true,
+        "ic4": true
+      }
+    },
+    {
+      "omega": 0.1,
+      "tag": "dxsweep",
+      "X0": 12.0,
+      "N": 500,
+      "k3syn_total": {
+        "L": [
+          40,
+          80,
+          20,
+          20
+        ],
+        "R": [
+          40,
+          40,
+          80,
+          80
+        ]
+      },
+      "k3syn_coverage_ok": true,
+      "k3syn_valid": true,
+      "k3syn_invalid": [],
+      "k3syn_by_avec": {
+        "L:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "L:real_p0": [
+          20,
+          20,
+          0,
+          0
+        ],
+        "L:real_p1": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "L:real_p2": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "R:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "R:real_p0": [
+          0,
+          0,
+          20,
+          20
+        ],
+        "R:real_p1": [
+          20,
+          0,
+          20,
+          20
+        ],
+        "R:real_p2": [
+          0,
+          20,
+          20,
+          20
+        ]
+      },
+      "k3real_diag": {
+        "L": [
+          10,
+          10,
+          0,
+          0
+        ],
+        "R": [
+          10,
+          10,
+          10,
+          10
+        ]
+      },
+      "k3real_invalid_diag_no_decide": [],
+      "k1k2_match_quality": {
+        "L": {
+          "min_overlap": 0.9999999999999999,
+          "min_gap": 0.036181618707093466,
+          "ambiguous": true,
+          "bijective": true
+        },
+        "R": {
+          "min_overlap": 0.9999999999999998,
+          "min_gap": 0.01947278438248612,
+          "ambiguous": true,
+          "bijective": true
+        }
+      },
+      "integrity_ok": {
+        "ic0": true,
+        "ic1": true,
+        "ic4": true
+      }
+    },
+    {
+      "omega": 0.1,
+      "tag": "dxsweep",
+      "X0": 12.0,
+      "N": 1000,
+      "k3syn_total": {
+        "L": [
+          40,
+          80,
+          20,
+          20
+        ],
+        "R": [
+          40,
+          40,
+          80,
+          80
+        ]
+      },
+      "k3syn_coverage_ok": true,
+      "k3syn_valid": true,
+      "k3syn_invalid": [],
+      "k3syn_by_avec": {
+        "L:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "L:real_p0": [
+          20,
+          20,
+          0,
+          0
+        ],
+        "L:real_p1": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "L:real_p2": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "R:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "R:real_p0": [
+          0,
+          0,
+          20,
+          20
+        ],
+        "R:real_p1": [
+          20,
+          0,
+          20,
+          20
+        ],
+        "R:real_p2": [
+          0,
+          20,
+          20,
+          20
+        ]
+      },
+      "k3real_diag": {
+        "L": [
+          10,
+          10,
+          0,
+          0
+        ],
+        "R": [
+          10,
+          10,
+          10,
+          10
+        ]
+      },
+      "k3real_invalid_diag_no_decide": [],
+      "k1k2_match_quality": {
+        "L": {
+          "min_overlap": 0.9999999999999999,
+          "min_gap": 0.03618161870709702,
+          "ambiguous": true,
+          "bijective": true
+        },
+        "R": {
+          "min_overlap": 0.9999999999999998,
+          "min_gap": 0.01947278438246225,
+          "ambiguous": true,
+          "bijective": true
+        }
+      },
+      "integrity_ok": {
+        "ic0": true,
+        "ic1": true,
+        "ic4": true
+      }
+    },
+    {
+      "omega": 0.1,
+      "tag": "dxsweep",
+      "X0": 12.0,
+      "N": 2000,
+      "k3syn_total": {
+        "L": [
+          40,
+          80,
+          20,
+          20
+        ],
+        "R": [
+          40,
+          40,
+          80,
+          80
+        ]
+      },
+      "k3syn_coverage_ok": true,
+      "k3syn_valid": true,
+      "k3syn_invalid": [],
+      "k3syn_by_avec": {
+        "L:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "L:real_p0": [
+          20,
+          20,
+          0,
+          0
+        ],
+        "L:real_p1": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "L:real_p2": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "R:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "R:real_p0": [
+          0,
+          0,
+          20,
+          20
+        ],
+        "R:real_p1": [
+          20,
+          0,
+          20,
+          20
+        ],
+        "R:real_p2": [
+          0,
+          20,
+          20,
+          20
+        ]
+      },
+      "k3real_diag": {
+        "L": [
+          10,
+          10,
+          0,
+          0
+        ],
+        "R": [
+          10,
+          10,
+          10,
+          10
+        ]
+      },
+      "k3real_invalid_diag_no_decide": [],
+      "k1k2_match_quality": {
+        "L": {
+          "min_overlap": 0.9999999999999999,
+          "min_gap": 0.03618161870709635,
+          "ambiguous": true,
+          "bijective": true
+        },
+        "R": {
+          "min_overlap": 0.9999999999999998,
+          "min_gap": 0.019472784382467245,
+          "ambiguous": true,
+          "bijective": true
+        }
+      },
+      "integrity_ok": {
+        "ic0": true,
+        "ic1": true,
+        "ic4": true
+      }
+    },
+    {
+      "omega": 0.1,
+      "tag": "dxsweep",
+      "X0": 16.0,
+      "N": 500,
+      "k3syn_total": {
+        "L": [
+          40,
+          80,
+          20,
+          20
+        ],
+        "R": [
+          40,
+          40,
+          80,
+          80
+        ]
+      },
+      "k3syn_coverage_ok": true,
+      "k3syn_valid": true,
+      "k3syn_invalid": [],
+      "k3syn_by_avec": {
+        "L:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "L:real_p0": [
+          20,
+          20,
+          0,
+          0
+        ],
+        "L:real_p1": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "L:real_p2": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "R:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "R:real_p0": [
+          0,
+          0,
+          20,
+          20
+        ],
+        "R:real_p1": [
+          20,
+          0,
+          20,
+          20
+        ],
+        "R:real_p2": [
+          0,
+          20,
+          20,
+          20
+        ]
+      },
+      "k3real_diag": {
+        "L": [
+          10,
+          10,
+          0,
+          0
+        ],
+        "R": [
+          10,
+          10,
+          10,
+          10
+        ]
+      },
+      "k3real_invalid_diag_no_decide": [],
+      "k1k2_match_quality": {
+        "L": {
+          "min_overlap": 0.9999999999999999,
+          "min_gap": 0.03618161870709846,
+          "ambiguous": true,
+          "bijective": true
+        },
+        "R": {
+          "min_overlap": 0.9999999999999998,
+          "min_gap": 0.019472784382483344,
+          "ambiguous": true,
+          "bijective": true
+        }
+      },
+      "integrity_ok": {
+        "ic0": true,
+        "ic1": true,
+        "ic4": true
+      }
+    },
+    {
+      "omega": 0.1,
+      "tag": "dxsweep",
+      "X0": 16.0,
+      "N": 1000,
+      "k3syn_total": {
+        "L": [
+          40,
+          80,
+          20,
+          20
+        ],
+        "R": [
+          40,
+          40,
+          80,
+          80
+        ]
+      },
+      "k3syn_coverage_ok": true,
+      "k3syn_valid": true,
+      "k3syn_invalid": [],
+      "k3syn_by_avec": {
+        "L:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "L:real_p0": [
+          20,
+          20,
+          0,
+          0
+        ],
+        "L:real_p1": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "L:real_p2": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "R:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "R:real_p0": [
+          0,
+          0,
+          20,
+          20
+        ],
+        "R:real_p1": [
+          20,
+          0,
+          20,
+          20
+        ],
+        "R:real_p2": [
+          0,
+          20,
+          20,
+          20
+        ]
+      },
+      "k3real_diag": {
+        "L": [
+          10,
+          10,
+          0,
+          0
+        ],
+        "R": [
+          10,
+          10,
+          10,
+          10
+        ]
+      },
+      "k3real_invalid_diag_no_decide": [],
+      "k1k2_match_quality": {
+        "L": {
+          "min_overlap": 0.9999999999999999,
+          "min_gap": 0.036181618707101015,
+          "ambiguous": true,
+          "bijective": true
+        },
+        "R": {
+          "min_overlap": 1.0,
+          "min_gap": 0.019472784382465358,
+          "ambiguous": true,
+          "bijective": true
+        }
+      },
+      "integrity_ok": {
+        "ic0": true,
+        "ic1": true,
+        "ic4": true
+      }
+    },
+    {
+      "omega": 0.1,
+      "tag": "dxsweep",
+      "X0": 16.0,
+      "N": 2000,
+      "k3syn_total": {
+        "L": [
+          40,
+          80,
+          20,
+          20
+        ],
+        "R": [
+          40,
+          40,
+          80,
+          80
+        ]
+      },
+      "k3syn_coverage_ok": true,
+      "k3syn_valid": true,
+      "k3syn_invalid": [],
+      "k3syn_by_avec": {
+        "L:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "L:real_p0": [
+          20,
+          20,
+          0,
+          0
+        ],
+        "L:real_p1": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "L:real_p2": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "R:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "R:real_p0": [
+          0,
+          0,
+          20,
+          20
+        ],
+        "R:real_p1": [
+          20,
+          0,
+          20,
+          20
+        ],
+        "R:real_p2": [
+          0,
+          20,
+          20,
+          20
+        ]
+      },
+      "k3real_diag": {
+        "L": [
+          10,
+          10,
+          0,
+          0
+        ],
+        "R": [
+          10,
+          10,
+          10,
+          10
+        ]
+      },
+      "k3real_invalid_diag_no_decide": [],
+      "k1k2_match_quality": {
+        "L": {
+          "min_overlap": 0.9999999999999999,
+          "min_gap": 0.036181618707078034,
+          "ambiguous": true,
+          "bijective": true
+        },
+        "R": {
+          "min_overlap": 0.9999999999999998,
+          "min_gap": 0.019472784382445485,
+          "ambiguous": true,
+          "bijective": true
+        }
+      },
+      "integrity_ok": {
+        "ic0": true,
+        "ic1": true,
+        "ic4": true
+      }
+    },
+    {
+      "omega": 0.05,
+      "tag": "X0sweep",
+      "X0": 8.0,
+      "N": 800,
+      "k3syn_total": {
+        "L": [
+          40,
+          80,
+          20,
+          20
+        ],
+        "R": [
+          40,
+          40,
+          80,
+          80
+        ]
+      },
+      "k3syn_coverage_ok": true,
+      "k3syn_valid": true,
+      "k3syn_invalid": [],
+      "k3syn_by_avec": {
+        "L:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "L:real_p0": [
+          20,
+          20,
+          0,
+          0
+        ],
+        "L:real_p1": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "L:real_p2": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "R:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "R:real_p0": [
+          0,
+          0,
+          20,
+          20
+        ],
+        "R:real_p1": [
+          20,
+          0,
+          20,
+          20
+        ],
+        "R:real_p2": [
+          0,
+          20,
+          20,
+          20
+        ]
+      },
+      "k3real_diag": {
+        "L": [
+          10,
+          10,
+          0,
+          0
+        ],
+        "R": [
+          10,
+          10,
+          10,
+          10
+        ]
+      },
+      "k3real_invalid_diag_no_decide": [],
+      "k1k2_match_quality": {
+        "L": {
+          "min_overlap": 0.9999999999999998,
+          "min_gap": 0.009340480485359293,
+          "ambiguous": true,
+          "bijective": true
+        },
+        "R": {
+          "min_overlap": 0.9999999999999999,
+          "min_gap": 0.004912386909043276,
+          "ambiguous": true,
+          "bijective": true
+        }
+      },
+      "integrity_ok": {
+        "ic0": true,
+        "ic1": true,
+        "ic4": true
+      }
+    },
+    {
+      "omega": 0.05,
+      "tag": "X0sweep",
+      "X0": 10.0,
+      "N": 1000,
+      "k3syn_total": {
+        "L": [
+          40,
+          80,
+          20,
+          20
+        ],
+        "R": [
+          40,
+          40,
+          80,
+          80
+        ]
+      },
+      "k3syn_coverage_ok": true,
+      "k3syn_valid": true,
+      "k3syn_invalid": [],
+      "k3syn_by_avec": {
+        "L:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "L:real_p0": [
+          20,
+          20,
+          0,
+          0
+        ],
+        "L:real_p1": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "L:real_p2": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "R:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "R:real_p0": [
+          0,
+          0,
+          20,
+          20
+        ],
+        "R:real_p1": [
+          20,
+          0,
+          20,
+          20
+        ],
+        "R:real_p2": [
+          0,
+          20,
+          20,
+          20
+        ]
+      },
+      "k3real_diag": {
+        "L": [
+          10,
+          10,
+          0,
+          0
+        ],
+        "R": [
+          10,
+          10,
+          10,
+          10
+        ]
+      },
+      "k3real_invalid_diag_no_decide": [],
+      "k1k2_match_quality": {
+        "L": {
+          "min_overlap": 0.9999999999999998,
+          "min_gap": 0.009340480485359293,
+          "ambiguous": true,
+          "bijective": true
+        },
+        "R": {
+          "min_overlap": 0.9999999999999999,
+          "min_gap": 0.004912386909043276,
+          "ambiguous": true,
+          "bijective": true
+        }
+      },
+      "integrity_ok": {
+        "ic0": true,
+        "ic1": true,
+        "ic4": true
+      }
+    },
+    {
+      "omega": 0.05,
+      "tag": "X0sweep",
+      "X0": 12.0,
+      "N": 1200,
+      "k3syn_total": {
+        "L": [
+          40,
+          80,
+          20,
+          20
+        ],
+        "R": [
+          40,
+          40,
+          80,
+          80
+        ]
+      },
+      "k3syn_coverage_ok": true,
+      "k3syn_valid": true,
+      "k3syn_invalid": [],
+      "k3syn_by_avec": {
+        "L:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "L:real_p0": [
+          20,
+          20,
+          0,
+          0
+        ],
+        "L:real_p1": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "L:real_p2": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "R:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "R:real_p0": [
+          0,
+          0,
+          20,
+          20
+        ],
+        "R:real_p1": [
+          20,
+          0,
+          20,
+          20
+        ],
+        "R:real_p2": [
+          0,
+          20,
+          20,
+          20
+        ]
+      },
+      "k3real_diag": {
+        "L": [
+          10,
+          10,
+          0,
+          0
+        ],
+        "R": [
+          10,
+          10,
+          10,
+          10
+        ]
+      },
+      "k3real_invalid_diag_no_decide": [],
+      "k1k2_match_quality": {
+        "L": {
+          "min_overlap": 0.9999999999999998,
+          "min_gap": 0.009340480485359293,
+          "ambiguous": true,
+          "bijective": true
+        },
+        "R": {
+          "min_overlap": 0.9999999999999999,
+          "min_gap": 0.004912386909043276,
+          "ambiguous": true,
+          "bijective": true
+        }
+      },
+      "integrity_ok": {
+        "ic0": true,
+        "ic1": true,
+        "ic4": true
+      }
+    },
+    {
+      "omega": 0.05,
+      "tag": "X0sweep",
+      "X0": 14.0,
+      "N": 1400,
+      "k3syn_total": {
+        "L": [
+          40,
+          80,
+          20,
+          20
+        ],
+        "R": [
+          40,
+          40,
+          80,
+          80
+        ]
+      },
+      "k3syn_coverage_ok": true,
+      "k3syn_valid": true,
+      "k3syn_invalid": [],
+      "k3syn_by_avec": {
+        "L:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "L:real_p0": [
+          20,
+          20,
+          0,
+          0
+        ],
+        "L:real_p1": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "L:real_p2": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "R:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "R:real_p0": [
+          0,
+          0,
+          20,
+          20
+        ],
+        "R:real_p1": [
+          20,
+          0,
+          20,
+          20
+        ],
+        "R:real_p2": [
+          0,
+          20,
+          20,
+          20
+        ]
+      },
+      "k3real_diag": {
+        "L": [
+          10,
+          10,
+          0,
+          0
+        ],
+        "R": [
+          10,
+          10,
+          10,
+          10
+        ]
+      },
+      "k3real_invalid_diag_no_decide": [],
+      "k1k2_match_quality": {
+        "L": {
+          "min_overlap": 0.9999999999999998,
+          "min_gap": 0.009340480485359293,
+          "ambiguous": true,
+          "bijective": true
+        },
+        "R": {
+          "min_overlap": 0.9999999999999999,
+          "min_gap": 0.004912386909043276,
+          "ambiguous": true,
+          "bijective": true
+        }
+      },
+      "integrity_ok": {
+        "ic0": true,
+        "ic1": true,
+        "ic4": true
+      }
+    },
+    {
+      "omega": 0.05,
+      "tag": "X0sweep",
+      "X0": 16.0,
+      "N": 1600,
+      "k3syn_total": {
+        "L": [
+          40,
+          80,
+          20,
+          20
+        ],
+        "R": [
+          40,
+          40,
+          80,
+          80
+        ]
+      },
+      "k3syn_coverage_ok": true,
+      "k3syn_valid": true,
+      "k3syn_invalid": [],
+      "k3syn_by_avec": {
+        "L:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "L:real_p0": [
+          20,
+          20,
+          0,
+          0
+        ],
+        "L:real_p1": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "L:real_p2": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "R:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "R:real_p0": [
+          0,
+          0,
+          20,
+          20
+        ],
+        "R:real_p1": [
+          20,
+          0,
+          20,
+          20
+        ],
+        "R:real_p2": [
+          0,
+          20,
+          20,
+          20
+        ]
+      },
+      "k3real_diag": {
+        "L": [
+          10,
+          10,
+          0,
+          0
+        ],
+        "R": [
+          10,
+          10,
+          10,
+          10
+        ]
+      },
+      "k3real_invalid_diag_no_decide": [],
+      "k1k2_match_quality": {
+        "L": {
+          "min_overlap": 0.9999999999999998,
+          "min_gap": 0.009340480485359293,
+          "ambiguous": true,
+          "bijective": true
+        },
+        "R": {
+          "min_overlap": 0.9999999999999999,
+          "min_gap": 0.004912386909043276,
+          "ambiguous": true,
+          "bijective": true
+        }
+      },
+      "integrity_ok": {
+        "ic0": true,
+        "ic1": true,
+        "ic4": true
+      }
+    },
+    {
+      "omega": 0.05,
+      "tag": "X0sweep",
+      "X0": 20.0,
+      "N": 2000,
+      "k3syn_total": {
+        "L": [
+          40,
+          80,
+          20,
+          20
+        ],
+        "R": [
+          40,
+          40,
+          80,
+          80
+        ]
+      },
+      "k3syn_coverage_ok": true,
+      "k3syn_valid": true,
+      "k3syn_invalid": [],
+      "k3syn_by_avec": {
+        "L:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "L:real_p0": [
+          20,
+          20,
+          0,
+          0
+        ],
+        "L:real_p1": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "L:real_p2": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "R:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "R:real_p0": [
+          0,
+          0,
+          20,
+          20
+        ],
+        "R:real_p1": [
+          20,
+          0,
+          20,
+          20
+        ],
+        "R:real_p2": [
+          0,
+          20,
+          20,
+          20
+        ]
+      },
+      "k3real_diag": {
+        "L": [
+          10,
+          10,
+          0,
+          0
+        ],
+        "R": [
+          10,
+          10,
+          10,
+          10
+        ]
+      },
+      "k3real_invalid_diag_no_decide": [],
+      "k1k2_match_quality": {
+        "L": {
+          "min_overlap": 0.9999999999999998,
+          "min_gap": 0.009340480485359293,
+          "ambiguous": true,
+          "bijective": true
+        },
+        "R": {
+          "min_overlap": 0.9999999999999999,
+          "min_gap": 0.004912386909043276,
+          "ambiguous": true,
+          "bijective": true
+        }
+      },
+      "integrity_ok": {
+        "ic0": true,
+        "ic1": true,
+        "ic4": true
+      }
+    },
+    {
+      "omega": 0.05,
+      "tag": "X0sweep",
+      "X0": 24.0,
+      "N": 2400,
+      "k3syn_total": {
+        "L": [
+          40,
+          80,
+          20,
+          20
+        ],
+        "R": [
+          40,
+          40,
+          80,
+          80
+        ]
+      },
+      "k3syn_coverage_ok": true,
+      "k3syn_valid": true,
+      "k3syn_invalid": [],
+      "k3syn_by_avec": {
+        "L:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "L:real_p0": [
+          20,
+          20,
+          0,
+          0
+        ],
+        "L:real_p1": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "L:real_p2": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "R:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "R:real_p0": [
+          0,
+          0,
+          20,
+          20
+        ],
+        "R:real_p1": [
+          20,
+          0,
+          20,
+          20
+        ],
+        "R:real_p2": [
+          0,
+          20,
+          20,
+          20
+        ]
+      },
+      "k3real_diag": {
+        "L": [
+          10,
+          10,
+          0,
+          0
+        ],
+        "R": [
+          10,
+          10,
+          10,
+          10
+        ]
+      },
+      "k3real_invalid_diag_no_decide": [],
+      "k1k2_match_quality": {
+        "L": {
+          "min_overlap": 0.9999999999999998,
+          "min_gap": 0.009340480485359293,
+          "ambiguous": true,
+          "bijective": true
+        },
+        "R": {
+          "min_overlap": 0.9999999999999999,
+          "min_gap": 0.004912386909043276,
+          "ambiguous": true,
+          "bijective": true
+        }
+      },
+      "integrity_ok": {
+        "ic0": true,
+        "ic1": true,
+        "ic4": true
+      }
+    },
+    {
+      "omega": 0.05,
+      "tag": "X0sweep",
+      "X0": 28.0,
+      "N": 2800,
+      "k3syn_total": {
+        "L": [
+          40,
+          80,
+          20,
+          20
+        ],
+        "R": [
+          40,
+          40,
+          80,
+          80
+        ]
+      },
+      "k3syn_coverage_ok": true,
+      "k3syn_valid": true,
+      "k3syn_invalid": [],
+      "k3syn_by_avec": {
+        "L:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "L:real_p0": [
+          20,
+          20,
+          0,
+          0
+        ],
+        "L:real_p1": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "L:real_p2": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "R:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "R:real_p0": [
+          0,
+          0,
+          20,
+          20
+        ],
+        "R:real_p1": [
+          20,
+          0,
+          20,
+          20
+        ],
+        "R:real_p2": [
+          0,
+          20,
+          20,
+          20
+        ]
+      },
+      "k3real_diag": {
+        "L": [
+          10,
+          10,
+          0,
+          0
+        ],
+        "R": [
+          10,
+          10,
+          10,
+          10
+        ]
+      },
+      "k3real_invalid_diag_no_decide": [],
+      "k1k2_match_quality": {
+        "L": {
+          "min_overlap": 0.9999999999999998,
+          "min_gap": 0.009340480485359293,
+          "ambiguous": true,
+          "bijective": true
+        },
+        "R": {
+          "min_overlap": 0.9999999999999999,
+          "min_gap": 0.004912386909043276,
+          "ambiguous": true,
+          "bijective": true
+        }
+      },
+      "integrity_ok": {
+        "ic0": true,
+        "ic1": true,
+        "ic4": true
+      }
+    },
+    {
+      "omega": 0.05,
+      "tag": "dxsweep",
+      "X0": 12.0,
+      "N": 500,
+      "k3syn_total": {
+        "L": [
+          40,
+          80,
+          20,
+          20
+        ],
+        "R": [
+          40,
+          40,
+          80,
+          80
+        ]
+      },
+      "k3syn_coverage_ok": true,
+      "k3syn_valid": true,
+      "k3syn_invalid": [],
+      "k3syn_by_avec": {
+        "L:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "L:real_p0": [
+          20,
+          20,
+          0,
+          0
+        ],
+        "L:real_p1": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "L:real_p2": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "R:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "R:real_p0": [
+          0,
+          0,
+          20,
+          20
+        ],
+        "R:real_p1": [
+          20,
+          0,
+          20,
+          20
+        ],
+        "R:real_p2": [
+          0,
+          20,
+          20,
+          20
+        ]
+      },
+      "k3real_diag": {
+        "L": [
+          10,
+          10,
+          0,
+          0
+        ],
+        "R": [
+          10,
+          10,
+          10,
+          10
+        ]
+      },
+      "k3real_invalid_diag_no_decide": [],
+      "k1k2_match_quality": {
+        "L": {
+          "min_overlap": 1.0,
+          "min_gap": 0.00934048048535574,
+          "ambiguous": true,
+          "bijective": true
+        },
+        "R": {
+          "min_overlap": 1.0,
+          "min_gap": 0.004912386909083244,
+          "ambiguous": true,
+          "bijective": true
+        }
+      },
+      "integrity_ok": {
+        "ic0": true,
+        "ic1": true,
+        "ic4": true
+      }
+    },
+    {
+      "omega": 0.05,
+      "tag": "dxsweep",
+      "X0": 12.0,
+      "N": 1000,
+      "k3syn_total": {
+        "L": [
+          40,
+          80,
+          20,
+          20
+        ],
+        "R": [
+          40,
+          40,
+          80,
+          80
+        ]
+      },
+      "k3syn_coverage_ok": true,
+      "k3syn_valid": true,
+      "k3syn_invalid": [],
+      "k3syn_by_avec": {
+        "L:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "L:real_p0": [
+          20,
+          20,
+          0,
+          0
+        ],
+        "L:real_p1": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "L:real_p2": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "R:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "R:real_p0": [
+          0,
+          0,
+          20,
+          20
+        ],
+        "R:real_p1": [
+          20,
+          0,
+          20,
+          20
+        ],
+        "R:real_p2": [
+          0,
+          20,
+          20,
+          20
+        ]
+      },
+      "k3real_diag": {
+        "L": [
+          10,
+          10,
+          0,
+          0
+        ],
+        "R": [
+          10,
+          10,
+          10,
+          10
+        ]
+      },
+      "k3real_invalid_diag_no_decide": [],
+      "k1k2_match_quality": {
+        "L": {
+          "min_overlap": 1.0,
+          "min_gap": 0.009340480485362623,
+          "ambiguous": true,
+          "bijective": true
+        },
+        "R": {
+          "min_overlap": 0.9999999999999998,
+          "min_gap": 0.004912386908977995,
+          "ambiguous": true,
+          "bijective": true
+        }
+      },
+      "integrity_ok": {
+        "ic0": true,
+        "ic1": true,
+        "ic4": true
+      }
+    },
+    {
+      "omega": 0.05,
+      "tag": "dxsweep",
+      "X0": 12.0,
+      "N": 2000,
+      "k3syn_total": {
+        "L": [
+          40,
+          80,
+          20,
+          20
+        ],
+        "R": [
+          40,
+          40,
+          80,
+          80
+        ]
+      },
+      "k3syn_coverage_ok": true,
+      "k3syn_valid": true,
+      "k3syn_invalid": [],
+      "k3syn_by_avec": {
+        "L:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "L:real_p0": [
+          20,
+          20,
+          0,
+          0
+        ],
+        "L:real_p1": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "L:real_p2": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "R:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "R:real_p0": [
+          0,
+          0,
+          20,
+          20
+        ],
+        "R:real_p1": [
+          20,
+          0,
+          20,
+          20
+        ],
+        "R:real_p2": [
+          0,
+          20,
+          20,
+          20
+        ]
+      },
+      "k3real_diag": {
+        "L": [
+          10,
+          10,
+          0,
+          0
+        ],
+        "R": [
+          10,
+          10,
+          10,
+          10
+        ]
+      },
+      "k3real_invalid_diag_no_decide": [],
+      "k1k2_match_quality": {
+        "L": {
+          "min_overlap": 1.0,
+          "min_gap": 0.009340480485348301,
+          "ambiguous": true,
+          "bijective": true
+        },
+        "R": {
+          "min_overlap": 1.0,
+          "min_gap": 0.004912386909040167,
+          "ambiguous": true,
+          "bijective": true
+        }
+      },
+      "integrity_ok": {
+        "ic0": true,
+        "ic1": true,
+        "ic4": true
+      }
+    },
+    {
+      "omega": 0.05,
+      "tag": "dxsweep",
+      "X0": 16.0,
+      "N": 500,
+      "k3syn_total": {
+        "L": [
+          40,
+          80,
+          20,
+          20
+        ],
+        "R": [
+          40,
+          40,
+          80,
+          80
+        ]
+      },
+      "k3syn_coverage_ok": true,
+      "k3syn_valid": true,
+      "k3syn_invalid": [],
+      "k3syn_by_avec": {
+        "L:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "L:real_p0": [
+          20,
+          20,
+          0,
+          0
+        ],
+        "L:real_p1": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "L:real_p2": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "R:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "R:real_p0": [
+          0,
+          0,
+          20,
+          20
+        ],
+        "R:real_p1": [
+          20,
+          0,
+          20,
+          20
+        ],
+        "R:real_p2": [
+          0,
+          20,
+          20,
+          20
+        ]
+      },
+      "k3real_diag": {
+        "L": [
+          10,
+          10,
+          0,
+          0
+        ],
+        "R": [
+          10,
+          10,
+          10,
+          10
+        ]
+      },
+      "k3real_invalid_diag_no_decide": [],
+      "k1k2_match_quality": {
+        "L": {
+          "min_overlap": 1.0,
+          "min_gap": 0.009340480485359848,
+          "ambiguous": true,
+          "bijective": true
+        },
+        "R": {
+          "min_overlap": 0.9999999999999999,
+          "min_gap": 0.004912386909069366,
+          "ambiguous": true,
+          "bijective": true
+        }
+      },
+      "integrity_ok": {
+        "ic0": true,
+        "ic1": true,
+        "ic4": true
+      }
+    },
+    {
+      "omega": 0.05,
+      "tag": "dxsweep",
+      "X0": 16.0,
+      "N": 1000,
+      "k3syn_total": {
+        "L": [
+          40,
+          80,
+          20,
+          20
+        ],
+        "R": [
+          40,
+          40,
+          80,
+          80
+        ]
+      },
+      "k3syn_coverage_ok": true,
+      "k3syn_valid": true,
+      "k3syn_invalid": [],
+      "k3syn_by_avec": {
+        "L:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "L:real_p0": [
+          20,
+          20,
+          0,
+          0
+        ],
+        "L:real_p1": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "L:real_p2": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "R:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "R:real_p0": [
+          0,
+          0,
+          20,
+          20
+        ],
+        "R:real_p1": [
+          20,
+          0,
+          20,
+          20
+        ],
+        "R:real_p2": [
+          0,
+          20,
+          20,
+          20
+        ]
+      },
+      "k3real_diag": {
+        "L": [
+          10,
+          10,
+          0,
+          0
+        ],
+        "R": [
+          10,
+          10,
+          10,
+          10
+        ]
+      },
+      "k3real_invalid_diag_no_decide": [],
+      "k1k2_match_quality": {
+        "L": {
+          "min_overlap": 1.0,
+          "min_gap": 0.009340480485345526,
+          "ambiguous": true,
+          "bijective": true
+        },
+        "R": {
+          "min_overlap": 1.0,
+          "min_gap": 0.004912386909093347,
+          "ambiguous": true,
+          "bijective": true
+        }
+      },
+      "integrity_ok": {
+        "ic0": true,
+        "ic1": true,
+        "ic4": true
+      }
+    },
+    {
+      "omega": 0.05,
+      "tag": "dxsweep",
+      "X0": 16.0,
+      "N": 2000,
+      "k3syn_total": {
+        "L": [
+          40,
+          80,
+          20,
+          20
+        ],
+        "R": [
+          40,
+          40,
+          80,
+          80
+        ]
+      },
+      "k3syn_coverage_ok": true,
+      "k3syn_valid": true,
+      "k3syn_invalid": [],
+      "k3syn_by_avec": {
+        "L:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "L:real_p0": [
+          20,
+          20,
+          0,
+          0
+        ],
+        "L:real_p1": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "L:real_p2": [
+          0,
+          20,
+          0,
+          0
+        ],
+        "R:random": [
+          20,
+          20,
+          20,
+          20
+        ],
+        "R:real_p0": [
+          0,
+          0,
+          20,
+          20
+        ],
+        "R:real_p1": [
+          20,
+          0,
+          20,
+          20
+        ],
+        "R:real_p2": [
+          0,
+          20,
+          20,
+          20
+        ]
+      },
+      "k3real_diag": {
+        "L": [
+          10,
+          10,
+          0,
+          0
+        ],
+        "R": [
+          10,
+          10,
+          10,
+          10
+        ]
+      },
+      "k3real_invalid_diag_no_decide": [],
+      "k1k2_match_quality": {
+        "L": {
+          "min_overlap": 1.0,
+          "min_gap": 0.0093404804853644,
+          "ambiguous": true,
+          "bijective": true
+        },
+        "R": {
+          "min_overlap": 1.0,
+          "min_gap": 0.004912386909024291,
+          "ambiguous": true,
+          "bijective": true
+        }
+      },
+      "integrity_ok": {
+        "ic0": true,
+        "ic1": true,
+        "ic4": true
+      }
+    }
+  ],
+  "global_classification": "NO-A (ver por omega)"
+}
