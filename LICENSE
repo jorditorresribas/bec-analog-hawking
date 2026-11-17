@@ -1,12 +1,3 @@
-This repository uses two licences:
-
-  * Source code (all *.py files): MIT License (below).
-  * Documentation, figures and data (docs/, residual_anatomy/*.md, out/, reference/):
-    Creative Commons Attribution 4.0 International (CC BY 4.0),
-    https://creativecommons.org/licenses/by/4.0/. The legal code is at https://creativecommons.org/licenses/by/4.0/legalcode
-
--------------------------------------------------------------------------------
-
 MIT License
 
 Copyright (c) 2026 Jordi Torres Ribas

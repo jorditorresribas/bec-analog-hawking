@@ -83,5 +83,5 @@ layout and compared with the original outputs (see `docs/provenance/RELEASE_VERI
 
 ## Licence
 
-Code: MIT. Documentation, figures and data: CC BY 4.0. See [`LICENSE`](LICENSE).
+Code: MIT ([`LICENSE`](LICENSE)). Documentation, figures and data: CC BY 4.0 ([`LICENSE-DOCS.md`](LICENSE-DOCS.md)).
 To cite, see [`CITATION.cff`](CITATION.cff).
