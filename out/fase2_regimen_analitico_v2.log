@@ -1,0 +1,20 @@
+=== sin el termino (addendum 2) ===
+  umbral 0.5 gamma= 0.0: R = +0.00, +0.00, +0.00, +0.00, +0.00 | ['k4', 'k4', 'k4', 'k4', 'k4'] | p_eff = 0.333
+  umbral 0.5 gamma= 1.0: R = +1.53, +1.26, +1.09, +0.89, +0.77 | ['transicion', 'transicion', 'transicion', 'transicion', 'transicion'] | p_eff = 0.187
+  umbral 0.5 gamma=10.0: R = +7.06, +5.95, +5.26, +4.42, +3.90 | ['transicion', 'transicion', 'transicion', 'transicion', 'transicion'] | p_eff = 0.189
+  umbral 1.0 gamma= 0.0: R = +0.00, +0.00, +0.00, +0.00, +0.00 | ['k4', 'k4', 'k4', 'k4', 'k4'] | p_eff = 0.333
+  umbral 1.0 gamma= 1.0: R = +2.11, +1.75, +1.53, +1.26, +1.09 | ['transicion', 'transicion', 'transicion', 'transicion', 'transicion'] | p_eff = 0.184
+  umbral 1.0 gamma=10.0: R = +9.44, +7.97, +7.06, +5.95, +5.26 | ['transicion', 'transicion', 'transicion', 'transicion', 'transicion'] | p_eff = 0.191
+  umbral 2.0 gamma= 0.0: R = +0.00, +0.00, +0.00, +0.00, +0.00 | ['k4', 'k4', 'k4', 'k4', 'k4'] | p_eff = 0.333
+  umbral 2.0 gamma= 1.0: R = +2.89, +2.41, +2.11, +1.75, +1.53 | ['transicion', 'transicion', 'transicion', 'transicion', 'transicion'] | p_eff = 0.184
+  umbral 2.0 gamma=10.0: R = +12.58, +10.64, +9.44, +7.97, +7.06 | ['k6', 'k6', 'transicion', 'transicion', 'transicion'] | p_eff = 0.193
+=== con -p^5/(128c^3) ===
+  umbral 0.5 gamma= 0.0: R = -0.12, -0.09, -0.07, -0.06, -0.05 | ['transicion', 'k4', 'k4', 'k4', 'k4'] | p_eff = 0.399
+  umbral 0.5 gamma= 1.0: R = +1.49, +1.22, +1.06, +0.87, +0.75 | ['transicion', 'transicion', 'transicion', 'transicion', 'transicion'] | p_eff = 0.187
+  umbral 0.5 gamma=10.0: R = +7.05, +5.94, +5.25, +4.41, +3.89 | ['transicion', 'transicion', 'transicion', 'transicion', 'transicion'] | p_eff = 0.189
+  umbral 1.0 gamma= 0.0: R = -0.21, -0.15, -0.12, -0.09, -0.07 | ['transicion', 'transicion', 'transicion', 'k4', 'k4'] | p_eff = 0.466
+  umbral 1.0 gamma= 1.0: R = +2.06, +1.70, +1.49, +1.22, +1.06 | ['transicion', 'transicion', 'transicion', 'transicion', 'transicion'] | p_eff = 0.184
+  umbral 1.0 gamma=10.0: R = +9.42, +7.95, +7.05, +5.94, +5.25 | ['transicion', 'transicion', 'transicion', 'transicion', 'transicion'] | p_eff = 0.191
+  umbral 2.0 gamma= 0.0: R = -0.39, -0.26, -0.21, -0.15, -0.12 | ['transicion', 'transicion', 'transicion', 'transicion', 'transicion'] | p_eff = 0.735
+  umbral 2.0 gamma= 1.0: R = +2.82, +2.35, +2.06, +1.70, +1.49 | ['transicion', 'transicion', 'transicion', 'transicion', 'transicion'] | p_eff = 0.184
+  umbral 2.0 gamma=10.0: R = +12.54, +10.61, +9.42, +7.95, +7.05 | ['k6', 'k6', 'transicion', 'transicion', 'transicion'] | p_eff = 0.193
