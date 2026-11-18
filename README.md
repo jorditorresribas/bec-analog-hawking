@@ -32,6 +32,11 @@ modifications was already established (Macher, Finazzi, Parentani and others). T
 artefact is shown to be one within the tested scope (one flow profile, one range of λ).
 The external validation covers the basic solver (λ = 1). See §7 of the write-up.
 
+> **Audit notice (2026-11-17).** `docs/CORRELATIONS.md` §4, §5, §7 and §8 (robustness of the
+> density-density "tongue" against λ, and the w × λ grid) were computed with the defective λ
+> operator and **have no physical validity**; their conclusions are withdrawn. §1–3 (λ = 1) are
+> not affected. Details at the top of that document.
+
 ## Quick start
 
 ```bash

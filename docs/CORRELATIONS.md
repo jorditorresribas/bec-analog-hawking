@@ -2,6 +2,18 @@
 
 > **Nota de la versión pública (2026-11-17).** Este documento se escribió con todos los archivos en una sola carpeta. En el repositorio público están reorganizados: solver en `solver/`, benchmark FP en `benchmarks/fp_v1/`, cadena de validación en `methods/`, correlaciones en `correlations/`, documentos en `docs/`; `out/`, `reference/` y `residual_anatomy/` conservan su ruta. Todos los scripts se ejecutan **desde la raíz del repositorio** (p. ej. `python3 benchmarks/fp_v1/FP_check_reproduction.py`). Los SHA-256 citados aquí corresponden a la estructura original; los de la versión pública están en `docs/provenance/RELEASE_MANIFEST.txt`.
 
+> ⚠️ **AVISO DE AUDITORÍA (2026-11-17) — §4, §5, §7 y §8 NO TIENEN VALIDEZ FÍSICA.**
+> Todos los resultados con λ ≠ 1 de este documento se calcularon con `build_op_lambda`, que
+> conserva la presión cuántica del fondo **Qp independiente de λ**. Para λ ≠ 1 ese fondo no es
+> estacionario para el operador modificado: rompe el modo de Goldstone (residuo medido =
+> predicho ½|1−√λ|‖(√n)″‖, cociente 1.0000; `residual_anatomy/diag_goldstone.py`). Con ese
+> operador, la temperatura upstream sale incluso negativa para todo λ ≠ 1 (el «colapso»;
+> `residual_anatomy/diag_T2_qp_consistent.py`). **Quedan retiradas** las conclusiones «la lengua
+> de Hawking es ROBUSTA frente a k⁴» (§5), las cifras ±10 % / 20–45 % (§7), la tabla w × λ y
+> su lectura (§8). Las secciones se conservan como registro histórico.
+> **No afectados:** §1–§3 (λ = 1, donde ambos operadores son idénticos).
+> Una revisión más completa (incluida la interpretación del parámetro λ) está en curso.
+
 Sesión 2026-11-14 (continuación). Construido SOBRE el solver Hawking cerrado y
 auditado (ver `REPRODUCE.md`). Observable: la correlación densidad-densidad de
 Hawking (la "lengua" de Steinhauer/Balbinot-Carusotto) y su robustez frente al
@@ -83,6 +95,8 @@ Datos: `out/correlation_lambda1.npz`, `out/correlation_decomp.npz`.
 
 ## 4. Knob trans-planckiano k⁴ (b): diseño y VALIDACIÓN
 
+> ⚠️ **SECCIÓN AFECTADA** por el operador λ defectuoso — sin validez física (ver aviso inicial).
+
 Dispersión modificada manteniendo la MÉTRICA acústica (c,v) FIJA:
 ```
 (ω − v k)² = c² k² + λ k⁴/4 ,   c² = g n   (κ, T_H intactas)
@@ -120,6 +134,8 @@ lados (0.125 en λ=0.25; 0.048 en λ=4) — pero β² a ω fija no es la medida 
 ---
 
 ## 5. Resultado (b): robustez de la lengua vs λ
+
+> ⚠️ **SECCIÓN AFECTADA** por el operador λ defectuoso — sin validez física (ver aviso inicial).
 
 `run_lambda_sweep.py`. L=30, N=3000, ncoarse=360, banda ω adaptada a ω_max(λ)
 (90 pts), op='lambda' para todos. Medida de robustez: integral de la parte negativa
@@ -169,6 +185,8 @@ Figura: `out/lambda_sweep.png`. Datos: `out/lambda_sweep.npz`.
 ---
 
 ## 7. Profundización de la robustez (sesión 2026-11-14 cont.)
+
+> ⚠️ **SECCIÓN AFECTADA** por el operador λ defectuoso — sin validez física (ver aviso inicial).
 
 Tres pasos sobre §5 para cerrar los caveats (1) métrica que mezcla franjas y
 (2) sin convergencia / solo 3 λ / 1 config.
@@ -233,6 +251,8 @@ orden, pico en el valor físico, sin cambio cualitativo al variar la completaci�
 ---
 
 ## 8. Opción A: dependencia con w (sesión 2026-11-14 cont.) — CERRADA, resultado NULO
+
+> ⚠️ **SECCIÓN AFECTADA** por el operador λ defectuoso — sin validez física (ver aviso inicial).
 
 Recomendación del referee (ChatGPT): ¿la lengua de Hawking se vuelve menos sensible
 a la dispersión UV (λ) al suavizar el horizonte (w grande, más hidrodinámico)?
