@@ -37,11 +37,12 @@ Este proyecto calcula esa radiación con un solver numérico propio. La magnitud
 
 ## 2. Cómo se trabajó
 
-**Tres papeles separados:**
+**Tres papeles separados (más un asesor sin valor de revisión):**
 
 - **Una persona (yo)** decide qué se hace, autoriza cada ejecución y arbitra los desacuerdos.
 - **Claude Code (Anthropic)** implementa: escribe el código, lo ejecuta, verifica los números y redacta los informes.
 - **ChatGPT (OpenAI)** actúa como **revisor externo**: revisa los diseños antes de que exista el código, audita el código antes de ejecutarlo y, al final, los paquetes de datos.
+- **Claude en el chat de claude.ai (Anthropic)**, en la auditoría de noviembre, actuó como **asesor** de la persona: ayudó a coordinar y a decidir (por ejemplo, propuso guardar en un commit los criterios de E1-bis antes de ejecutarlo y bajar una tolerancia de un test). Es de la misma familia que el implementador, así que **sus sugerencias no cuentan como revisión independiente**; en este documento, «el revisor» es siempre ChatGPT.
 
 El trabajo lo dirigió una persona sin formación académica en física. Por eso, el método se diseñó para que las conclusiones no dependieran de la autoridad de nadie, humana o artificial, sino de comprobaciones explícitas, documentadas y reproducibles.
 
@@ -119,7 +120,7 @@ Una persona organizó a dos IAs con papeles separados y reglas fijadas de antema
 
 ---
 
-*Herramientas: implementación con Claude Code (Anthropic); revisión externa con ChatGPT (OpenAI). Código propio en Python (NumPy, SciPy).*
+*Herramientas: implementación con Claude Code (Anthropic); revisión externa con ChatGPT (OpenAI); asesoría de coordinación con Claude en claude.ai (Anthropic), sin valor de revisión independiente. Código propio en Python (NumPy, SciPy).*
 
 ---
 
@@ -185,7 +186,7 @@ Criterio principal: error en a ≤ 10⁻⁶ en las dos, y control de ventana (W2
 
 | Qué falló | Quién lo detectó | Qué cambió en el proceso |
 |---|---|---|
-| Los tests imprimían resultados pero nunca fallaban: no tenían aserciones | El implementador, en la auditoría de solo lectura pedida por el revisor | Todos los tests comprueban con tolerancia y devuelven error; `tests/run_all.py` los ejecuta todos |
+| Los tests imprimían resultados pero nunca fallaban: no tenían aserciones | El implementador, en la auditoría de solo lectura pedida por un asesor | Todos los tests comprueban con tolerancia y devuelven error; `tests/run_all.py` los ejecuta todos |
 | Las correlaciones calculadas con λ heredaban el mismo defecto de fondo que el "colapso" | El implementador, en esa misma auditoría, al repasar qué resultados usaban el operador defectuoso | Esas conclusiones se retiraron, con aviso público |
 | La amplitud absoluta de la correlación densidad-densidad salía a la mitad: el prefactor del artículo corresponde a otra normalización de modos. Además, la ecuación se citaba con un número equivocado | El implementador marcó el posible factor 4π en la auditoría de la fase 1; el revisor localizó la fórmula (Ec. 25) y el número de ecuación equivocado; el implementador lo zanjó con una prueba exacta en un condensado homogéneo | Test de normalización absoluta con tolerancia; ecuaciones cotejadas con el texto literal de los artículos |
 | Una figura publicada se había generado con una versión del código anterior a la que describía el texto (sin la ventana de suavizado) | El implementador, al regenerarla | Las figuras se regeneran con los scripts del repositorio antes de publicar |

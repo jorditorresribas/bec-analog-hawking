@@ -57,8 +57,10 @@ for N in (4000, 6000):
     b_v, _, _ = beta2(1.0, N, 'validated')
     d = abs(b_l-b_v)/b_v
     # Historial de la tolerancia (declarado): 1e-8 -> FALLO (dif real 3e-8: mismo operador, distinto orden
-    # de operaciones + mal condicionamiento); 1e-5 (suelo de redondeo ~7e-6) -> demasiado generosa segun el
-    # revisor (~300x la dif real); 1e-6 (revisor, 2026-11-17): ~30x la dif real, sigue detectando fallos.
+    # de operaciones + mal condicionamiento); 1e-5 (suelo de redondeo ~7e-6) -> demasiado generosa (~300x la dif
+    # real); 1e-6 (2026-11-17): ~30x la dif real, sigue detectando fallos. Los dos ultimos pasos los propuso el
+    # asesor del chat (Claude en claude.ai, misma familia que el implementador): NO es una revision independiente.
+    # (Hasta el 2026-11-18 este comentario lo atribuia por error "al revisor".)
     check(f"B N={N}", d < 1e-6, f"beta^2(lambda)={b_l:.8f}  beta^2(validado)={b_v:.8f}  dif rel={d:.1e} (tol 1e-6)")
 
 # (C) pseudo-unitaridad

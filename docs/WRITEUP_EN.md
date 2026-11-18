@@ -37,11 +37,12 @@ This project computes that radiation with a numerical solver written from scratc
 
 ## 2. How the work was organised
 
-**Three separate roles:**
+**Three separate roles (plus an adviser with no value as review):**
 
 - **A person (me)** decides what gets done, authorises every run and settles disagreements.
 - **Claude Code (Anthropic)** implements: writes the code, runs it, checks the numbers and drafts the reports.
 - **ChatGPT (OpenAI)** acts as **external reviewer**: reviews designs before any code exists, audits the code before it is run and, at the end, audits the data packages.
+- **Claude in the claude.ai chat (Anthropic)**, during the November audit, acted as the person's **adviser**: it helped coordinate and decide (for example, it proposed committing the E1-bis criteria before the run and tightening a test tolerance). It belongs to the same family as the implementer, so **its suggestions do not count as independent review**; in this document, "the reviewer" always means ChatGPT.
 
 The work was directed by someone with no academic training in physics. For that reason, the method was designed so that conclusions would not rest on anyone's authority, human or artificial, but on explicit, documented and reproducible checks.
 
@@ -119,7 +120,7 @@ A person organised two AIs into separate roles with rules fixed in advance. The 
 
 ---
 
-*Tools: implementation with Claude Code (Anthropic); external review with ChatGPT (OpenAI). Custom code in Python (NumPy, SciPy).*
+*Tools: implementation with Claude Code (Anthropic); external review with ChatGPT (OpenAI); coordination advice from Claude on claude.ai (Anthropic), with no value as independent review. Custom code in Python (NumPy, SciPy).*
 
 ---
 
@@ -185,7 +186,7 @@ Main criterion: error in a ≤ 10⁻⁶ in both, and window check (W2 against W3
 
 | What went wrong | Who detected it | What changed in the process |
 |---|---|---|
-| The tests printed results but never failed: they had no assertions | The implementer, in the read-only audit requested by the reviewer | Every test checks against a tolerance and returns an error; `tests/run_all.py` runs them all |
+| The tests printed results but never failed: they had no assertions | The implementer, in the read-only audit requested by an adviser | Every test checks against a tolerance and returns an error; `tests/run_all.py` runs them all |
 | The correlations computed with λ inherited the same background defect as the "collapse" | The implementer, in that same audit, while reviewing which results used the defective operator | Those conclusions were withdrawn, with a public notice |
 | The absolute amplitude of the density-density correlation came out at half its value: the paper's prefactor belongs to a different mode normalisation. The equation was also cited with the wrong number | The implementer flagged the possible factor of 4π in the phase 1 audit; the reviewer located the formula (Eq. 25) and the wrong equation number; the implementer settled it with an exact test in a homogeneous condensate | Absolute-normalisation test with a tolerance; equations checked against the literal text of the papers |
 | A published figure had been generated with an earlier version of the code than the one described in the text (without the smoothing window) | The implementer, while regenerating it | Figures are regenerated with the repository scripts before publishing |

@@ -75,8 +75,12 @@ to re-run it. The other scripts overwrite their outputs in `out/`.
 
 One person directed the work and made every decision; Claude Code (Anthropic) implemented
 and ran the code; ChatGPT (OpenAI) acted as external reviewer of designs, code and data
-packages. Success and failure criteria ("gates") were written before each run and never
-adjusted afterwards. The AIs are tools, not authors.
+packages. During the November 2026 audit, Claude in the claude.ai chat (Anthropic) also
+advised the person on coordination and decisions; being from the same model family as the
+implementer, its suggestions do not count as independent review. Success and failure
+criteria ("gates") were written before each run; two test tolerances were relaxed after a
+failure, declared in the code with their justification (see the write-up, "What this project
+demonstrates", item 2). The AIs are tools, not authors.
 
 ## Provenance and integrity
 

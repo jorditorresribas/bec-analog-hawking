@@ -114,5 +114,12 @@ Richardson con p = 2 (`residual_anatomy/gates/gate_E1bis_lrcp.py`, 110 s).
 
 C1 (≤ 10⁻⁶), C2 (control de ventana), C3 (nivel fuerte ≤ 10⁻⁷, solo informativo) y C4 (b ≤ 10⁻³) se cumplen; integridad
 I0–I3 correcta. Con la extrapolación en ω controlada, A8 y A14 quedan confirmadas a 10⁻⁸ y 10⁻⁶ en dos números de Mach que
-no se habían explorado. Salidas: `out/e1bis_nL.csv`, `out/e1bis_fits.csv`, `out/e1bis_result.csv`, `out/e1bis_manifest.json`,
+no se habían explorado.
+
+*Atribución (aclarada el 2026-11-18):* la idea de guardar los criterios en un commit antes de ejecutar la propuso el
+asesor del chat (Claude en claude.ai, misma familia que el implementador; no es revisión independiente), no el revisor
+externo (ChatGPT). `E1BIS_PREREG.md` dice «a propuesta del revisor»; no se corrige allí porque es el archivo cuyo
+SHA-256 certifica el pre-registro (`out/e1bis_manifest.json`) y modificarlo rompería esa verificación.
+
+Salidas: `out/e1bis_nL.csv`, `out/e1bis_fits.csv`, `out/e1bis_result.csv`, `out/e1bis_manifest.json`,
 `out/e1bis_run.log`.
