@@ -19,20 +19,28 @@ El modelo físico (λ = 1) tiene A = 1/4 fijo; toda la familia (λ, w) de la fas
 con B ≠ 0 tiene β̂ ≠ 0 y **no puede ser equivalente a ningún (λ, w′)**: hay un segundo número adimensional, que mide la
 **forma** de la dispersión a k grande con la escala fija. Eso es lo que se quiere aislar.
 
-## 2. El modelo: interacción de alcance finito
+## 2. El modelo: dispersión fenomenológica U(k) = g(1 + γk⁴)
 ### 2.1 Por qué no una cinética de cuarto orden
 Lo inmediato sería una energía cinética ε(k) = k²/2 + a·k⁴. Pero entonces ε(ε + 2c²) = c²k² + (¼ + 2ac²)k⁴ + a·k⁶ + a²·k⁸:
 aparece k⁸ y el coeficiente de k⁴ cambia con c²(x). Y en un flujo, una cinética ∂⁴ rompe la invariancia galileana: el
 espectro ya no es simplemente (ω − vk)². Se descarta.
 
 ### 2.2 La elección: U(k) = g(1 + γk⁴)
-Con la cinética estándar y una interacción de dos cuerpos de alcance finito con transformada U(k) = g(1 + γk⁴), la
-relación de Bogoliubov en un flujo uniforme es
+Con la cinética estándar y un término de interacción con transformada U(k) = g(1 + γk⁴), la relación de Bogoliubov
+en un flujo uniforme es
 
   (ω − vk)² = ε_k(ε_k + 2nU(k)) = **c²k² + k⁴/4 + γc²·k⁶**,  con ε_k = k²/2 y c² = gn.
 
 Es exactamente la forma pedida, con **β = γc²**. Como c depende de x, β también; el parámetro del modelo es γ, y se
 usa β_H = γc_H² en el horizonte. β̂ = B/A² = 16γc², distinto de 0 para todo γ > 0. Estabilidad: U(k) > 0 para γ ≥ 0.
+
+**Qué es y qué no es (corregido el 2026-11-18 a indicación del asesor):** U(k) = g(1 + γk⁴) **no** es la transformada de
+una interacción física de dos cuerpos: la de un potencial real está acotada (y decae) a k grande, no crece como k⁴. Es un
+**modelo fenomenológico de dispersión**, en la línea de Corley y Jacobson: una forma cómoda y local de imponer la relación
+de dispersión deseada sobre un fondo de Bose-Einstein, legítima como modelo de juguete para estudiar la sensibilidad de la
+radiación a la forma UV de la dispersión, y nada más. En versiones anteriores de este texto se presentó como «interacción
+de alcance finito» y, en un resumen, como «modelo de Gross-Pitaevskii físicamente coherente»: las dos expresiones
+exageraban.
 
 En el espacio real, U*f = g(f + γ f⁗) (porque (ik)⁴ = k⁴): es un operador **local** de cuarto orden, discretizable con el
 esténcil (1, −4, 6, −4, 1)/dx⁴ (segundo orden).
@@ -125,3 +133,48 @@ Malla: perfil tanh, L = 40, N = 240·L, salvo indicación. Si un gate falla, ese
 | **F1 — homogéneo** | flujo uniforme subsónico (Mach 0,5) y supersónico (Mach 2), γ = 1 y 10, ω = 0,05 y 0,2·ω_max: (a) cada raíz cumple el símbolo (\|det\| relativo ≤ 10⁻¹⁰) y la onda plana cumple el operador FD con residuo O(dx²); (b) norma: signo(\|U\|² − \|V\|²) = signo(Ω) y \|J\| = 1; (c) recuento de raíces (6; reales y evanescentes según §2.5); (d) inyección en el homogéneo: transmisión = 1 y reflexión ≈ 0; (e) pseudo-unitariedad en el horizonte (w = 2): \|Σ η\|a\|² − η_in\| converge con orden ≈ 2 | (a) orden en [1,8; 2,2]; (b) exacto a 10⁻¹²; (c) exacto; (d) \|T − 1\| ≤ 10⁻⁶ y \|R\|² ≤ 10⁻⁶ con N fino; (e) orden en [1,5; 2,5] y defecto ≤ 10⁻³ en la malla fina |
 | **F2 — límite γ → 0** | (a) con γ = 0, el driver nuevo (raíces del polinomio general, J = v_g(\|U\|²−\|V\|²), disposición de grado 4) reproduce n_L de v1.0 (`mode_matching.solve_inject`) en w = 2, 9 ω; (b) informativo: n_L(γ) − n_L(0) frente a γ pequeño (resuelto en la malla) | (a) dif. rel. ≤ 10⁻⁸ con solve refinado; (b) se informa el orden en γ (se espera 1) |
 | **F3 — no degeneración** | w = 2, γ = 10: D(s) = máx_ω \|n_L^γ(ω) − n_L^{(0, w/s)}(s·ω)\| / n_L^γ(ω), la distancia a la familia de reescalados (que contiene toda la familia (λ, w′) de la fase 1). Control positivo: el mismo cálculo con el modelo λ = 4 debe dar D_min ≈ ruido | D_min(γ = 10) ≥ 100 × ruido, con ruido = dif. máx. de n_L^γ entre N y 1,5N; y control: D_min(λ = 4) ≤ 10 × su ruido |
+
+## 6. Formulación revisada y gates F0′–F3′ (2026-11-18; criterios en commit antes de implementar)
+F0 y F1 fallaron por un suelo de redondeo ∝ dx⁻⁴ (`residual_anatomy/FASE2_GATES_RESULT.md`). Decisión del usuario: la
+opción 1. Nada de lo anterior se borra; F0–F3 conservan su veredicto.
+
+### 6.1 Ensamblado en (s, d) = (u + v, u − v)
+Con H± = A ∓ iB, A = −½∂² + ½v² + g(n + γn⁗) + V − μ (= la de v1.0 con el fondo consistente V_γ) y B = v∂ + ½v′, y
+K = g·√n(1 + γ∂⁴)√n, las ecuaciones BdG son exactamente
+
+  −iB·s + A·d = ω·s,  (A + 2K)·s − iB·d = ω·d,
+
+con símbolo det = (vk − ω)² − ε(ε + 2G_k), la misma dispersión. **K aparece una sola vez, actuando solo sobre s**: no hay
+resta de entradas grandes. Para el modo de Goldstone, s = 0 y d = 2√n, y K no interviene: A√n = 0 y B√n = j′/(2√n) = 0 por
+construcción del fondo.
+
+### 6.2 Diferencias finitas de cuarto orden y mallas más gruesas
+∂: (1, −8, 0, 8, −1)/12h; ∂²: (−1, 16, −30, 16, −1)/12h²; ∂⁴: (−1, 12, −39, 56, −39, 12, −1)/6h⁴; v′, Q_p y n⁗ analíticos.
+Mallas h ∈ {0,04; 0,03; 0,02} (el suelo ε·γg/h⁴ queda en ~10⁻⁹–10⁻⁸ con γ = 10, frente a ~10⁻⁶ con h = 0,01).
+
+### 6.3 *Matching* con los modos exactos de la red
+Con esténciles de cuarto orden, el sistema discreto tiene orden 10 (s alcanza ±3 y d, ±2), es decir, 6 modos físicos y 4
+espurios de la red. En las regiones asintóticas homogéneas se usan los **modos exactos del sistema discreto**: las 10 raíces
+z = e^{ikh} del polinomio característico discreto (de grado 10), con su vector propio. Propagante: |z| = 1 (a 10⁻⁹); a la
+izquierda se aceptan |z| > 1, y a la derecha, |z| < 1 (evanescentes físicos y espurios por igual). Velocidad de grupo
+discreta, dω/dk = −(∂F/∂k)/(∂F/∂ω) con F el determinante; norma |J| = 1 con J = v_g·Re(s̄d). Recuento esperado: 5 modos
+«away» por lado. Ecuaciones: fila 1 en i = 2…N−3, fila 2 en i = 3…N−4, y *matching* de s en 6 nodos y de d en 4 por lado:
+2N − 10 + 20 = 2N + 10 = incógnitas. Ninguna fila usa solo nodos fijados. Fase de cada modo referida a su borde. Solve
+`eqref`.
+
+Consecuencia: en el homogéneo, el *matching* es **exacto** (sin el error O(h²) que tiene v1.0 al usar modos del continuo),
+así que la transmisión debe ser 1 hasta el redondeo.
+
+### 6.4 Criterios F0′–F3′ (perfil tanh, L = max(40, 8w + 20), w = 2 salvo indicación)
+**Regla del suelo de redondeo:** en cada gate se mide el suelo de redondeo (sensibilidad a 1 ulp de L, con el mismo solve) y
+debe quedar **al menos 100 veces por debajo** de la tolerancia de ese gate; si no, el gate falla aunque el resto pase.
+
+| Gate | Qué comprueba | Criterio |
+|---|---|---|
+| **F1′ — homogéneo (primero)** | flujo uniforme subsónico y supersónico, γ = 1 y 10, ω = 0,05 y 0,2·ω_max, h ∈ {0,04; 0,03; 0,02}: (a) las raíces físicas de la red convergen a las del continuo; (b) normas; (c) recuento (10 raíces, 5 «away» por lado); (d) inyección de cada canal entrante: transmisión y resto; (e) suelo de redondeo de (d) | (a) orden observado de \|k_red − k_cont\| en [3,5; 4,5]; (b) signo(Re s̄d) = signo(Ω) y \|J\| = 1 a 10⁻¹²; (c) exacto; (d) \|T − 1\| ≤ 10⁻⁸ y resto ≤ 10⁻⁸; (e) ≤ 10⁻¹⁰ |
+| **F0′ — Goldstone** | residuo de M·Φ_G (interior \|x\| ≤ L − 10) para γ = 0, 1, 10; control negativo con V₀ | (a) idéntico para los tres γ (dif. ≤ 10⁻¹⁴ relativa); (b) orden observado en [3,5; 4,5]; (c) NO consistente ≥ 100 × consistente en la malla más gruesa y orden < 0,5 |
+| **F1′(e)** horizonte | pseudo-unitariedad en w = 2, γ = 1 y 10, 3 ω de la banda, h ∈ {0,04; 0,03; 0,02} | defecto con orden observado en [3; 5] y ≤ 10⁻⁵ en h = 0,02; suelo de redondeo de n_L ≤ 10⁻⁷ |
+| **F2′ — γ → 0 en el continuo** | (a) con γ = 0: n_L(ω) en 9 ω de la banda con h ∈ {0,04; 0,03; 0,02}, orden observado en [3,5; 4,5], y su extrapolación de Richardson (p = 4) frente a la de v1.0 (N₀, 1,5N₀, 2,25N₀; p = 2; solve refinado); (b) informativo: n_L(γ) − n_L(0) para γ ∈ {0,1; 0,03; 0,01} | (a) diferencia relativa entre los dos límites ≤ 10⁻⁶ |
+| **F3′ — no degeneración** | igual que F3, con el driver nuevo: γ = 10 frente a la familia n_L^{(0, w/s)}(s·ω); ruido = dif. entre h = 0,03 y 0,02; control λ = 4 desde `out/diag_T2_nL.csv` | D_min(γ = 10) ≥ 100 × ruido; control: D_min(λ = 4) ≤ 10 × su ruido (dif. N₀ frente a 1,5N₀ de v1.0) |
+
+Orden de ejecución: F1′(a–e) → F0′ → F1′(e) → F2′ → F3′. Si F1′ falla, se para y se documenta.
