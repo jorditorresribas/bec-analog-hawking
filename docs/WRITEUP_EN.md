@@ -3,7 +3,7 @@
 **An acoustic black hole, a spurious result, and how its origin was identified**
 
 **Author:** Jordi Torres Ribas · **Contact:** jorditorresribas+bec@gmail.com
-**Version:** 1.5 (English translation of the Spanish version) · **Date:** 18 November 2026
+**Version:** 2.0 (English translation of the Spanish version) · **Date:** 18 November 2026
 
 ---
 

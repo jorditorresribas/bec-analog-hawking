@@ -3,7 +3,7 @@
 **Un agujero negro acústico, un resultado espurio y cómo se identificó su origen**
 
 **Autor:** Jordi Torres Ribas · **Contacto:** jorditorresribas+bec@gmail.com
-**Versión:** 1.5 · **Fecha:** 18 de noviembre de 2026
+**Versión:** 2.0 · **Fecha:** 18 de noviembre de 2026
 
 ---
 

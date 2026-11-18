@@ -2,7 +2,7 @@
 
 **An acoustic black hole, a spurious result, and how its origin was identified**
 
-Jordi Torres Ribas · v1.5 · 18 November 2026
+Jordi Torres Ribas · v2.0 · 18 November 2026
 
 A numerical solver for analogue Hawking radiation in a one-dimensional Bose-Einstein
 condensate flowing faster than sound (an "acoustic black hole"). Halfway through the
