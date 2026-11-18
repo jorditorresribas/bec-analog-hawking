@@ -1,0 +1,813 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Un agujero negro de sonido · simulación interactiva</title>
+<meta name="description" content="Átomos que fluyen más rápido que el sonido atrapan las ondas como un agujero negro atrapa la luz. Juega con la simulación, mira el espectro cuántico de Hawking y la historia de un resultado que parecía un descubrimiento y no lo era.">
+<meta name="theme-color" content="#070A10">
+<link rel="canonical" href="https://bec.minimism.uk/es/">
+<link rel="alternate" hreflang="en" href="https://bec.minimism.uk/">
+<link rel="alternate" hreflang="es" href="https://bec.minimism.uk/es/">
+<link rel="alternate" hreflang="x-default" href="https://bec.minimism.uk/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:site_name" content="minimism.uk">
+<meta property="og:url" content="https://bec.minimism.uk/es/">
+<meta property="og:title" content="Un agujero negro de sonido · simulación interactiva">
+<meta property="og:description" content="Átomos que fluyen más rápido que el sonido atrapan las ondas como un agujero negro atrapa la luz. Juega con la simulación, mira el espectro cuántico de Hawking y la historia de un resultado que parecía un descubrimiento y no lo era.">
+<meta property="og:image" content="https://bec.minimism.uk/og-es.jpg">
+<meta property="og:image:secure_url" content="https://bec.minimism.uk/og-es.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Simulación interactiva de un agujero negro acústico: un río de átomos con el horizonte en dorado y el titular «Un agujero negro de sonido».">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Un agujero negro de sonido · simulación interactiva">
+<meta name="twitter:description" content="Átomos que fluyen más rápido que el sonido atrapan las ondas como un agujero negro atrapa la luz. Juega con la simulación, mira el espectro cuántico de Hawking y la historia de un resultado que parecía un descubrimiento y no lo era.">
+<meta name="twitter:image" content="https://bec.minimism.uk/og-es.jpg">
+<meta name="twitter:image:alt" content="Simulación interactiva de un agujero negro acústico: un río de átomos con el horizonte en dorado y el titular «Un agujero negro de sonido».">
+<style>
+:root{
+  --bg:#070A10; --panel:#0E141D; --line:#1D2836; --ink:#E6ECF2; --muted:#8696A8;
+  --sub:#3D7BFF; --sup:#FF6B3D; --pos:#3DF2E0; --neg:#FF4FB8; --gold:#FFD25A; --ok:#5BE39A; --bad:#FF6B6B;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans)}
+body{min-height:100vh}
+header{padding:18px 22px 6px;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px}
+h1{margin:0;font-size:22px;letter-spacing:.02em;font-weight:800}
+h1 span{color:var(--gold)}
+.sub{color:var(--muted);font-size:13px}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:14px;padding:10px 22px 22px}
+@media (max-width:980px){.grid{grid-template-columns:minmax(0,1fr)}
+  .grid>.left,.grid>.right{display:contents}
+  .m1{order:1}.m3{order:2}.m2{order:3}.m9{order:4}.m7{order:5}.m5{order:6}.m6{order:7}.m4{order:8}.m8{order:9}.m10{order:10}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;position:relative}
+.label{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;display:flex;justify-content:space-between;gap:8px}
+canvas{display:block;width:100%}
+#river{height:250px;cursor:crosshair;border-radius:8px}
+#plot{height:150px}
+#st{height:230px;image-rendering:auto;border-radius:6px;background:#000}
+.left{display:grid;gap:14px;min-width:0;align-content:start}
+.right{display:grid;gap:14px;align-content:start}
+.hint{position:absolute;left:50%;top:150px;transform:translateX(-50%);font-family:var(--mono);font-size:12px;color:var(--gold);background:#000a;padding:4px 10px;border-radius:20px;pointer-events:none;transition:opacity .6s}
+.row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:8px 0}
+.row label{font-size:13px;color:var(--muted);min-width:0}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{background:transparent;color:var(--muted);border:0;padding:6px 10px;font:600 12px var(--sans);cursor:pointer}
+.seg button.on{background:#1B2A40;color:var(--ink)}
+.btn{background:#16212F;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:7px 12px;font:600 13px var(--sans);cursor:pointer}
+.btn:hover{border-color:#36506F}
+.btn.gold{background:var(--gold);color:#1a1300;border-color:var(--gold)}
+input[type=range]{width:100%;accent-color:var(--gold)}
+.val{font-family:var(--mono);font-size:12px;color:var(--gold)}
+.toggle{display:flex;gap:10px;align-items:flex-start;padding:10px;border:1px dashed #5a2a2a;border-radius:10px;cursor:pointer}
+.toggle input{margin-top:3px;accent-color:var(--bad)}
+.toggle b{color:var(--bad)}
+.toggle small{display:block;color:var(--muted);font-size:12px;line-height:1.4;margin-top:2px}
+.missions{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+.missions li{display:grid;grid-template-columns:22px 1fr;gap:6px;font-size:13px;line-height:1.35;color:var(--muted)}
+.missions li::before{content:"○";color:#4a5a6c;font-family:var(--mono)}
+.missions li.done{color:var(--ink)}
+.missions li.done::before{content:"✔";color:var(--ok)}
+.missions small{display:block;color:#6d7d90;font-size:11.5px}
+#result{font-family:var(--mono);font-size:14px;font-weight:700;padding:10px;border-radius:8px;background:#0a0f16;text-align:center;min-height:42px;display:flex;align-items:center;justify-content:center}
+.legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.sw{display:inline-block;width:12px;height:4px;border-radius:2px;margin-right:6px;vertical-align:middle}
+.note{font-size:12px;color:var(--muted);line-height:1.5}
+.note b{color:var(--ink)}
+.stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.stats div b{display:block;color:var(--ink);font-size:15px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:var(--gold);color:#1a1300;font-weight:800;padding:10px 18px;border-radius:30px;opacity:0;transition:.35s;pointer-events:none;z-index:9}
+.sleep{position:absolute;inset:44px 14px auto 14px;height:250px;display:none;align-items:center;justify-content:center;flex-direction:column;gap:6px;background:#05070Ccc;border-radius:8px;cursor:pointer;font-family:var(--mono);color:var(--gold);font-size:15px;font-weight:700;text-align:center}
+.sleep small{color:var(--muted);font-weight:400;font-size:12px}
+.sleep.on{display:flex;z-index:5}
+.sleep.on ~ .hint{opacity:0 !important}
+.toast.on{opacity:1;transform:translateX(-50%)}
+svg text{font-family:var(--mono)}
+footer{text-align:center;padding:8px 22px 28px;color:var(--muted);font-size:13px;letter-spacing:.02em}
+footer .heart{color:inherit;display:inline-block;animation:beat 1.6s ease-in-out infinite}
+@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.25)}30%{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){footer .heart{animation:none}}
+.lang{margin-left:auto;display:flex;gap:4px;font-family:var(--mono);font-size:12px}
+.lang a,.lang span{padding:3px 8px;border:1px solid var(--line);border-radius:6px;color:var(--muted);text-decoration:none}
+.lang span{color:var(--ink);background:#1B2A40}
+.lang a:hover{color:var(--ink);border-color:#36506F}
+.note a,.vlist a{color:#8fb3ff;text-decoration:none;border-bottom:1px dotted #8fb3ff66}
+.note a:hover,.vlist a:hover{color:var(--ink)}
+.vlist{list-style:none;margin:0 0 8px;padding:0;display:grid;gap:8px;font-size:12px;line-height:1.45;color:var(--muted)}
+.vlist b{color:var(--ink)}
+.tourbtn{padding:5px 11px;font-size:12px}
+header{display:grid;grid-template-columns:minmax(0,1fr) auto auto;grid-template-areas:"title tour lang" "sub sub sub";align-items:center;gap:6px 12px}
+header h1{grid-area:title} header .sub{grid-area:sub} header .tourbtn{grid-area:tour} header .lang{grid-area:lang;margin-left:0}
+@media (max-width:600px){header{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"title lang" "sub sub" "tour tour"} header .tourbtn{justify-self:start}}
+.story{margin:8px 22px 0;padding:9px 14px;border:1px solid var(--line);border-radius:12px;background:#0B111A;display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;font-size:13px;color:var(--muted);line-height:1.4}
+.story b{color:var(--gold);font-family:var(--mono)}
+.story .arr{color:#4a5a6c}
+.story .btn{margin-left:auto;padding:5px 10px;font-size:12px}
+@media (max-width:600px){.story .arr{display:none}.story>span{flex-basis:100%}.story .btn{margin-left:0;margin-top:4px}}
+details.adv{border-top:1px solid var(--line);margin-top:10px;padding-top:8px}
+details.adv summary{cursor:pointer;font:600 12px var(--sans);color:var(--muted);list-style:none}
+details.adv summary::-webkit-details-marker{display:none}
+details.adv summary::before{content:"▸ ";color:var(--gold)}
+details.adv[open] summary::before{content:"▾ "}
+.q{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;border:1px solid #36506F;background:transparent;color:var(--muted);font:700 10px var(--sans);cursor:help;padding:0;margin-left:5px;vertical-align:1px;text-transform:none;letter-spacing:0}
+.q:hover,.q:focus{color:var(--ink);border-color:var(--gold);outline:none}
+#tip{position:fixed;z-index:70;max-width:270px;background:#16212F;border:1px solid #36506F;color:var(--ink);font-size:12px;line-height:1.45;padding:8px 10px;border-radius:8px;display:none;box-shadow:0 6px 20px #0008}
+.tour-hl{z-index:41 !important;box-shadow:0 0 0 3px var(--gold),0 0 0 100vmax rgba(3,5,9,.72) !important}
+#tour{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:60;width:min(580px,calc(100% - 24px));background:#0E141D;border:1px solid var(--gold);border-radius:12px;padding:12px 14px;display:none;box-shadow:0 10px 30px #000c}
+#tour.on{display:block}
+#tour h3{margin:0 0 6px;padding-right:24px;font-size:15px;color:var(--gold)}
+#tour p{margin:0 0 10px;font-size:13px;line-height:1.5;color:var(--ink)}
+#tour .tnav{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+#tour .tstep{font-family:var(--mono);font-size:11px;color:var(--muted);margin-right:auto}
+#tour .tend{display:none;gap:8px;flex-wrap:wrap;margin:0 0 10px}
+#tour .tend a{text-decoration:none}
+#tourX{position:absolute;right:8px;top:6px;background:none;border:0;color:var(--muted);font-size:18px;cursor:pointer}
+</style>
+</head>
+<body>
+<header>
+  <h1>Agujero negro de <span>sonido</span></h1>
+  <div class="sub">Condensado de Bose-Einstein que fluye más rápido que su propio sonido · simulación clásica (de campo medio) en vivo, con resultados cuánticos del solver validado</div>
+  <button class="btn gold tourbtn" id="tourGo">▶ Recorrido de 1 minuto</button>
+  <nav class="lang" aria-label="Idioma"><a href="/" hreflang="en" lang="en">EN</a><span aria-current="page">ES</span></nav>
+</header>
+<div class="story" id="story"><span><b>1</b> · Un resultado espectacular: la radiación «desaparecía»</span><span class="arr">→</span><span><b>2</b> · Era un error, no física</span><span class="arr">→</span><span><b>3</b> · Simulador corregido y validado contra resultados exactos (10⁻⁸)</span><button class="btn" id="storyGo">Reproducir el falso colapso</button></div>
+
+<div class="grid">
+  <div class="left">
+    <div class="card m1">
+      <div class="label"><span>El río de átomos · haz clic dentro del río o usa los botones</span><span id="clock">t = 0</span></div>
+      <canvas id="river"></canvas>
+      <div class="sleep" id="sleep">⏸ Simulación en pausa por inactividad<small>Se detiene tras 1 minuto sin interacción para ahorrar recursos · toca o haz clic para continuar</small></div>
+      <div class="hint" id="hint">haz clic aquí, dentro del río, para soltar una onda</div>
+      <div class="row" style="margin:10px 0 4px">
+        <button class="btn gold" id="shootOut">Soltar una onda fuera del agujero</button>
+        <button class="btn" id="shootIn" style="border-color:#7a3a26">Soltar una onda dentro</button>
+        <button class="btn" id="shootEdge">Justo en el borde</button>
+      </div>
+      <div class="legend" style="margin-top:8px">
+        <span><i class="sw" style="background:var(--sub)"></i>más lento que el sonido: las ondas pueden remontar</span>
+        <span><i class="sw" style="background:var(--sup)"></i>más rápido que el sonido: las ondas son arrastradas</span>
+        <span><i class="sw" style="background:var(--pos)"></i>/<i class="sw" style="background:var(--neg);margin-left:4px"></i>onda de sonido (×4)</span>
+      </div>
+    </div>
+
+    <div class="card m5">
+      <div class="label"><span>Velocidad del flujo v(x) frente a velocidad del sonido c(x)</span><span>horizonte: donde se cruzan<button class="q" data-tip="horizon">?</button></span></div>
+      <canvas id="plot"></canvas>
+    </div>
+
+    <div class="card m6">
+      <div class="label"><span>Diagrama espacio-tiempo · cada fila es un instante</span><span>tiempo ↓</span></div>
+      <canvas id="st"></canvas>
+      <div class="note" style="margin-top:8px">Las rayas son trayectorias de las ondas. Las que remontan se inclinan a la izquierda; las que caen se doblan hacia la derecha al cruzar la línea dorada. Cerca del horizonte, una onda que intenta salir se queda “pegada” mucho tiempo.</div>
+    </div>
+
+    <div class="card m4">
+      <div class="label"><span>Misiones</span><span id="mcount">0/4</span></div>
+      <ul class="missions">
+        <li id="m1"><div>Haz escapar una onda lanzada fuera del agujero.<small>Contra corriente, a la izquierda del horizonte.</small></div></li>
+        <li id="m2"><div>Deja que el agujero se trague uno.<small>Contra corriente, dentro (derecha), onda larga.</small></div></li>
+        <li id="m3"><div>Truco transplanckiano: saca una onda de dentro.<small>Pista: con dispersión superlumínica, las ondas muy cortas van más rápido que c. Subir λ también ayuda: estrecha el horizonte en la práctica.</small></div></li>
+        <li id="m4"><div>Reproduce el “colapso”: activa el bug con λ ≠ 1.<small>Mira cómo el fondo se descoloca solo, sin lanzar nada.</small></div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="card m3">
+      <div class="label"><span>Última onda (fonón)</span></div>
+      <div id="result">—</div>
+      <div class="stats" style="margin-top:8px">
+        <div>FUERA<b id="eOut">0%</b></div><div>HORIZONTE<b id="eNear">0%</b></div><div>DENTRO<b id="eIn">0%</b></div>
+      </div>
+    </div>
+
+    <div class="card m2">
+      <div class="label"><span>Controles</span><span id="fps"></span></div>
+      <div class="row"><label>Dirección de la onda <span class="val">· lanza uno ya</span></label>
+        <div class="seg" id="dir"><button data-v="-1" class="on">Contra corriente</button><button data-v="1">A favor</button></div>
+      </div>
+      <div class="row" style="display:block">
+        <label>Longitud de onda<button class="q" data-tip="xi">?</button> <span class="val" id="kval"></span></label>
+        <input type="range" id="k0" min="0.3" max="5" step="0.1" value="0.6">
+      </div>
+      <details class="adv">
+        <summary>Para físicos: λ, bug del fondo, velocidad</summary>
+      <div class="row" style="display:block">
+        <label>λ · dispersión<button class="q" data-tip="disp">?</button> c²k² + λk⁴/4 <span class="val" id="lval">1</span></label>
+        <div class="note" style="margin-top:4px">Con el fondo corregido, λ equivale exactamente a un horizonte de anchura w/√λ: no aísla la física a escala pequeña.</div>
+        <div class="seg" id="lam" style="margin-top:6px"><button data-v="0.25">0,25</button><button data-v="0.5">0,5</button><button data-v="1" class="on">1</button><button data-v="2">2</button><button data-v="4">4</button></div>
+      </div>
+      <label class="toggle"><input type="checkbox" id="bug"><span><b>Activar el bug del fondo</b><small>El término de presión cuántica del fondo no se reescala con λ, igual que en la versión que producía el “colapso”. Con λ = 1 no pasa nada; con λ ≠ 1 el condensado deja de estar en equilibrio.</small></span></label>
+      <div class="row" style="display:block">
+        <label>Velocidad de simulación <span class="val" id="sval"></span></label>
+        <input type="range" id="speed" min="2" max="40" step="1" value="15">
+      </div>
+      </details>
+      <div class="row">
+        <button class="btn" id="pause">⏸ Pausa</button>
+        <button class="btn" id="reset">↺ Reiniciar</button>
+        <button class="btn gold" id="demo">▶ Demo</button>
+      </div>
+      <div class="note">Atajos: <b>espacio</b> pausa · <b>R</b> reinicia.</div>
+    </div>
+
+    <div class="card m9">
+      <div class="label"><span>Espectro de Hawking · cálculo cuántico</span></div>
+      <svg id="spec" viewBox="0 0 300 200" width="100%"></svg>
+      <svg id="spect" viewBox="0 0 300 118" width="100%" style="margin-top:4px"></svg>
+      <div class="legend"><span><i class="sw" style="background:var(--pos)"></i>solver n(ω)</span><span><i class="sw" style="background:#cfd8e3"></i>Planck a T_H</span></div>
+      <div class="note" style="margin-top:6px">Ocupación n(ω) del modo de Hawking, calculada por el solver en 40 frecuencias. <b>No</b> es una curva de Planck exacta (gráfica de abajo): la temperatura efectiva T_ω = ω/ln(1 + 1/n) vale 0,958·T_H a baja frecuencia, llega a 0,975·T_H hacia ω ≈ 5·T_H y baja a 0,89·T_H junto al corte dispersivo ω_max ≈ 10,9·T_H, por encima del cual no hay emisión de Hawking.</div>
+      <div class="note" style="margin-top:4px">Calculado con el solver de la v2.0 (commit ff8625c); script y datos en data/ (<a href="../data/hawking_spectrum.py">hawking_spectrum.py</a>, <a href="../data/hawking_spectrum.csv">hawking_spectrum.csv</a>).</div>
+    </div>
+
+    <div class="card m7">
+      <div class="label"><span>Temperatura de Hawking frente a anchura del horizonte</span></div>
+      <svg id="t2" viewBox="0 0 300 200" width="100%"></svg>
+      <div class="legend"><span><i class="sw" style="background:var(--gold)"></i>benchmark, w = 2…8</span><span><i class="sw" style="background:var(--pos)"></i>modelo λ en la anchura w/√λ</span><span><i class="sw" style="background:var(--bad)"></i>con el bug</span></div>
+      <div class="note" style="margin-top:6px" id="t2txt"></div>
+      <div class="note" style="margin-top:4px">Fuentes: <a href="https://github.com/jorditorresribas/bec-analog-hawking/blob/v2.0/out/fp_benchmark.csv">fp_benchmark.csv</a> y <a href="https://github.com/jorditorresribas/bec-analog-hawking/blob/v2.0/out/diag_T2.csv">diag_T2.csv</a> (repo v2.0). La línea discontinua es T = T_H.</div>
+    </div>
+
+    <div class="card m8 note">
+      <b>Qué es cada panel.</b> <b>La animación</b> es una simulación Gross-Pitaevskii 1D clásica (de campo medio) que corre en tu navegador, con el mismo perfil de flujo (Mach 0,5 → 2, w = 2) y el mismo λ que el solver. Muestra cómo quedan atrapadas las ondas en el horizonte y cómo la dispersión deja salir las cortas; las amplitudes se dibujan ×4. No puede mostrar la radiación de Hawking, que es un efecto cuántico. <b>Las dos gráficas</b> son cálculos cuánticos (de Bogoliubov<button class="q" data-tip="bogo">?</button>) del solver validado, con la fuente de cada número enlazada. Con el fondo corregido, cambiar λ equivale matemáticamente a cambiar la anchura del horizonte.
+    </div>
+
+    <div class="card m10">
+      <div class="label"><span>Qué está validado</span><span>repo v2.0</span></div>
+      <ul class="vlist">
+        <li><b>Temperatura de Hawking frente a Finazzi–Parentani (2011):</b> T/T_H = 0,957 → 0,985 para w = 2 → 8. <a href="https://github.com/jorditorresribas/bec-analog-hawking/blob/v2.0/out/fp_benchmark.csv">fp_benchmark.csv</a></li>
+        <li><b>Resultado exacto de Larré et al. (2012):</b> reproducido a 5·10⁻⁹ y 4·10⁻⁸, con los criterios en commit antes de ejecutar. <a href="https://github.com/jorditorresribas/bec-analog-hawking/blob/v2.0/residual_anatomy/E1_RESULT.md">E1_RESULT.md</a></li>
+        <li><b>λ es la anchura del horizonte:</b> (λ, w) ≡ (1, w/√λ) hasta 3,5·10⁻⁹ en 90 puntos. <a href="https://github.com/jorditorresribas/bec-analog-hawking/blob/v2.0/docs/CORRELATIONS.md">CORRELATIONS.md §9</a></li>
+        <li><b>Fase 2 (dispersión k⁶):</b> cerrada sin veredicto; el control pre-registrado falló, así que no se afirma nada. <a href="https://github.com/jorditorresribas/bec-analog-hawking/blob/v2.0/residual_anatomy/FASE2_RESULT.md">FASE2_RESULT.md</a></li>
+      </ul>
+      <div class="note">Código, datos y write-up: <a href="https://github.com/jorditorresribas/bec-analog-hawking/tree/v2.0">github.com/jorditorresribas/bec-analog-hawking</a> (v2.0) · <a href="https://github.com/jorditorresribas/bec-analog-hawking/blob/v2.0/docs/WRITEUP.md">write-up</a></div>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<div id="tour" role="dialog" aria-live="polite"><button id="tourX" aria-label="Cerrar el recorrido">×</button><h3 id="tourT"></h3><p id="tourP"></p><div class="tend" id="tourEnd"><button class="btn gold" id="tourExplore">Explorar el laboratorio</button><a class="btn" href="https://github.com/jorditorresribas/bec-analog-hawking/blob/v2.0/docs/WRITEUP.md" target="_blank" rel="noopener">Leer la historia completa</a><a class="btn" href="https://github.com/jorditorresribas/bec-analog-hawking/tree/v2.0" target="_blank" rel="noopener">Ver el código</a></div><div class="tnav"><span class="tstep" id="tourStep"></span><button class="btn" id="tourBack">← Atrás</button><button class="btn gold" id="tourNext">Siguiente →</button></div></div>
+<div id="tip"></div>
+<footer>Made with <span class="heart" aria-label="amor">&hearts;</span> by Jordi Torres Ribas</footer>
+
+<script>
+// Motor: Gross-Pitaevskii 1D dependiente del tiempo, split-step de Fourier.
+// Unidades ħ = m = g = 1. λ entra como coeficiente cinético s = √λ y acoplo g' = 1/s,
+// de modo que la dispersión es (ω − vk)² = c²k² + λk⁴/4 con c² = n (igual que el solver).
+const SIM = (function () {
+  const N = 1024, L = 200, dx = L / N;
+  const x = new Float64Array(N), k = new Float64Array(N);
+  for (let i = 0; i < N; i++) {
+    x[i] = -L / 2 + i * dx;
+    k[i] = (2 * Math.PI / L) * (i < N / 2 ? i : i - N);
+  }
+  // FFT radix-2 in situ
+  const rev = new Uint32Array(N);
+  const bits = Math.log2(N);
+  for (let i = 0; i < N; i++) {
+    let r = 0;
+    for (let b = 0; b < bits; b++) r |= ((i >> b) & 1) << (bits - 1 - b);
+    rev[i] = r;
+  }
+  const cosT = new Float64Array(N / 2), sinT = new Float64Array(N / 2);
+  for (let i = 0; i < N / 2; i++) { cosT[i] = Math.cos(2 * Math.PI * i / N); sinT[i] = Math.sin(2 * Math.PI * i / N); }
+  function fft(re, im, inv) {
+    for (let i = 0; i < N; i++) {
+      const j = rev[i];
+      if (j > i) { let t = re[i]; re[i] = re[j]; re[j] = t; t = im[i]; im[i] = im[j]; im[j] = t; }
+    }
+    const sg = inv ? 1 : -1;
+    for (let size = 2; size <= N; size <<= 1) {
+      const half = size >> 1, step = N / size;
+      for (let st = 0; st < N; st += size) {
+        for (let j = 0; j < half; j++) {
+          const wr = cosT[j * step], wi = sg * sinT[j * step];
+          const a = st + j, b = a + half;
+          const tr = re[b] * wr - im[b] * wi, ti = re[b] * wi + im[b] * wr;
+          re[b] = re[a] - tr; im[b] = im[a] - ti;
+          re[a] += tr; im[a] += ti;
+        }
+      }
+    }
+    if (inv) for (let i = 0; i < N; i++) { re[i] /= N; im[i] /= N; }
+  }
+
+  // Perfil de fondo: Mach 0,5 aguas arriba, Mach 2 aguas abajo, anchura w = 2 (como el write-up)
+  const nU = 1, MU = 0.5, MD = 2, J0 = MU * Math.pow(nU, 1.5);
+  const nD = Math.pow(J0 / MD, 2 / 3);
+  const w = 2, xw = -L / 4, xb = L / 4;
+  const VIEW = [-24, 84];
+
+  const st = {
+    lambda: 1, s: 1, gp: 1, bug: false, J: J0, t: 0, dt: 0.02,
+    n0: new Float64Array(N), re0: new Float64Array(N), im0: new Float64Array(N),
+    V: new Float64Array(N), gam: new Float64Array(N),
+    kc: new Float64Array(N), ks: new Float64Array(N),
+    re: new Float64Array(N), im: new Float64Array(N),
+    dens: new Float64Array(N), vel: new Float64Array(N), xh: xb,
+  };
+  const tr = new Float64Array(N), ti = new Float64Array(N);
+
+  function smooth(a) { a = Math.min(1, Math.max(0, a)); return a * a * (3 - 2 * a); }
+
+  function setup(lambda, bug) {
+    const s = Math.sqrt(lambda), gp = 1 / s;
+    st.lambda = lambda; st.s = s; st.gp = gp; st.bug = bug; st.t = 0;
+    const n0 = st.n0;
+    for (let i = 0; i < N; i++)
+      n0[i] = nD + (nU - nD) * 0.5 * (Math.tanh((x[i] - xw) / w) - Math.tanh((x[i] - xb) / w));
+    // fase con enrollamiento cuantizado (caja periódica)
+    const C = new Float64Array(N);
+    for (let i = 1; i < N; i++) C[i] = C[i - 1] + 0.5 * (1 / n0[i] + 1 / n0[i - 1]) * dx;
+    const I = C[N - 1] + 0.5 * (1 / n0[N - 1] + 1 / n0[0]) * dx;
+    const m = Math.max(1, Math.round(J0 * I / (2 * Math.PI * s)));
+    st.J = 2 * Math.PI * m * s / I;
+    for (let i = 0; i < N; i++) {
+      const th = 2 * Math.PI * m * C[i] / I, a = Math.sqrt(n0[i]);
+      st.re0[i] = a * Math.cos(th); st.im0[i] = a * Math.sin(th);
+    }
+    // T ψ0 espectral
+    tr.set(st.re0); ti.set(st.im0); fft(tr, ti, false);
+    for (let i = 0; i < N; i++) { const f = s * k[i] * k[i] / 2; tr[i] *= f; ti[i] *= f; }
+    fft(tr, ti, true);
+    // presión cuántica Q = (√n)'' / (2√n)
+    const qr = new Float64Array(N), qi = new Float64Array(N);
+    for (let i = 0; i < N; i++) qr[i] = Math.sqrt(n0[i]);
+    fft(qr, qi, false);
+    for (let i = 0; i < N; i++) { qr[i] *= -k[i] * k[i]; qi[i] *= -k[i] * k[i]; }
+    fft(qr, qi, true);
+    for (let i = 0; i < N; i++) {
+      // V tal que ψ0 es estacionario (μ = 0): V = Re[(−Tψ0 − g' n ψ0)/ψ0]
+      const a = st.re0[i], b = st.im0[i], d = a * a + b * b;
+      const nr = -tr[i] - gp * n0[i] * a, ni = -ti[i] - gp * n0[i] * b;
+      let V = (nr * a + ni * b) / d;
+      if (bug) V += (1 - s) * qr[i] / (2 * Math.sqrt(n0[i])); // el término de fondo sin reescalar
+      st.V[i] = V;
+      const ph = -s * k[i] * k[i] / 2 * st.dt;
+      st.kc[i] = Math.cos(ph); st.ks[i] = Math.sin(ph);
+      // esponja absorbente fuera de la ventana (incluye el horizonte blanco)
+      const xx = x[i];
+      let g = 0;
+      if (xx > 88) g = smooth((xx - 88) / 8);
+      else if (xx < -28) g = smooth((-28 - xx) / 10);
+      st.gam[i] = 1.2 * g;
+    }
+    st.re.set(st.re0); st.im.set(st.im0);
+    observe();
+  }
+
+  function halfV(re, im, dt) {
+    const gp = st.gp, V = st.V;
+    for (let i = 0; i < N; i++) {
+      const ph = -(V[i] + gp * (re[i] * re[i] + im[i] * im[i])) * dt / 2;
+      const c = Math.cos(ph), s = Math.sin(ph), a = re[i], b = im[i];
+      re[i] = a * c - b * s; im[i] = a * s + b * c;
+    }
+  }
+
+  function step(nsteps) {
+    const re = st.re, im = st.im, dt = st.dt;
+    for (let r = 0; r < nsteps; r++) {
+      halfV(re, im, dt);
+      fft(re, im, false);
+      for (let i = 0; i < N; i++) {
+        const a = re[i], b = im[i], c = st.kc[i], s = st.ks[i];
+        re[i] = a * c - b * s; im[i] = a * s + b * c;
+      }
+      fft(re, im, true);
+      halfV(re, im, dt);
+      for (let i = 0; i < N; i++) {
+        const g = st.gam[i];
+        if (g > 0) { re[i] -= g * dt * (re[i] - st.re0[i]); im[i] -= g * dt * (im[i] - st.im0[i]); }
+      }
+      st.t += dt;
+    }
+    observe();
+  }
+
+  function observe() {
+    const re = st.re, im = st.im;
+    tr.set(re); ti.set(im); fft(tr, ti, false);
+    for (let i = 0; i < N; i++) { const a = tr[i]; tr[i] = -k[i] * ti[i]; ti[i] = k[i] * a; }
+    fft(tr, ti, true);
+    for (let i = 0; i < N; i++) {
+      const d = re[i] * re[i] + im[i] * im[i];
+      st.dens[i] = d;
+      st.vel[i] = st.s * (re[i] * ti[i] - im[i] * tr[i]) / d;
+    }
+    // horizonte negro: primer punto (desde x = 20) donde v > c
+    let xh = st.xh;
+    for (let i = idx(20); i < idx(86); i++) {
+      if (st.vel[i] > Math.sqrt(st.dens[i])) {
+        const f0 = st.vel[i - 1] - Math.sqrt(st.dens[i - 1]), f1 = st.vel[i] - Math.sqrt(st.dens[i]);
+        xh = x[i - 1] + dx * (f0 / (f0 - f1));
+        break;
+      }
+    }
+    st.xh = xh;
+  }
+
+  function idx(xx) { let i = Math.round((xx + L / 2) / dx); return ((i % N) + N) % N; }
+
+  // Paquete de Bogoliubov local: dir = −1 contra corriente, +1 a favor
+  function launch(x0, k0, dir, A) {
+    A = A || 0.08;
+    const sig = 6, s = st.s, nl = st.n0[idx(x0)];
+    const om = Math.sqrt(nl * k0 * k0 + s * s * k0 * k0 * k0 * k0 / 4);
+    const Om = dir * om;
+    for (let i = 0; i < N; i++) {
+      let d = x[i] - x0; d -= L * Math.round(d / L);
+      const env = Math.exp(-d * d / (2 * sig * sig));
+      if (env < 1e-8) continue;
+      const dn = A * nl * env * Math.cos(k0 * d);
+      const dth = Om * A * env * Math.sin(k0 * d) / (s * k0 * k0);
+      const a = st.re[i], b = st.im[i], dd = a * a + b * b;
+      const f = Math.sqrt(Math.max(1e-9, dd + dn) / dd);
+      const c = Math.cos(dth), sn = Math.sin(dth);
+      st.re[i] = f * (a * c - b * sn); st.im[i] = f * (a * sn + b * c);
+    }
+    observe();
+  }
+
+  // energía relativa de la perturbación en [xa, xb)
+  function energy(xa, xbb) {
+    let E = 0;
+    for (let i = 0; i < N; i++) {
+      if (x[i] < xa || x[i] >= xbb) continue;
+      const r = (st.dens[i] - st.n0[i]) / st.n0[i];
+      E += r * r * dx;
+    }
+    return E;
+  }
+
+  return { N, L, dx, x, st, setup, step, launch, energy, idx, VIEW, nD, nU };
+})();
+if (typeof module !== 'undefined') module.exports = SIM;
+
+</script>
+<script>
+(function(){
+const S = SIM, st = S.st, N = S.N, X = S.x;
+const VA = S.VIEW[0], VB = S.VIEW[1];
+let lambda = 1, bug = false, dir = -1, k0 = 0.6, speed = 15, paused = false;
+const AMP = 4;
+const $ = id => document.getElementById(id);
+
+// ---------- canvas con DPR ----------
+function fit(c){ const r = c.getBoundingClientRect(), d = window.devicePixelRatio || 1;
+  c.width = Math.max(1, Math.round(r.width * d)); c.height = Math.max(1, Math.round(r.height * d));
+  return c.getContext('2d'); }
+const river = $('river'), plot = $('plot'), stc = $('st');
+let rc, pc, sc;
+function resize(){ rc = fit(river); pc = fit(plot);
+  stc.width = 560; stc.height = 260; sc = stc.getContext('2d'); sc.fillStyle = '#000'; sc.fillRect(0,0,560,260); }
+window.addEventListener('resize', () => { rc = fit(river); pc = fit(plot); });
+
+// ---------- trazadores (átomos) ----------
+const tracers = [];
+for (let i = 0; i < 320; i++) tracers.push({ x: VA + Math.random() * (VB - VA), y: Math.random() * 2 - 1, a: 0.3 + Math.random() * 0.7 });
+function sample(arr, xx){ return arr[S.idx(xx)]; }
+
+// ---------- evaluación del último fonón ----------
+let shot = null;
+const M = { m1:false, m2:false, m3:false, m4:false };
+function mission(id, msg){ if (M[id]) return; M[id] = true; $(id).classList.add('done');
+  $('mcount').textContent = Object.values(M).filter(Boolean).length + '/4'; toast(msg); }
+function toast(t){ const e = $('toast'); e.textContent = t; e.classList.add('on'); clearTimeout(e._t); e._t = setTimeout(() => e.classList.remove('on'), 2600); }
+
+function setResult(txt, col){ const r = $('result'); r.textContent = txt; r.style.color = col || 'var(--ink)'; }
+
+let lastX = null;
+function launchAt(xx){
+  lastX = xx;
+  S.launch(xx, k0, dir); flashes.push({ x: xx, t: performance.now() });
+  $('hint').style.opacity = 0;
+  if (bug && lambda !== 1){ shot = null; setResult('Evaluación desactivada: el fondo no está en equilibrio', 'var(--bad)'); return; }
+  const xh = st.xh;
+  shot = { x0: xx, xh, k0, dir, t0: st.t, E0: S.energy(VA - 4, VB + 4), maxOut: 0, R: Math.min(xx, xh) - 8, inside: xx > xh + 2 };
+  setResult('Evaluando…', 'var(--gold)');
+}
+function evalShot(){
+  if (!shot) return;
+  const xh = st.xh, E0 = shot.E0 || 1;
+  const out = S.energy(VA - 4, Math.min(shot.R, xh - 4)) / E0;
+  const near = S.energy(xh - 4, xh + 4) / E0;
+  const inn = S.energy(xh + 4, VB + 4) / E0;
+  shot.maxOut = Math.max(shot.maxOut, out);
+  const tot = Math.max(1e-9, S.energy(VA - 30, VB + 10) / E0);
+  $('eOut').textContent = Math.round(100 * Math.min(1, S.energy(VA - 4, xh - 4) / E0)) + '%';
+  $('eNear').textContent = Math.round(100 * Math.min(1, near)) + '%';
+  $('eIn').textContent = Math.round(100 * Math.min(1, inn)) + '%';
+  if (st.t - shot.t0 < 80) return;
+  let verdict;
+  if (shot.maxOut > 0.12) verdict = 'esc';
+  else if (near > 0.15) verdict = 'near';
+  else verdict = 'trap';
+  if (verdict === 'esc'){ setResult('✔ ESCAPÓ', 'var(--ok)');
+    if (!shot.inside && shot.dir < 0) mission('m1', 'Misión: la onda ha escapado');
+    if (shot.inside && shot.dir < 0) mission('m3', 'Truco transplanckiano conseguido');
+  } else if (verdict === 'near'){ setResult('◐ PEGADO AL HORIZONTE · sale muy despacio', 'var(--gold)'); }
+  else { setResult('✖ ATRAPADO · arrastrado al interior', 'var(--bad)');
+    if (shot.inside && shot.dir < 0) mission('m2', 'Misión: el agujero se lo ha tragado');
+  }
+  shot = null;
+}
+
+// ---------- reinicio ----------
+function reset(){
+  S.setup(lambda, bug); S.step(1);
+  shot = null; setResult('—'); tracers.forEach(t => t.x = VA + Math.random() * (VB - VA));
+  sc.fillStyle = '#000'; sc.fillRect(0, 0, stc.width, stc.height);
+  bugT0 = st.t; updateT2(); if (typeof kLabel === "function") kLabel();
+}
+let bugT0 = 0;
+
+// ---------- dibujo del río ----------
+function drawRiver(){
+  const W = river.width, H = river.height, d = window.devicePixelRatio || 1;
+  const c = rc; c.clearRect(0, 0, W, H);
+  const g = c.createLinearGradient(0, 0, 0, H); g.addColorStop(0, '#05070C'); g.addColorStop(1, '#0B1220');
+  c.fillStyle = g; c.fillRect(0, 0, W, H);
+  // estrellas fijas
+  c.fillStyle = '#ffffff22'; for (let i = 0; i < 60; i++){ const sx = (i * 9301 % 997) / 997 * W, sy = (i * 4973 % 991) / 991 * H; c.fillRect(sx, sy, d, d); }
+  const cy = H * 0.52, hmax = H * 0.36;
+  const xToPx = xx => (xx - VA) / (VB - VA) * W;
+  const xh = st.xh;
+  if (colW !== W || colT !== st.n0){ colW = W; colT = st.n0; colSub = []; colSup = [];
+    for (let px = 0; px < W; px++){ const a = (0.35 + 0.35 * st.n0[S.idx(VA + (px + 0.5) / W * (VB - VA))]) * 0.55;
+      colSub.push(`rgba(61,123,255,${a})`); colSup.push(`rgba(255,107,61,${a})`); } }
+  for (let px = 0; px < W; px += 1){
+    const xx = VA + (px + 0.5) / W * (VB - VA), i = S.idx(xx);
+    const n = st.dens[i], n0 = st.n0[i], dn = (n - n0) / n0;
+    const hh = hmax * Math.max(0.05, n0 + AMP * (n - n0));
+    const sup = st.vel[i] > Math.sqrt(n);
+    c.fillStyle = sup ? colSup[px] : colSub[px];
+    c.fillRect(px, cy - hh, 1, 2 * hh);
+    const s = Math.min(1, Math.abs(dn) / 0.06);
+    if (s > 0.02){
+      c.fillStyle = (dn > 0 ? POS : NEG)[Math.round(s * 255)];
+      c.fillRect(px, cy - hh, 1, 2 * hh);
+    }
+    // borde brillante
+    c.fillStyle = sup ? 'rgba(255,170,130,.8)' : 'rgba(140,180,255,.8)';
+    c.fillRect(px, cy - hh, 1, 1.2 * d); c.fillRect(px, cy + hh - 1.2 * d, 1, 1.2 * d);
+  }
+  // átomos
+  for (const t of tracers){
+    const i = S.idx(t.x), n = st.dens[i], n0 = st.n0[i];
+    const hh = hmax * Math.max(0.05, n0 + AMP * (n - n0));
+    const px = xToPx(t.x), py = cy + t.y * hh * 0.92;
+    c.fillStyle = `rgba(255,255,255,${0.25 + 0.5 * t.a})`;
+    c.beginPath(); c.arc(px, py, (0.9 + t.a) * d, 0, 6.283); c.fill();
+  }
+  // horizonte
+  const hx = xToPx(xh);
+  const hg = c.createLinearGradient(hx - 24 * d, 0, hx + 24 * d, 0);
+  hg.addColorStop(0, 'rgba(255,210,90,0)'); hg.addColorStop(0.5, 'rgba(255,210,90,.28)'); hg.addColorStop(1, 'rgba(255,210,90,0)');
+  c.fillStyle = hg; c.fillRect(hx - 24 * d, 0, 48 * d, H);
+  c.strokeStyle = '#FFD25A'; c.lineWidth = 2 * d; c.setLineDash([6 * d, 5 * d]);
+  c.beginPath(); c.moveTo(hx, 8 * d); c.lineTo(hx, H - 8 * d); c.stroke(); c.setLineDash([]);
+  c.font = `700 ${11 * d}px ui-monospace, Menlo, monospace`; c.fillStyle = '#FFD25A'; c.textAlign = 'center';
+  c.fillText('HORIZONTE', hx, 18 * d);
+  c.textAlign = 'left'; c.fillStyle = '#8fb3ff'; c.fillText('← el sonido puede escapar', 10 * d, H - 12 * d);
+  c.textAlign = 'right'; c.fillStyle = '#ffab8a'; c.fillText('no hay vuelta atrás →', W - 10 * d, H - 12 * d);
+  c.textAlign = 'right'; c.fillStyle = '#ffffff99'; c.fillText('flujo →', W - 10 * d, 18 * d);
+  // destellos de lanzamiento
+  const nowT = performance.now();
+  for (let i = flashes.length - 1; i >= 0; i--){ const f = flashes[i], a = (nowT - f.t) / 700;
+    if (a > 1){ flashes.splice(i, 1); continue; }
+    c.strokeStyle = `rgba(255,210,90,${1 - a})`; c.lineWidth = 3 * d;
+    c.beginPath(); c.arc(xToPx(f.x), cy, (10 + 60 * a) * d, 0, 6.283); c.stroke(); }
+  // puntero
+  if (hover != null){ c.strokeStyle = '#ffffff55'; c.lineWidth = d; c.beginPath(); c.moveTo(hover * d, 26 * d); c.lineTo(hover * d, H - 26 * d); c.stroke(); }
+}
+let hover = null;
+// tablas de color: el canvas guarda la opacidad en 8 bits, así que 256 niveles dan el mismo resultado
+const POS = [], NEG = []; for (let j = 0; j < 256; j++){ POS.push(`rgba(61,242,224,${j / 255})`); NEG.push(`rgba(255,79,184,${j / 255})`); }
+let colW = 0, colT = null, colSub = [], colSup = []; const flashes = [];
+river.addEventListener('mousemove', e => { const r = river.getBoundingClientRect(); hover = e.clientX - r.left; });
+river.addEventListener('mouseleave', () => hover = null);
+river.addEventListener('click', e => { const r = river.getBoundingClientRect(); launchAt(VA + (e.clientX - r.left) / r.width * (VB - VA)); });
+
+// ---------- gráfica v y c ----------
+function drawPlot(){
+  const W = plot.width, H = plot.height, d = window.devicePixelRatio || 1, c = pc;
+  c.clearRect(0, 0, W, H);
+  const L = 34 * d, B = 18 * d, T = 8 * d, Rr = 8 * d, y0 = 0, y1 = 1.6;
+  const Xp = xx => L + (xx - VA) / (VB - VA) * (W - L - Rr), Yp = v => T + (y1 - v) / (y1 - y0) * (H - T - B);
+  c.font = `${10 * d}px ui-monospace, Menlo, monospace`; c.fillStyle = '#6d7d90'; c.textAlign = 'right';
+  [0, 0.5, 1, 1.5].forEach(v => { c.strokeStyle = '#1D2836'; c.lineWidth = d; c.beginPath(); c.moveTo(L, Yp(v)); c.lineTo(W - Rr, Yp(v)); c.stroke(); c.fillText(v.toFixed(1), L - 6 * d, Yp(v) + 3 * d); });
+  // sombreado supersónico
+  c.fillStyle = 'rgba(255,107,61,.08)';
+  c.fillRect(Xp(st.xh), T, W - Rr - Xp(st.xh), H - T - B);
+  function line(fn, col, wdt){ c.strokeStyle = col; c.lineWidth = wdt * d; c.beginPath();
+    for (let px = L, f = true; px <= W - Rr; px += 2 * d){ const xx = VA + (px - L) / (W - L - Rr) * (VB - VA); const y = Yp(fn(S.idx(xx))); f ? c.moveTo(px, y) : c.lineTo(px, y); f = false; } c.stroke(); }
+  line(i => Math.sqrt(st.dens[i]), '#3DF2E0', 2);
+  line(i => st.vel[i], '#FF6B3D', 2);
+  const hx = Xp(st.xh); c.strokeStyle = '#FFD25A'; c.setLineDash([4 * d, 4 * d]); c.beginPath(); c.moveTo(hx, T); c.lineTo(hx, H - B); c.stroke(); c.setLineDash([]);
+  c.textAlign = 'left'; c.fillStyle = '#3DF2E0'; c.fillText('c(x) sonido', L + 6 * d, Yp(1.02) - 4 * d);
+  c.fillStyle = '#FF6B3D'; c.fillText('v(x) flujo', Xp(VB) - 80 * d, Yp(1.3) - 4 * d);
+}
+
+// ---------- espacio-tiempo ----------
+let row;
+function drawST(){
+  const W = stc.width, H = stc.height;
+  sc.drawImage(stc, 0, 0, W, H - 1, 0, 1, W, H - 1);
+  if (!row) row = sc.createImageData(W, 1);
+  const dt = row.data, hpx = Math.round((st.xh - VA) / (VB - VA) * W);
+  for (let px = 0; px < W; px++){
+    const xx = VA + (px + 0.5) / W * (VB - VA), i = S.idx(xx);
+    const dn = (st.dens[i] - st.n0[i]) / st.n0[i], s = Math.max(-1, Math.min(1, dn / 0.05));
+    const sup = st.vel[i] > Math.sqrt(st.dens[i]);
+    let r = sup ? 22 : 6, gg = sup ? 8 : 10, b = sup ? 6 : 26;
+    if (s > 0){ r += 61 * s * 3.2; gg += 242 * s; b += 224 * s; } else { r += 255 * -s; gg += 79 * -s; b += 184 * -s; }
+    const o = px * 4; dt[o] = Math.min(255, r); dt[o + 1] = Math.min(255, gg); dt[o + 2] = Math.min(255, b); dt[o + 3] = 255;
+  }
+  for (let q = -1; q <= 1; q++){ const p = hpx + q; if (p >= 0 && p < W){ const o = p * 4; dt[o] = 255; dt[o + 1] = 210; dt[o + 2] = 90; } }
+  sc.putImageData(row, 0, 0);
+}
+
+// ---------- temperatura frente a anchura (datos del solver, repo v2.0) ----------
+// benchmark: out/fp_benchmark.csv (Tup_over_kloc2pi); modelo λ: out/diag_T2.csv (N = 9600), QP_LAM = fondo corregido, QP_FIJO = bug
+const BENCH = [[2, 0.95724], [3, 0.97302], [4, 0.97893], [6, 0.98327], [8, 0.98481]];
+const LAMS = [0.25, 0.5, 1, 2, 4], GOOD = [0.97900, 0.97139, 0.95724, 0.93241, 0.89175], BAD = [-0.00562, -0.02671, 0.95724, -0.05323, -0.01706];
+const WEQ = LAMS.map(l => 2 / Math.sqrt(l));
+const NS = 'http://www.w3.org/2000/svg', fmtN = (v, d) => v.toFixed(d).replace('.', ',');
+function mk(svgEl, n, a, t){ const e = document.createElementNS(NS, n); for (const k in a) e.setAttribute(k, a[k]); if (t != null) e.textContent = t; svgEl.appendChild(e); return e; }
+const svg = $('t2');
+function updateT2(){
+  while (svg.firstChild) svg.removeChild(svg.firstChild);
+  const lo = bug ? -0.1 : 0.88, hi = bug ? 1.06 : 1.01;
+  const sx = w => 40 + Math.log(w / 0.9) / Math.log(10) * 250, sy = v => 10 + (hi - v) / (hi - lo) * 160;
+  (bug ? [0, 0.5, 1] : [0.9, 0.95, 1]).forEach(v => { mk(svg, 'line', { x1: 40, x2: 290, y1: sy(v), y2: sy(v), stroke: '#1D2836' }); mk(svg, 'text', { x: 36, y: sy(v) + 3, 'text-anchor': 'end', fill: '#6d7d90', 'font-size': 9 }, fmtN(v, 2)); });
+  [1, 2, 4, 8].forEach(w => mk(svg, 'text', { x: sx(w), y: 184, 'text-anchor': 'middle', fill: '#6d7d90', 'font-size': 9 }, String(w)));
+  mk(svg, 'text', { x: 165, y: 197, 'text-anchor': 'middle', fill: '#6d7d90', 'font-size': 8.5 }, 'anchura del horizonte w (longitudes de curación)');
+  mk(svg, 'text', { x: 4, y: 8, fill: '#6d7d90', 'font-size': 9 }, 'T/T_H');
+  mk(svg, 'line', { x1: 40, x2: 290, y1: sy(1), y2: sy(1), stroke: '#FFD25A', 'stroke-dasharray': '4 4', opacity: 0.6 });
+  const pts = WEQ.map((w, i) => [w, GOOD[i]]).concat(BENCH).sort((a, b) => a[0] - b[0]);
+  mk(svg, 'polyline', { points: pts.map(p => sx(p[0]) + ',' + sy(p[1])).join(' '), fill: 'none', stroke: '#3DF2E0', 'stroke-width': 1.5, opacity: bug ? 0.3 : 0.7 });
+  if (bug) mk(svg, 'polyline', { points: WEQ.map((w, i) => sx(w) + ',' + sy(BAD[i])).slice().reverse().join(' '), fill: 'none', stroke: '#FF6B6B', 'stroke-width': 2 });
+  BENCH.forEach(p => mk(svg, 'rect', { x: sx(p[0]) - 3.5, y: sy(p[1]) - 3.5, width: 7, height: 7, fill: '#FFD25A' }));
+  WEQ.forEach((w, i) => mk(svg, 'circle', { cx: sx(w), cy: sy(bug ? BAD[i] : GOOD[i]), r: 3.2, fill: bug ? '#FF6B6B' : '#3DF2E0' }));
+  const i = LAMS.indexOf(lambda), v = bug ? BAD[i] : GOOD[i];
+  mk(svg, 'circle', { cx: sx(WEQ[i]), cy: sy(v), r: 7, fill: 'none', stroke: '#fff', 'stroke-width': 1.5 });
+  $('t2txt').innerHTML = `λ = ${fmtN(lambda, lambda < 1 ? 2 : 0)} → anchura w/√λ = ${fmtN(WEQ[i], 2)} · ${bug ? 'con el bug' : 'fondo corregido'}: <b style="color:${bug && lambda !== 1 ? 'var(--bad)' : 'var(--pos)'}">T/T_H = ${fmtN(v, 3)}</b>. ` +
+    (bug && lambda !== 1 ? 'Es el falso “colapso”: la temperatura cae a ≈ 0.' : 'Misma curva que el benchmark: λ solo cambia la anchura del horizonte.');
+}
+
+// ---------- espectro de Hawking (cálculo cuántico del solver; data/hawking_spectrum.json) ----------
+const SPEC = [[0.05,18.66,0.9576],[0.0574,16.2,0.9576],[0.0658,14.06,0.9577],[0.0755,12.2,0.9578],[0.0866,10.57,0.9579],[0.0993,9.154,0.9579],[0.1139,7.919,0.958],[0.1307,6.843,0.9582],[0.1499,5.906,0.9583],[0.172,5.089,0.9584],[0.1973,4.377,0.9586],[0.2263,3.757,0.9588],[0.2596,3.217,0.959],[0.2978,2.747,0.9593],[0.3416,2.339,0.9595],[0.3918,1.984,0.9599],[0.4494,1.675,0.9602],[0.5156,1.408,0.9606],[0.5914,1.176,0.961],[0.6784,0.9757,0.9615],[0.7782,0.803,0.9621],[0.8927,0.6546,0.9627],[1.024,0.5277,0.9634],[1.1747,0.4199,0.9641],[1.3475,0.3289,0.9649],[1.5457,0.2528,0.9658],[1.7731,0.1901,0.9668],[2.034,0.1393,0.9678],[2.3332,0.09888,0.9689],[2.6765,0.06763,0.97],[3.0702,0.04425,0.9712],[3.5219,0.02747,0.9724],[4.04,0.01602,0.9735],[4.6343,0.008675,0.9744],[5.3161,0.004301,0.9748],[6.0982,0.001916,0.9742],[6.9953,0.0007467,0.9715],[8.0244,0.0002435,0.9644],[9.2049,6.015e-05,0.9471],[10.5591,6.682e-06,0.8861]], WMAX = 10.886;
+(function drawSpec(){
+  const s2 = $('spec'), x0 = Math.log10(0.04), x1 = Math.log10(14), y0 = -6, y1 = 1.6;
+  const sx = w => 40 + (Math.log10(w) - x0) / (x1 - x0) * 250, sy = n => 10 + (y1 - Math.log10(n)) / (y1 - y0) * 160;
+  [1, -1, -3, -5].forEach(e => { mk(s2, 'line', { x1: 40, x2: 290, y1: sy(10 ** e), y2: sy(10 ** e), stroke: '#1D2836' }); mk(s2, 'text', { x: 36, y: sy(10 ** e) + 3, 'text-anchor': 'end', fill: '#6d7d90', 'font-size': 9 }, '10' + (e < 0 ? '⁻' : '') + '⁰¹²³⁴⁵⁶'[Math.abs(e)]); });
+  [0.1, 1, 10].forEach(w => mk(s2, 'text', { x: sx(w), y: 184, 'text-anchor': 'middle', fill: '#6d7d90', 'font-size': 9 }, fmtN(w, w < 1 ? 1 : 0)));
+  mk(s2, 'text', { x: 165, y: 197, 'text-anchor': 'middle', fill: '#6d7d90', 'font-size': 8.5 }, 'ω / T_H');
+  mk(s2, 'text', { x: 4, y: 8, fill: '#6d7d90', 'font-size': 9 }, 'n(ω)');
+  mk(s2, 'line', { x1: sx(WMAX), x2: sx(WMAX), y1: 10, y2: 170, stroke: '#FF6B3D', 'stroke-dasharray': '3 3' });
+  mk(s2, 'text', { x: sx(WMAX) - 3, y: 22, 'text-anchor': 'end', fill: '#FF6B3D', 'font-size': 9 }, 'ω_max');
+  const pl = []; for (let w = 0.04; w <= 13; w *= 1.06) { const n = 1 / Math.expm1(w); if (n > 1e-6) pl.push(sx(w) + ',' + sy(n)); }
+  SPEC.forEach(p => mk(s2, 'circle', { cx: sx(p[0]), cy: sy(p[1]), r: 2.3, fill: '#3DF2E0' }));
+  mk(s2, 'polyline', { points: pl.join(' '), fill: 'none', stroke: '#ffffff', 'stroke-width': 1.2, 'stroke-dasharray': '5 4', opacity: 0.85 });
+  // temperatura efectiva por frecuencia: la desviación respecto a Planck, sin maquillar
+  const s3 = $('spect'), ty0 = 0.86, ty1 = 1.01, ty = v => 8 + (ty1 - v) / (ty1 - ty0) * 86;
+  [0.9, 0.95, 1].forEach(v => { mk(s3, 'line', { x1: 40, x2: 290, y1: ty(v), y2: ty(v), stroke: '#1D2836' }); mk(s3, 'text', { x: 36, y: ty(v) + 3, 'text-anchor': 'end', fill: '#6d7d90', 'font-size': 9 }, fmtN(v, 2)); });
+  mk(s3, 'line', { x1: 40, x2: 290, y1: ty(1), y2: ty(1), stroke: '#ffffff', 'stroke-dasharray': '5 4', opacity: 0.85 });
+  mk(s3, 'line', { x1: sx(WMAX), x2: sx(WMAX), y1: 8, y2: 94, stroke: '#FF6B3D', 'stroke-dasharray': '3 3' });
+  mk(s3, 'polyline', { points: SPEC.map(p => sx(p[0]) + ',' + ty(p[2])).join(' '), fill: 'none', stroke: '#3DF2E0', 'stroke-width': 1.5 });
+  SPEC.forEach(p => mk(s3, 'circle', { cx: sx(p[0]), cy: ty(p[2]), r: 1.8, fill: '#3DF2E0' }));
+  [0.1, 1, 10].forEach(w => mk(s3, 'text', { x: sx(w), y: 106, 'text-anchor': 'middle', fill: '#6d7d90', 'font-size': 9 }, fmtN(w, w < 1 ? 1 : 0)));
+  mk(s3, 'text', { x: 165, y: 117, 'text-anchor': 'middle', fill: '#6d7d90', 'font-size': 8.5 }, 'ω / T_H');
+  mk(s3, 'text', { x: 46, y: 89, fill: '#6d7d90', 'font-size': 9 }, 'T_ω / T_H (Planck = 1)');
+})();
+
+// ---------- controles ----------
+function seg(id, cb){ $(id).addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return;
+  [...$(id).children].forEach(x => x.classList.toggle('on', x === b)); cb(parseFloat(b.dataset.v)); }); }
+seg('dir', v => { dir = v; launchAt(lastX != null ? lastX : st.xh - 20); });
+seg('lam', v => { lambda = v; $('lval').textContent = String(v).replace('.', ','); reset(); });
+$('bug').addEventListener('change', e => { bug = e.target.checked; reset(); });
+function kLabel(){ const v = st.J / S.nD, c2 = S.nD, lam = lambda;
+  // umbral por velocidad de GRUPO: la onda remonta si dΩ/dk > v, con Ω² = c²k² + λk⁴/4
+  const g = kk => (c2 * kk + lam * kk * kk * kk / 2) / Math.sqrt(c2 * kk * kk + lam * kk ** 4 / 4) - v;
+  let a = 1e-4, b = 60; for (let it = 0; it < 80; it++){ const m = (a + b) / 2; if (g(m) > 0) b = m; else a = m; }
+  const kstar = (a + b) / 2;
+  $('kval').textContent = `${(2 * Math.PI / k0).toFixed(1).replace('.', ',')} ξ  (k = ${k0.toFixed(1).replace('.', ',')}; escapa de dentro si k > ${kstar.toFixed(1).replace('.', ',')})`; }
+$('k0').addEventListener('input', e => { k0 = parseFloat(e.target.value); kLabel(); });
+$('speed').addEventListener('input', e => { speed = parseInt(e.target.value); $('sval').textContent = speed + ' pasos/frame'; });
+$('pause').addEventListener('click', togglePause);
+function togglePause(){ paused = !paused; $('pause').textContent = paused ? '▶ Seguir' : '⏸ Pausa'; }
+$('reset').addEventListener('click', reset);
+$('shootOut').addEventListener('click', () => launchAt(st.xh - 20));
+$('shootIn').addEventListener('click', () => launchAt(st.xh + 12));
+$('shootEdge').addEventListener('click', () => launchAt(st.xh - 3));
+$('demo').addEventListener('click', () => {
+  const xh = st.xh;
+  S.launch(xh - 22, 0.6, -1); S.launch(xh + 14, 0.5, -1);
+  setTimeout(() => S.launch(xh + 12, Math.max(3.2, 2.6 / Math.sqrt(lambda) + 0.8), -1), 900);
+  $('hint').style.opacity = 0; setResult('Demo: fuera escapa · dentro cae · onda corta sale', 'var(--gold)'); shot = null;
+});
+document.addEventListener('keydown', e => { if (e.code === 'Space'){ e.preventDefault(); togglePause(); } if (e.key === 'r' || e.key === 'R') reset(); });
+
+// ---------- bucle ----------
+let last = performance.now(), fpsAcc = 0, fpsN = 0;
+const IDLE_MS = 60000;
+let lastAct = performance.now(), sleeping = false;
+function wake(){ lastAct = performance.now(); if (sleeping){ sleeping = false; $('sleep').classList.remove('on'); last = performance.now(); requestAnimationFrame(frame); } }
+['pointerdown', 'keydown', 'input', 'wheel'].forEach(ev => document.addEventListener(ev, wake, true));
+$('sleep').addEventListener('click', wake);
+function frame(now){
+  if (now - lastAct > IDLE_MS){ sleeping = true; $('sleep').classList.add('on'); $('fps').textContent = 'en pausa'; return; }
+  const dtf = now - last; last = now; fpsAcc += dtf; fpsN++;
+  if (fpsAcc > 1000){ $('fps').textContent = Math.round(1000 * fpsN / fpsAcc) + ' fps'; fpsAcc = 0; fpsN = 0; }
+  if (!paused){
+    S.step(speed);
+    const adv = speed * st.dt;
+    for (const t of tracers){ t.x += sample(st.vel, t.x) * adv; if (t.x > VB){ t.x = VA + Math.random() * 2; t.y = Math.random() * 2 - 1; } }
+    evalShot();
+    if (bug && lambda !== 1 && st.t - bugT0 > 30) mission('m4', 'Misión: has reproducido el falso colapso');
+    drawST();
+  }
+  $('clock').textContent = 't = ' + st.t.toFixed(0);
+  drawRiver(); drawPlot();
+  requestAnimationFrame(frame);
+}
+
+
+// ---------- recorrido guiado y ayudas «?» ----------
+const TIPS = { horizon: 'El horizonte es donde el flujo pasa a ir más rápido que el sonido. Más allá (a la derecha), las ondas ya no pueden remontar: es un punto de no retorno para el sonido.', xi: 'ξ (longitud de curación) es el tamaño mínimo que pueden tener las ondas en este gas. Las mucho más cortas que ξ se comportan distinto: van más rápido que el sonido normal.', disp: 'Dispersión: en este gas, las ondas cortas van más rápido que las largas. Por eso las ondas muy cortas pueden escapar desde dentro del horizonte.', bogo: 'La teoría de Bogoliubov describe las pequeñas ondulaciones cuánticas (fonones) de un condensado. Es lo que resuelve el simulador para calcular la radiación de Hawking.' };
+const tipEl = $('tip');
+function showTip(btn){ tipEl.textContent = TIPS[btn.dataset.tip] || ''; tipEl.style.display = 'block';
+  const r = btn.getBoundingClientRect(), w = tipEl.offsetWidth, h = tipEl.offsetHeight;
+  let x = Math.min(window.innerWidth - w - 8, Math.max(8, r.left + r.width / 2 - w / 2)), y = r.bottom + 8;
+  if (y + h > window.innerHeight - 8) y = r.top - h - 8;
+  tipEl.style.left = x + 'px'; tipEl.style.top = y + 'px'; }
+document.addEventListener('click', e => { const q = e.target.closest('.q');
+  if (q){ e.preventDefault(); e.stopPropagation(); if (tipEl.style.display === 'block' && tipEl._for === q){ tipEl.style.display = 'none'; tipEl._for = null; } else { showTip(q); tipEl._for = q; } }
+  else { tipEl.style.display = 'none'; tipEl._for = null; } }, true);
+document.querySelectorAll('.q').forEach(q => { q.addEventListener('mouseenter', () => { showTip(q); tipEl._for = q; });
+  q.addEventListener('mouseleave', () => { tipEl.style.display = 'none'; tipEl._for = null; }); });
+window.addEventListener('scroll', () => { tipEl.style.display = 'none'; }, { passive: true });
+
+const TOUR = [
+  { t: 'Un río más rápido que el sonido', p: 'Esto es un gas de átomos ultrafríos que fluye hacia la derecha. A la izquierda va más lento que el sonido; a la derecha, más rápido. La línea dorada, donde se cruzan las dos velocidades, es el <b>horizonte</b>: un punto de no retorno para el sonido.', el: '.m1', act: null },
+  { t: 'Suelta un sonido', p: 'Se acaban de soltar dos ondas, las dos contra la corriente. La de la izquierda escapa. A la de la derecha, aunque viaja hacia atrás, el río la arrastra: no puede salir. Es un <b>agujero negro para el sonido</b>.', el: '.m1', act: 'shots' },
+  { t: 'Lo que la animación no puede enseñar', p: 'Hawking predijo que un horizonte así emite un brillo débil, como si estuviera caliente. Una animación clásica no puede mostrarlo; el simulador validado lo calcula: es esta curva. Sale casi térmica, a un 96–97 % de la temperatura ideal, con desviaciones reales que no se esconden.', el: '.m9', act: null },
+  { t: 'El resultado que parecía un descubrimiento', p: 'A mitad del proyecto, cambiar un parámetro hizo que la radiación desapareciera: la gráfica muestra ahora ese cálculo, con la temperatura cayendo casi a cero. Parecía un hallazgo. Era un error del modelo: el gas dejaba de estar en equilibrio. Un test de simetría lo delató, se corrigió, y el parámetro resultó cambiar solo la anchura del horizonte.', el: '.m7', act: 'bug' }
+];
+const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let tourI = -1;
+function setBug(on){
+  const want = on ? '4' : '1';
+  const b = document.querySelector('#lam button[data-v="' + want + '"]'); if (b && !b.classList.contains('on')) b.click();
+  if ($('bug').checked !== on){ $('bug').checked = on; $('bug').dispatchEvent(new Event('change')); }
+  if (on) document.querySelector('details.adv').open = true;
+}
+function tourShow(i){
+  document.querySelectorAll('.tour-hl').forEach(e => e.classList.remove('tour-hl'));
+  tourI = i; const s = TOUR[i], el = document.querySelector(s.el);
+  el.classList.add('tour-hl');
+  const top = el.getBoundingClientRect().top + window.scrollY - 12;
+  window.scrollTo({ top: Math.max(0, top), behavior: reduceMotion ? 'auto' : 'smooth' });
+  $('tourT').textContent = s.t; $('tourP').innerHTML = s.p;
+  $('tourStep').textContent = 'Paso' + ' ' + (i + 1) + ' / ' + TOUR.length;
+  $('tourBack').disabled = i === 0;
+  $('tourNext').textContent = i === TOUR.length - 1 ? 'Terminar' : 'Siguiente →';
+  $('tourEnd').style.display = i === TOUR.length - 1 ? 'flex' : 'none';
+  if (s.act === 'bug') setBug(true); else if (bug) setBug(false);
+  if (s.act === 'shots'){ const xh = st.xh; shot = null; S.launch(xh - 22, 0.6, -1); setTimeout(() => S.launch(st.xh + 14, 0.5, -1), 500);
+    setResult('Recorrido: la de la izquierda escapa · la de la derecha cae', 'var(--gold)'); $('hint').style.opacity = 0; }
+}
+function tourStart(i){ wake(); if (paused) togglePause(); $('tour').classList.add('on'); tourShow(i || 0); }
+// mientras el recorrido está abierto cuenta como actividad: la simulación no entra en la pausa por inactividad
+setInterval(() => { if (tourI >= 0) wake(); }, 15000);
+function tourClose(){ document.querySelectorAll('.tour-hl').forEach(e => e.classList.remove('tour-hl'));
+  $('tour').classList.remove('on'); if (bug) setBug(false); tourI = -1; }
+$('tourGo').addEventListener('click', () => tourStart(0));
+$('storyGo').addEventListener('click', () => tourStart(3));
+$('tourNext').addEventListener('click', () => tourI < TOUR.length - 1 ? tourShow(tourI + 1) : tourClose());
+$('tourBack').addEventListener('click', () => { if (tourI > 0) tourShow(tourI - 1); });
+$('tourX').addEventListener('click', tourClose);
+$('tourExplore').addEventListener('click', () => { tourClose(); window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' }); });
+document.addEventListener('keydown', e => { if (tourI < 0) return;
+  if (e.key === 'ArrowRight'){ e.preventDefault(); $('tourNext').click(); }
+  else if (e.key === 'ArrowLeft'){ e.preventDefault(); $('tourBack').click(); }
+  else if (e.key === 'Escape') tourClose(); });
+
+resize();
+$('sval').textContent = speed + ' pasos/frame';
+reset(); kLabel();
+setTimeout(() => { if (!shot) launchAt(st.xh - 20); $('hint').style.opacity = 1; }, 700);
+requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
