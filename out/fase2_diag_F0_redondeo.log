@@ -1,0 +1,5 @@
+ N    gamma | residuo double | residuo long double | v1.0 (long double) | ||gamma g P sqrt n|| (escala de la resta)
+  2000    10 | 1.505e-06      | 1.505e-06           | 1.505e-06          | 1.42e-01
+  4000    10 | 3.773e-07      | 3.764e-07           | 3.761e-07          | 1.42e-01
+  8000    10 | 5.198e-07      | 3.003e-07           | 9.401e-08          | 1.42e-01
+ 16000    10 | 7.891e-06      | 4.196e-06           | 2.350e-08          | 1.42e-01
