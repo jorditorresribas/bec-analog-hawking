@@ -15,7 +15,7 @@ especificadas, la simulación reproduce la relación de temperatura de horizonte
 de Finazzi–Parentani: **T_upstream/(κ_local/2π) = 0.957 → 0.985** en cinco anchuras de
 horizonte (tiende a 1 al suavizar el horizonte), usando el observable que FP define (el
 cuanto Hawking upstream n_ω = |β_ω|²). Con la κ̄ de FP (T₀ = κ̄/2π) y d = 1.58 la desviación
-es ≤ 0.75 %, **condicional a d** (con d = 1 o 2 llega al 2–3 %; tabla en `FP_BENCHMARK.md` §5b).
+es ≤ 0.75 %, **condicional a d** (con d = 1 o 2 la desviación máxima es del 2,4 % y del 3,4 %; tabla en `FP_BENCHMARK.md` §5b).
 Es **validación numérica**, NO nueva física, y **NO una reproducción íntegra del
 artículo** (perfiles distintos; d≈1.58 es ajuste de FP, no universal).
 

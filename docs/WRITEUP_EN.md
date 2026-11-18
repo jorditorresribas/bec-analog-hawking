@@ -127,7 +127,7 @@ A person organised two AIs into separate roles with rules fixed in advance. The 
 
 **System.** 1D Bose-Einstein condensate, stationary Bogoliubov-de Gennes (BdG) equations; ℏ = m = g = 1. Density profile n(x) of tanh form (Mach 0.5 upstream, 2 downstream, width w = 2); not to be confused with the Larré et al. *waterfall* configuration used in E1. 3×3 S-matrix by exact modal matching with a second-order finite-difference operator. Observable: n_L(ω), the occupation of the upstream Hawking channel (Finazzi and Parentani 2011, Eq. 42). T_eff = lim ω·n_L.
 
-**v1.0 benchmark (frozen).** T_up/(κ_local/2π) = 0.957 → 0.985 for w ∈ {2, 3, 4, 6, 8}, against Finazzi and Parentani, PRD 83, 084010 (2011). With their broadened-horizon κ̄, T_up/(κ̄/2π) ∈ [0.9926, 1.0050]; this second figure is conditional on their window width d = 1.58 (with d = 1 or 2 the agreement drops to 2–3 %). The scale Λ = 2mc²/ℏ of their Eq. 9 has been checked against the paper.
+**v1.0 benchmark (frozen).** T_up/(κ_local/2π) = 0.957 → 0.985 for w ∈ {2, 3, 4, 6, 8}, against Finazzi and Parentani, PRD 83, 084010 (2011). With their broadened-horizon κ̄, T_up/(κ̄/2π) ∈ [0.9926, 1.0050]; this second figure is conditional on their window width d = 1.58 (with d = 1 or 2 the maximum deviation is 2.4 % and 3.4 %). The scale Λ = 2mc²/ℏ of their Eq. 9 has been checked against the paper.
 
 **The artefact.** The operator with dispersion (ω−vk)² = c²k² + λk⁴/4 is equivalent to BdG with mass m′ = 1/√λ and coupling g′n = c²/√λ, but it kept the background quantum pressure Q_p fixed instead of using Q_p,λ = √λ·Q_p. Goldstone residual on Φ_G = (√n, −√n): ½(1 − √λ)(√n)″. Measured / predicted = 1.0000, independent of the grid. With Q_p,λ the residual drops to O(dx²). The planned Padé operator had the residual (K_P − K_1)√n (measured ratio ≈ 1.00).
 
@@ -138,7 +138,7 @@ A person organised two AIs into separate roles with rules fixed in advance. The 
 | T_eff/T_H, inconsistent background | −0.006 | −0.027 | 0.957 | −0.053 | −0.017 |
 | T_eff/T_H, consistent background | 0.979 | 0.971 | 0.957 | 0.932 | 0.892 |
 
-(T_H = κ_local/2π. With the inconsistent background, n_L ∝ ω at low frequency, so the extrapolated T_eff comes out ≈ 0, slightly negative because of the extrapolation. With the consistent background, the difference between grids is ≤ 5×10⁻⁵.)
+(T_H = κ_local/2π. With the inconsistent background, n_L ∝ ω at low frequency, so the extrapolated T_eff comes out ≈ 0, slightly negative because of the extrapolation. With the consistent background, the difference between grids is ≤ 6×10⁻⁵.)
 
 **λ ↔ width equivalence.** With the consistent background, x′ = x/√λ, ω′ = √λ·ω map the λ operator on a profile of width w onto the physical operator (λ = 1) on a profile of width w/√λ: M₁(x′) = √λ·M_λ(x), also on the grid (L′ = L/√λ, same N). Checked at the 90 points of T2: relative difference in n_L ≤ 3.2×10⁻⁶ with the standard solve (its rounding noise) and ≤ 3.5×10⁻⁹ with equilibration and iterative refinement. The "consistent background" row is therefore the curve T/T_H against the width w/√λ = 4 → 1.
 

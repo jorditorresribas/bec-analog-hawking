@@ -127,7 +127,7 @@ Una persona organizó a dos IAs con papeles separados y reglas fijadas de antema
 
 **Sistema.** Condensado de Bose-Einstein 1D, ecuaciones de Bogoliubov-de Gennes (BdG) estacionarias; ℏ = m = g = 1. Perfil de densidad n(x) en tanh (Mach 0,5 aguas arriba, 2 aguas abajo, anchura w = 2); no confundir con la configuración *waterfall* de Larré et al. usada en E1. Matriz S 3×3 por *matching* modal exacto con operador en diferencias finitas de segundo orden. Observable: n_L(ω), la ocupación del canal Hawking aguas arriba (Finazzi y Parentani 2011, Ec. 42). T_eff = lím ω·n_L.
 
-**Benchmark v1.0 (congelado).** T_up/(κ_local/2π) = 0,957 → 0,985 para w ∈ {2, 3, 4, 6, 8}, frente a Finazzi y Parentani, PRD 83, 084010 (2011). Con su κ̄ de horizonte ensanchado, T_up/(κ̄/2π) ∈ [0,9926, 1,0050]; esta segunda cifra es condicional a su anchura de ventana d = 1,58 (con d = 1 o 2, el acuerdo baja al 2–3 %). La escala Λ = 2mc²/ℏ de su Ec. 9 se ha cotejado con el artículo.
+**Benchmark v1.0 (congelado).** T_up/(κ_local/2π) = 0,957 → 0,985 para w ∈ {2, 3, 4, 6, 8}, frente a Finazzi y Parentani, PRD 83, 084010 (2011). Con su κ̄ de horizonte ensanchado, T_up/(κ̄/2π) ∈ [0,9926, 1,0050]; esta segunda cifra es condicional a su anchura de ventana d = 1,58 (con d = 1 o 2, la desviación máxima es del 2,4 % y del 3,4 %). La escala Λ = 2mc²/ℏ de su Ec. 9 se ha cotejado con el artículo.
 
 **El artefacto.** El operador con dispersión (ω−vk)² = c²k² + λk⁴/4 equivale a BdG con masa m′ = 1/√λ y acoplo g′n = c²/√λ, pero mantenía fija la presión cuántica del fondo, Q_p, en lugar de Q_p,λ = √λ·Q_p. Residuo de Goldstone sobre Φ_G = (√n, −√n): ½(1 − √λ)(√n)″. Medido / predicho = 1,0000, independiente de la malla. Con Q_p,λ el residuo baja a O(dx²). El operador Padé planificado tenía el residuo (K_P − K_1)√n (cociente medido ≈ 1,00).
 
@@ -138,7 +138,7 @@ Una persona organizó a dos IAs con papeles separados y reglas fijadas de antema
 | T_eff/T_H, fondo inconsistente | −0,006 | −0,027 | 0,957 | −0,053 | −0,017 |
 | T_eff/T_H, fondo consistente | 0,979 | 0,971 | 0,957 | 0,932 | 0,892 |
 
-(T_H = κ_local/2π. Con el fondo inconsistente, n_L ∝ ω a baja frecuencia, de modo que el T_eff extrapolado sale ≈ 0, ligeramente negativo por la extrapolación. Con el fondo consistente, la diferencia entre mallas es ≤ 5·10⁻⁵.)
+(T_H = κ_local/2π. Con el fondo inconsistente, n_L ∝ ω a baja frecuencia, de modo que el T_eff extrapolado sale ≈ 0, ligeramente negativo por la extrapolación. Con el fondo consistente, la diferencia entre mallas es ≤ 6·10⁻⁵.)
 
 **Equivalencia λ ↔ anchura.** Con el fondo consistente, x′ = x/√λ, ω′ = √λ·ω transforman el operador con λ sobre un perfil de anchura w en el operador físico (λ = 1) sobre un perfil de anchura w/√λ: M₁(x′) = √λ·M_λ(x), también en la malla (L′ = L/√λ, mismo N). Comprobado en los 90 puntos de T2: diferencia relativa en n_L ≤ 3,2·10⁻⁶ con el solve estándar (su ruido de redondeo) y ≤ 3,5·10⁻⁹ con equilibrado y refinamiento iterativo. La fila «fondo consistente» es, por tanto, la curva T/T_H frente a la anchura w/√λ = 4 → 1.
 

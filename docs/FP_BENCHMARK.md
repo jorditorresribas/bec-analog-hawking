@@ -14,7 +14,7 @@ acercándose a 1 al suavizar el horizonte, usando el observable que FP define (e
 Hawking upstream n_ω=|β_ω|²), robusto en banda de ajuste y resolución numérica. Con la κ̄
 de horizonte ensanchado de FP (T_0 = κ̄/2π) y su anchura de ventana d = 1.58 el acuerdo es
 ≤ 0.75 %, pero esa cifra depende de d (ajustado por FP a sus perfiles) y de la ventana
-simétrica: con d = 1 o 2 sube al 2–3 % (tabla de sensibilidad en §5b).** Es validación
+simétrica: con d = 1 o 2 la desviación máxima es del 2,4 % y del 3,4 % (tabla de sensibilidad en §5b).** Es validación
 numérica, no nueva física (ver §8–9).
 
 > **Titular revisado (auditoría fase 1, 2026-11-17).** El resultado principal pasa a ser el
@@ -150,8 +150,8 @@ mismo T_upstream de la tabla de §5b (`python3 benchmarks/fp_v1/FP_d_sensitivity
 | 3.0 | 1.1268 | 1.0744 | 1.0487 | 1.0242 | 1.0128 |
 
 El acuerdo «≤ 0.75 %» es **condicional** a importar d = 1.58 (ajustado por FP a SUS
-perfiles) y a la ventana simétrica elegida aquí: con d = 1 o d = 2 la desviación llega al
-2–3 %. El resultado que no depende de ningún parámetro importado es
+perfiles) y a la ventana simétrica elegida aquí: con d = 1 o d = 2 la desviación máxima es del
+2,4 % y del 3,4 %. El resultado que no depende de ningún parámetro importado es
 **T_up/(κ_local/2π) = 0.957 → 0.985, que tiende a 1 al suavizar el horizonte.**
 
 ## 6. Resultado secundario y por qué NO es la T de FP

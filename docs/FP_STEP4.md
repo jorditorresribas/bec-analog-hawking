@@ -56,6 +56,11 @@ SOLO = nuestro n_L = T_upstream.** El estimador H4 sumaba n_L+n_R+ = **n_{−ω}
 | 4 | 0.983 | 0.981 | 1.002 |
 | 8 | 0.988 | 0.992 | 0.996 |
 
+> *Nota (auditoría de números, 2026-11-18):* esta primera tabla usa el estimador preliminar de la pendiente en la banda
+> [0.05, 0.60]·T (0.9612 / 0.9826 / 0.9884 en la salida de `FP_step4_upstream_robust.py`, redondeados). Las cifras que
+> valen son las de §4b (T_0 extrapolado a ω → 0, la definición de FP): 0.9572 / 0.9789 / 0.9848 y T_up/(κ̄/2π) =
+> 1.0050 / 0.9984 / 0.9926.
+
 - T_upstream está **por debajo de κ_local** y **= κ̄/2π a <1%** — exactamente el resultado
   central de FP (T_0 = κ̄/2π < κ_K/2π en el caso simétrico monótono).
 - El déficit **encoge con w** (T_upstream/κ_local: 0.961→0.988): T_0 tiende a κ_K/2π al
