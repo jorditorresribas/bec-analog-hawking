@@ -77,6 +77,14 @@ Para ω fija, en cada región asintótica homogénea, k cumple el polinomio de g
   filas u y v en i = 2…N−3, la fila suma en i = 1 y en i = N−2, y el *matching* de (u, v) con la superposición de modos
   en p = 0, 1, 2 y p = N−1, N−2, N−3. Recuento: 2(N−4) + 2 + 12 = 2N + 6 ecuaciones = 2N incógnitas de campo + 3 + 3
   amplitudes. Con γ = 0 se usa exactamente la disposición de v1.0 (matching en 2 puntos por lado, 2 + 2 amplitudes).
+- **Corrección de implementación (2026-11-18, antes de ejecutar ningún gate):** el *matching* de (u, v) en p = 0, 1, 2
+  descrito arriba deja el sistema **casi singular**. El estado del sistema discreto de orden 6 no es «u, v en 3 nodos»,
+  sino s = u + v en 4 nodos y d = u − v en 2 (la fila u alcanza ±2 en s y ±1 en d). Con u, v fijados en 0, 1, 2, la fila
+  suma en i = 1 solo usa nodos ya fijados y no aporta información. Síntoma: en un flujo uniforme supersónico con γ = 1,
+  inyectar un modo daba «transmisión» 1,59 y defecto 0,27. Se cambia a: *matching* de s en p = 0…3 y de d en p = 0, 1 por
+  lado (mismo recuento, 2N + 6). Con eso, la transmisión en el homogéneo es exacta (defecto 10⁻⁹–10⁻¹¹). Además, la fase
+  de cada modo se refiere a su borde (x_ref = x[0] o x[−1]) en lugar de a x = 0, para no escalar las columnas evanescentes
+  por e^{±Im k·L}. Los criterios de los gates no cambian.
 - **Solve:** equilibrado + refinamiento iterativo (`diag_conditioning.solve(..., 'eqref')`), porque el operador de cuarto
   orden empeora el condicionamiento.
 
