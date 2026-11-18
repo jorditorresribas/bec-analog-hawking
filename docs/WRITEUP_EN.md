@@ -3,7 +3,7 @@
 **An acoustic black hole, a spurious result, and how its origin was identified**
 
 **Author:** Jordi Torres Ribas · **Contact:** jorditorresribas+bec@gmail.com
-**Version:** 1.4 (English translation of the Spanish version) · **Date:** 17 November 2026
+**Version:** 1.5 (English translation of the Spanish version) · **Date:** 18 November 2026
 
 ---
 
@@ -13,13 +13,14 @@ The goal was to simulate on a computer a laboratory analogue of a black hole: a 
 
 - I used AI to build a simulator of a laboratory analogue of a black hole, and subjected it to validation rules fixed before every test.
 - Halfway through, a striking result appeared: the radiation "collapsed" when one model parameter was changed. **It wasn't physics: it was a flaw in the model.** The symmetry test identified the defect, with agreement to four significant figures between the measured and predicted residuals. Once it was fixed, the "collapse" disappeared.
-- The instrument reproduces an **exact** result published by another research group, with a relative error of 3×10⁻⁵ in the leading coefficient.
-- The audits detected real errors in the checks themselves. They are documented below, together with who detected each one.
+- The instrument reproduces an **exact** result published by another research group: first with a relative error of 3×10⁻⁵ in the leading coefficient and then, in a second test whose criteria were published before it was run, with an error of 10⁻⁸.
+- Once the error was fixed, it turned out that the parameter being varied did not do what it was meant to do: it is exactly equivalent to changing the width of the horizon.
+- The audits detected real errors in the checks themselves and in the documentation. They are documented below, together with who detected each one.
 
 ## What this project demonstrates
 
 1. **Directing AI on a hard technical problem without errors reaching the conclusions**: one AI builds, another audits, and a person decides.
-2. **Turning "it seems to work" into "it has been checked"**: success and failure criteria written down *before* running anything, never adjusted afterwards.
+2. **Turning "it seems to work" into "it has been checked"**: success and failure criteria written down *before* running anything. There are two exceptions, both test tolerances, declared in the code itself with their justification: they were relaxed after a failure, once the numerical noise that explained it had been measured (`tests/validate_lambda.py` and `residual_anatomy/diag_scaling_equivalence.py`).
 3. **Spotting a misleading result and identifying where it came from**, instead of publishing it or burying it.
 4. **Full traceability**: every result stored with its data, a manifest and cryptographic fingerprints (SHA-256), so that a third party can reproduce it.
 5. **Honesty about scope**: keeping what is PROVEN separate from what is a HYPOTHESIS and what is OPEN, and keeping negative results too.
@@ -47,7 +48,7 @@ The work was directed by someone with no academic training in physics. For that 
 **Rules applied without exception:**
 
 - **Design on paper → review → implementation → audit → run.** No significant computation was launched without an approved design.
-- **Criteria fixed in advance** ("gates"). Before running, it is written down which result counts as success, which as failure and which as inconclusive. If the outcome is unfavourable, it is reported as is; the threshold does not move.
+- **Criteria fixed in advance** ("gates"). Before running, it is written down which result counts as success, which as failure and which as inconclusive. If the outcome is unfavourable, it is reported as is; the threshold does not move. (There were two declared exceptions in the tests: see "What this project demonstrates", item 2.)
 - **Mandatory labels**: PROVEN / HYPOTHESIS / OPEN, and always "validated within the documented scope".
 - **Persistence**: every result comes with its CSV files, a manifest recording the software environment, and SHA-256 fingerprints of code and data.
 - **Real independence**: two models from the same family do not count as two independent checks, because they can share biases. That is why the reviewer comes from a different company.
@@ -58,9 +59,9 @@ In total, the project accumulated about twenty documented gates.
 
 The basic simulator (version 1.0) was validated first and then frozen. It reproduces the theoretical prediction by Finazzi and Parentani (2011): the temperature obtained is between 95.7 % and 98.5 % of the ideal Hawking temperature, approaching 100 % as the horizon becomes smoother. (With the corrected temperature those authors propose, the agreement is better than 0.75 %, but that figure depends on a parameter they fitted to their own profiles.)
 
-It was then extended to vary the short-scale physics through a parameter λ. The result was surprising: moving λ away from its original value, in either direction, **made the temperature of the radiation drop to zero**. The expected physical effect was a few per cent; this was a total "collapse".
+A parameter, λ, was then added with the aim of changing only the very-short-scale physics and nothing else. The result was surprising: moving λ away from its original value, in either direction, **made the temperature of the radiation drop to zero**. The expected effect was a few per cent; this was a total "collapse".
 
-A result like that could have been presented as a finding. Instead:
+A result like that could have been presented as a finding. Instead it was investigated (section 4) and turned out to be a modelling error. The investigation also left a second lesson, less visible but just as important: **once the error was fixed, λ no longer did what it was meant to do.** Changing λ was shown to be exactly equivalent to making the horizon wider or narrower: the results with λ match those of the original simulator on a rescaled horizon with a relative difference of a few parts in a billion (3.5×10⁻⁹). In other words, λ does not isolate short-scale physics; it is another way of moving a parameter that was already known. The original question, as posed, did not have the content it seemed to have.
 
 ## 4. How the error was identified
 
@@ -70,7 +71,7 @@ A result like that could have been presented as a finding. Instead:
    - the original simulator passed the test (the residual decreased with grid refinement, as expected from discretisation error);
    - the λ version violated it, and the residual matched the formula derived on paper with a ratio of **1.0000**;
    - correcting the term brought the zero mode back.
-4. **The decisive test.** The original calculation was repeated with the corrected background, under the same conditions. **The "collapse" disappeared.** The temperature now varied smoothly, from 0.98 to 0.89 times the reference value, qualitatively consistent with what the literature indicates for this regime.
+4. **The decisive test.** The original calculation was repeated with the corrected background, under the same conditions. **The "collapse" disappeared.** The temperature now varied smoothly, from 0.98 to 0.89 times the reference value, and it matches exactly the original simulator applied to a horizon of rescaled width (section 3).
 5. **Additional consequence.** The more complex solver that had been planned (several steps of work) **had the same design flaw**. It was caught before it was built.
 
 ## 5. External validation
@@ -84,9 +85,13 @@ With criteria fixed before running, the simulator reproduced:
 
 in both cases tested, with numerical convergence at the expected order and the sensitivity to the fitting method quantified.
 
+A later audit showed that the 3×10⁻⁵ came almost entirely from how the data were extrapolated to zero frequency, not from the simulator. To check this without adjusting anything after the fact, the criteria for a second test (E1-bis) were written down and stored in a commit **before** it was run; that commit is public (`001a7ac`). In two cases that had not been looked at, the simulator reproduced the leading coefficient with errors of **5×10⁻⁹ and 4×10⁻⁸**, and the subleading one with **8×10⁻⁷ and 3×10⁻⁶**.
+
+The equations taken from the papers were later checked against their literal text. The check confirmed the conventions of the benchmark (Finazzi and Parentani's scale Λ) and found one citation with the wrong equation number, now corrected.
+
 ## 6. What went wrong along the way
 
-It is the most revealing part of the method. Seven real errors, chosen from the fourteen on record (the full list is in the appendix):
+It is the most revealing part of the method. Seven real errors, chosen from the nineteen on record (the full list is in the appendix):
 
 | What went wrong | Who detected it | What it taught / what changed in the process |
 |---|---|---|
@@ -103,7 +108,8 @@ None of these errors made it into a final conclusion. The last two affected the 
 ## 7. What is not being claimed
 
 - **There is no new physics.** The robustness of the radiation against changes at short scales was already established (Macher, Finazzi, Parentani and others). This project reproduces it; it does not discover it.
-- That the "collapse" was an artefact is shown **within the scope tested** (one flow profile, one range of λ). It has not been shown that this was the only possible mechanism, nor has convergence with respect to the domain size been established.
+- That the "collapse" was an artefact is shown **within the scope tested** (one flow profile, one range of λ). With the corrected background the results match the rescaled original simulator up to rounding, so there is no room for another mechanism within the tested scope; convergence with respect to the domain size has still not been studied.
+- The parameter λ does not probe short-scale physics at fixed geometry: with the corrected background it is a rescaling of the horizon width. The conclusions about correlations obtained with λ have been withdrawn.
 - The external validation covers the basic simulator (λ = 1), in the configuration and the two cases tested.
 - Some intermediate results ended up inconclusive or negative, and are recorded as such. For example, a phase-reference gate ended in "class C" (criterion not met) and was archived as it was.
 
@@ -121,7 +127,7 @@ A person organised two AIs into separate roles with rules fixed in advance. The 
 
 **System.** 1D Bose-Einstein condensate, stationary Bogoliubov-de Gennes (BdG) equations; ℏ = m = g = 1. Density profile n(x) of tanh form (Mach 0.5 upstream, 2 downstream, width w = 2); not to be confused with the Larré et al. *waterfall* configuration used in E1. 3×3 S-matrix by exact modal matching with a second-order finite-difference operator. Observable: n_L(ω), the occupation of the upstream Hawking channel (Finazzi and Parentani 2011, Eq. 42). T_eff = lim ω·n_L.
 
-**v1.0 benchmark (frozen).** T_up/(κ̄/2π) ∈ [0.9926, 1.0050] for w ∈ {2, 3, 4, 6, 8}, against Finazzi and Parentani, PRD 83, 084010 (2011).
+**v1.0 benchmark (frozen).** T_up/(κ_local/2π) = 0.957 → 0.985 for w ∈ {2, 3, 4, 6, 8}, against Finazzi and Parentani, PRD 83, 084010 (2011). With their broadened-horizon κ̄, T_up/(κ̄/2π) ∈ [0.9926, 1.0050]; this second figure is conditional on their window width d = 1.58 (with d = 1 or 2 the agreement drops to 2–3 %). The scale Λ = 2mc²/ℏ of their Eq. 9 has been checked against the paper.
 
 **The artefact.** The operator with dispersion (ω−vk)² = c²k² + λk⁴/4 is equivalent to BdG with mass m′ = 1/√λ and coupling g′n = c²/√λ, but it kept the background quantum pressure Q_p fixed instead of using Q_p,λ = √λ·Q_p. Goldstone residual on Φ_G = (√n, −√n): ½(1 − √λ)(√n)″. Measured / predicted = 1.0000, independent of the grid. With Q_p,λ the residual drops to O(dx²). The planned Padé operator had the residual (K_P − K_1)√n (measured ratio ≈ 1.00).
 
@@ -134,6 +140,8 @@ A person organised two AIs into separate roles with rules fixed in advance. The 
 
 (T_H = κ_local/2π. With the inconsistent background, n_L ∝ ω at low frequency, so the extrapolated T_eff comes out ≈ 0, slightly negative because of the extrapolation. With the consistent background, the difference between grids is ≤ 5×10⁻⁵.)
 
+**λ ↔ width equivalence.** With the consistent background, x′ = x/√λ, ω′ = √λ·ω map the λ operator on a profile of width w onto the physical operator (λ = 1) on a profile of width w/√λ: M₁(x′) = √λ·M_λ(x), also on the grid (L′ = L/√λ, same N). Checked at the 90 points of T2: relative difference in n_L ≤ 3.2×10⁻⁶ with the standard solve (its rounding noise) and ≤ 3.5×10⁻⁹ with equilibration and iterative refinement. The "consistent background" row is therefore the curve T/T_H against the width w/√λ = 4 → 1.
+
 **E1: validation against Larré et al., PRA 85, 013621 (2012).** a = |f_{u,d2}|² (their Eq. A8) and b = 2Re(f*h) (Eq. A14), extracted from ω·n_L = a + bω + cω² + dω³:
 
 | m_u | a numerical / exact | error | b numerical / exact | error |
@@ -142,6 +150,15 @@ A person organised two AIs into separate roles with rules fixed in advance. The 
 | 0.7 | 0.066910 / 0.066908 | 2.9×10⁻⁵ | −0.498434 / −0.497974 | 9.2×10⁻⁴ |
 
 Γ and T_H (their Eq. 57) reproduced. Integrity: regression of the new driver against v1.0 = 0; Gross-Pitaevskii residual converging at second order; pseudo-unitarity defect with observed order between 1.87 and 1.98; channels verified at 240/240 frequencies.
+
+**E1-bis (criteria pre-registered in commit `001a7ac`, before the run).** The E1 error turned out to be the bias of the ω → 0 extrapolation (window W1 with a cubic fit), not rounding (10⁻⁹–10⁻⁷ on that grid) nor discretisation. Window W2 = [0.05, 0.3]·T_H with a fourth-order fit, dx = 0.01/0.005/0.0025, refined solve and Richardson with p = 2:
+
+| m_u | error in a (A8) | error in b (A14) | observed order |
+|---|---|---|---|
+| 0.6 | 5.4×10⁻⁹ | 7.9×10⁻⁷ | 2.04 |
+| 0.7 | 4.2×10⁻⁸ | 3.1×10⁻⁶ | 2.00 |
+
+Main criterion: error in a ≤ 10⁻⁶ in both, and window check (W2 against W3) ≤ 10⁻⁶: PASS. m_u = 0.5 was repeated as a replica, not counting towards the verdict (1.1×10⁻⁸).
 
 **Note on the two reference temperatures.** In the v1.0 benchmark the ratio is taken against T_κ̄ = κ̄/(2π), the temperature built from the averaged gradient of Finazzi and Parentani (2011); that is why it comes out ≈ 1.00. In T2 the ratio is taken against T_local = κ_local/(2π), built from the gradient at the horizon; that is why λ = 1 gives 0.957. These results are not contradictory: they are ratios with different denominators.
 
@@ -164,8 +181,19 @@ A person organised two AIs into separate roles with rules fixed in advance. The 
 | The delivered package could not be reproduced on its own | The reviewer | Self-contained packages, with dependencies and checksums |
 | A cryptographic fingerprint attributed to the wrong file name | The reviewer | Keep the executed version and the updated version of each document separate |
 
+**Errors found in the November 2026 audit (5).** The second one withdrew conclusions from documents in the repository (not from this text); the others do not change any published number.
+
+| What went wrong | Who detected it | What changed in the process |
+|---|---|---|
+| The tests printed results but never failed: they had no assertions | The implementer, in the read-only audit requested by the reviewer | Every test checks against a tolerance and returns an error; `tests/run_all.py` runs them all |
+| The correlations computed with λ inherited the same background defect as the "collapse" | The implementer, in that same audit, while reviewing which results used the defective operator | Those conclusions were withdrawn, with a public notice |
+| The absolute amplitude of the density-density correlation came out at half its value: the paper's prefactor belongs to a different mode normalisation. The equation was also cited with the wrong number | The reviewer suspected a factor of 4π; the implementer settled it with an exact test in a homogeneous condensate | Absolute-normalisation test with a tolerance; equations checked against the literal text of the papers |
+| A published figure had been generated with an earlier version of the code than the one described in the text (without the smoothing window) | The implementer, while regenerating it | Figures are regenerated with the repository scripts before publishing |
+| An audit note attributed to the E1 calculation a rounding noise measured in a different configuration | The implementer, measuring it in the right configuration | Measure each quantity in the configuration it refers to |
+
 **References.**
 - J. Macher, R. Parentani, PRA 80, 043601 (2009)
+- A. Recati, N. Pavloff, I. Carusotto, PRA 80, 043603 (2009)
 - S. Finazzi, R. Parentani, PRD 83, 084010 (2011)
 - S. Finazzi, R. Parentani, PRD 85, 124027 (2012)
 - A. Coutant, R. Parentani, S. Finazzi, PRD 85, 024021 (2012)
@@ -174,6 +202,8 @@ A person organised two AIs into separate roles with rules fixed in advance. The 
 **Where everything is** (in the project repository, <https://github.com/jorditorresribas/bec-analog-hawking>; the detailed project documents are in Spanish):
 - `docs/FP_BENCHMARK.md`: v1.0 benchmark.
 - `residual_anatomy/NOVELTY_AUDIT.md`: novelty audit, including Appendix A (derivation, Goldstone test, T2).
-- `residual_anatomy/E1_RESULT.md` and `residual_anatomy/GATE_EXT_LRCP_DESIGN.md`: external validation.
+- `residual_anatomy/E1_RESULT.md` and `residual_anatomy/GATE_EXT_LRCP_DESIGN.md`: external validation; `residual_anatomy/E1BIS_PREREG.md`: E1-bis criteria.
+- `docs/CORRELATIONS.md` §9: λ ↔ width equivalence.
+- `tests/run_all.py`: all validations.
 - `residual_anatomy/P2_RESULT.md`: an archived negative result.
 - `out/`: CSV files and manifests.
