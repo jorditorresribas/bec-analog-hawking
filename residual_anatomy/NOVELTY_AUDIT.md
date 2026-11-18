@@ -253,11 +253,13 @@ regresión al benchmark congelado da 4.6e−11 → PASS.
 
 | λ | T_eff/T_H, Qp fijo (Paso 0) | T_eff/T_H, **Qp_λ (consistente)** | Δ entre N | *spread* entre órdenes (Qp_λ) |
 |---|---|---|---|---|
-| 0.25 | −0.006 | **0.97900** | 5e−5 | 3e−5 |
-| 0.5 | −0.027 | **0.97139** | 3e−5 | 2e−5 |
-| 1 | 0.95724 | **0.95724** | 1e−5 | 3e−5 |
-| 2 | −0.053 | **0.93241** | <1e−5 | 3e−5 |
-| 4 | −0.017 | **0.89175** | 1e−5 | 2e−5 |
+| 0.25 | −0.006 | **0.97900** | 5.7e−5 | 3e−5 |
+| 0.5 | −0.027 | **0.97139** | 2.1e−5 | 2e−5 |
+| 1 | 0.95724 | **0.95724** | 8.9e−6 | 3e−5 |
+| 2 | −0.053 | **0.93241** | 6.4e−6 | 3e−5 |
+| 4 | −0.017 | **0.89175** | 2.2e−6 | 2e−5 |
+
+(Columna «Δ entre N» = |T_eff/T_H(N = 9600) − T_eff/T_H(N = 14400)| con Qp_λ, de `out/diag_T2.csv`; *corregida en la auditoría de números del 2026-11-18*: antes decía 5e−5, 3e−5, 1e−5, <1e−5 y 1e−5. Ninguna conclusión cambia.)
 
 (T_H ≡ κ_local/2π. Pseudo-unitaridad de la columna d2: ≤ 6.7e−3 a N = 9600 y ≤ 3.0e−3 a N = 14400, mejora con N.)
 
@@ -266,7 +268,7 @@ regresión al benchmark congelado da 4.6e−11 → PASS.
   - con Qp fijo se reproduce el colapso del Paso 0: n_L **se anula** al bajar ω (n_L ∝ ω; p. ej. λ = 4: 0.16 en ω/T_H = 0.05,
     frente a 17 con Qp_λ), así que T_eff → 0;
   - con el fondo consistente, el colapso **desaparece**: n_L recupera la divergencia 1/ω y T_eff/T_H varía
-    **suave y monótonamente** de 0.979 a 0.892, convergido en N (≤ 5e−5) y estable frente al orden de extrapolación.
+    **suave y monótonamente** de 0.979 a 0.892, convergido en N (≤ 6e−5) y estable frente al orden de extrapolación.
 - **Conclusión:** el "colapso de n_L" fue un **artefacto** del fondo no estacionario (modo de Goldstone roto, A.3–A.5),
   no física. Los resultados de robustez en λ de CORRELATIONS §7–8 usaron el mismo operador y deben marcarse como
   afectados (no reevaluados aquí).

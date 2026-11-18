@@ -2,7 +2,7 @@
 
 **An acoustic black hole, a spurious result, and how its origin was identified**
 
-Jordi Torres Ribas · v1.4 · 17 November 2026
+Jordi Torres Ribas · v1.5 · 18 November 2026
 
 A numerical solver for analogue Hawking radiation in a one-dimensional Bose-Einstein
 condensate flowing faster than sound (an "acoustic black hole"). Halfway through the
@@ -24,6 +24,7 @@ points.
 |---|---|---|
 | Benchmark v1.0 vs Finazzi & Parentani, PRD 83, 084010 (2011) | T_up/(κ/2π) = 0.957 → 0.985 for w = 2 → 8, approaching 1 as the horizon gets smoother. With FP's broadened-horizon κ̄ the agreement is ≤ 0.75 %, but only for their window width d = 1.58 (fitted to their profiles); with d = 1 or 2 the maximum deviation is 2.4 % or 3.4 % (`docs/FP_BENCHMARK.md` §5b) | `python3 benchmarks/fp_v1/FP_check_reproduction.py` (~30 s) |
 | External validation vs Larré, Recati, Carusotto & Pavloff, PRA 85, 013621 (2012) | leading coefficient: relative error 2.4–2.9·10⁻⁵; secondary: < 10⁻³ | `python3 residual_anatomy/gates/gate_E1_lrcp.py` (~1 min) |
+| E1-bis: same validation with the ω → 0 extrapolation controlled, criteria pre-registered in commit `001a7ac` before the run | PASS: leading coefficient (A8) to 5.4·10⁻⁹ (m_u = 0.6) and 4.2·10⁻⁸ (m_u = 0.7); secondary (A14) to 7.9·10⁻⁷ and 3.1·10⁻⁶ (`residual_anatomy/E1_RESULT.md`) | `python3 residual_anatomy/gates/gate_E1bis_lrcp.py --selftest` (~15 s; the full gate refuses to overwrite its results) |
 | The "collapse" was an artefact (inconsistent background) | with a consistent background T_eff/T_H varies smoothly 0.979 → 0.892 for λ = 0.25 → 4. By the exact equivalence (λ, w) ≡ (1, w/√λ) (next row), this is the effect of the horizon width w/√λ = 4 → 1 in healing lengths, **not** of short-scale (UV) physics | `python3 residual_anatomy/diag_T2_qp_consistent.py` (~1 min) |
 | Goldstone (symmetry) test identifying the defect | measured / predicted residual = 1.0000 | `python3 residual_anatomy/diag_goldstone.py` (~7 min) |
 | With a consistent background, λ is an exact rescaling: (λ, w) ≡ (1, w/√λ) | the λ-solver and the v1.0 solver on the rescaled profile agree to ≤ 3.2·10⁻⁶ (rounding floor of the plain sparse solve ~7·10⁻⁶) in 90 points; with an equilibrated, iteratively refined solve of both sides, to ≤ 3.5·10⁻⁹ (`residual_anatomy/diag_conditioning_equiv.py`, ~2 min). So λ does **not** isolate short-scale physics | `python3 residual_anatomy/diag_scaling_equivalence.py` (~30 s) |
