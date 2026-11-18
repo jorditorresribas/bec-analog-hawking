@@ -18,6 +18,13 @@ result, and every intermediate result, including the negative ones.
 Most working documents are in Spanish; this README and the English write-up are the entry
 points.
 
+> **Project status: FROZEN (2026-11-18).** No further development is planned.
+> - **Phase 1** (solver, benchmark, the "collapse" artefact, external validation E1 / E1-bis): closed; results below.
+> - **Phase 2** (two-scale dispersion c²k² + k⁴/4 + γc²k⁶, to isolate short-scale physics): **CLOSED – NO VERDICT.**
+>   The solver passed its technical gates, but the pre-registered measurement's control failed (the chosen observable mixes
+>   the profile geometry with the dispersive broadening), so the prediction was not evaluated. See
+>   [`residual_anatomy/FASE2_RESULT.md`](residual_anatomy/FASE2_RESULT.md) and §7 of the write-up.
+
 ## Main results
 
 | Result | Value | Reproduce |
@@ -32,7 +39,7 @@ points.
 **Scope.** No new physics is claimed: the robustness of the radiation against short-scale
 modifications was already established (Macher, Finazzi, Parentani and others). The
 artefact is shown to be one within the tested scope (one flow profile, one range of λ).
-The external validation covers the basic solver (λ = 1). See §7 of the write-up.
+The external validation covers the basic solver (λ = 1). See §8 of the write-up.
 
 > **Audit notice (2026-11-17).** `docs/CORRELATIONS.md` §4, §5, §7 and §8 (robustness of the
 > density-density "tongue" against λ, and the w × λ grid) were computed with the defective λ

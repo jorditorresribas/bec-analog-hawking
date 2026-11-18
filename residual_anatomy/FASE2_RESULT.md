@@ -1,5 +1,7 @@
 # Fase 2 — Resultado de la medición pre-registrada (2026-11-18)
 
+**Estado de la fase 2: CERRADA – SIN VEREDICTO.** Proyecto congelado.
+
 **Veredicto: SIN VEREDICTO — falla el control K.** Se informa tal como salió. No se ha cambiado ningún criterio ni se ha
 repetido la ejecución.
 

@@ -15,6 +15,7 @@ The goal was to simulate on a computer a laboratory analogue of a black hole: a 
 - Halfway through, a striking result appeared: the radiation "collapsed" when one model parameter was changed. **It wasn't physics: it was a flaw in the model.** The symmetry test identified the defect, with agreement to four significant figures between the measured and predicted residuals. Once it was fixed, the "collapse" disappeared.
 - The instrument reproduces an **exact** result published by another research group: first with a relative error of 3×10⁻⁵ in the leading coefficient and then, in a second test whose criteria were published before it was run, with an error of 10⁻⁸.
 - Once the error was fixed, it turned out that the parameter being varied did not do what it was meant to do: it is exactly equivalent to changing the width of the horizon.
+- A second phase, aimed at genuinely isolating short-scale physics, ended **without a verdict**: a control fixed in advance detected that the chosen observable did not measure what was intended, and stopped a conclusion that the data did not justify.
 - The audits detected real errors in the checks themselves and in the documentation. They are documented below, together with who detected each one.
 
 ## What this project demonstrates
@@ -92,7 +93,7 @@ The equations taken from the papers were later checked against their literal tex
 
 ## 6. What went wrong along the way
 
-It is the most revealing part of the method. Seven real errors, chosen from the nineteen on record (the full list is in the appendix):
+It is the most revealing part of the method. Seven real errors, chosen from the twenty-six on record (the full list is in the appendix):
 
 | What went wrong | Who detected it | What it taught / what changed in the process |
 |---|---|---|
@@ -106,17 +107,28 @@ It is the most revealing part of the method. Seven real errors, chosen from the 
 
 None of these errors made it into a final conclusion. The last two affected the checks, not the physics: after fixing them, the recomputed data were byte-for-byte identical.
 
-## 7. What is not being claimed
+## 7. Phase 2: an attempt to isolate short-scale physics, without a verdict
+
+Section 3 left a question open: λ does not isolate short-scale physics because it only moves one scale. Phase 2 tried with a **two-scale** dispersion, (ω − vk)² = c²k² + k⁴/4 + γc²k⁶, whose second dimensionless number cannot be absorbed by any rescaling. It is a phenomenological dispersion model (in the spirit of Corley and Jacobson), not a physical interaction.
+
+- **The instrument was validated.** A first formulation failed its gates because of a round-off problem, and that is on record. The revised version passed all five: exact Goldstone mode, fourth-order convergence, agreement with the original simulator to 6×10⁻⁹ when the new term vanishes, and non-degeneracy against any rescaling.
+- **The measurement was pre-registered.** The prediction, the tolerances and a **control** were committed before any temperature was computed. The prediction was that the exponent of the broadened horizon would change from 1/3 to 1/5, according to a scaling argument that generalises Coutant and Parentani's. Three addenda declared, before measuring, what had been seen along the way, without changing any criterion, and the external reviewer reviewed everything before the run.
+- **Result: no verdict.** The control required that, without the new term, the method give the known exponent (≈ 1/3). It gave 0.62. The chosen observable, the width of the window that reproduces the temperature, mixes the geometry of the profile with the dispersive broadening, so it did not measure what was intended. Because the control failed, the prediction was not evaluated.
+- **Why it matters:** with the new term, the exponent came out at 0.51, "in the predicted direction". Without a control fixed in advance, it would have been tempting to present this as a confirmation. The control stopped that conclusion before it existed. It is the same kind of error as in phase 1, but this time the method itself stopped it.
+- *Descriptive data, no conclusion drawn:* with γ = 10, the k⁶ term lowers the temperature by 1.8 % for the sharpest horizon (w = 2) and by 0.04 % for the smoothest (w = 8).
+
+## 8. What is not being claimed
 
 - **There is no new physics.** The robustness of the radiation against changes at short scales was already established (Macher, Finazzi, Parentani and others). This project reproduces it; it does not discover it.
 - That the "collapse" was an artefact is shown **within the scope tested** (one flow profile, one range of λ). With the corrected background the results match the rescaled original simulator up to rounding, so there is no room for another mechanism within the tested scope; convergence with respect to the domain size has still not been studied.
 - The parameter λ does not probe short-scale physics at fixed geometry: with the corrected background it is a rescaling of the horizon width. The conclusions about correlations obtained with λ have been withdrawn.
 - The external validation covers the basic simulator (λ = 1), in the configuration and the two cases tested.
 - Some intermediate results ended up inconclusive or negative, and are recorded as such. For example, a phase-reference gate ended in "class C" (criterion not met) and was archived as it was.
+- Phase 2 gives no result about short-scale physics: it ended without a verdict.
 
-## 8. In one sentence
+## 9. In one sentence
 
-A person organised two AIs into separate roles with rules fixed in advance. The system produced a misleading result, detected it, identified where it came from, fixed it and validated the instrument against an exact published result, with every step reproducible.
+A person organised two AIs into separate roles with rules fixed in advance. The system produced a misleading result, detected it, identified where it came from, fixed it and validated the instrument against an exact published result, with every step reproducible. In a second phase, a control fixed in advance prevented a conclusion that the data did not justify.
 
 ---
 
@@ -192,6 +204,18 @@ Main criterion: error in a ≤ 10⁻⁶ in both, and window check (W2 against W3
 | A published figure had been generated with an earlier version of the code than the one described in the text (without the smoothing window) | The implementer, while regenerating it | Figures are regenerated with the repository scripts before publishing |
 | An audit note attributed to the E1 calculation a rounding noise measured in a different configuration | The implementer, measuring it in the right configuration | Measure each quantity in the configuration it refers to |
 
+**Phase 2 errors (7).** None reached a published conclusion.
+
+| What went wrong | Who detected it | What changed in the process |
+|---|---|---|
+| The matching in the first design left the system nearly singular | The implementer, in the uniform-flow tests, before the gates | Count the state of the discrete system before fixing the boundary conditions |
+| The first formulation had a round-off floor that grew with grid refinement (∝ dx⁻⁴) | Gates F0 and F1 | Reformulation (s, d variables; fourth order; coarser grids) with new criteria committed before implementing it |
+| The finite-difference coefficients were created with 15 digits instead of 60 | Gate F1′, in its first run | Record the failure, fix the bug and re-run with the same criteria |
+| The model was presented as a physical interaction | The adviser | It is a phenomenological dispersion model; corrected in the design |
+| A case in the transition was described as "k⁶-dominated" | The adviser's question; the implementer's calculation | Check the regime on paper before measuring (addendum 2) |
+| A term was missing from the expansion of the dispersion | The external reviewer | Sensitivity analysis (addendum 3); it did not change the k⁶ cases |
+| The observable did not isolate the dispersive broadening | The pre-registered control K | The measurement was declared without a verdict |
+
 **References.**
 - J. Macher, R. Parentani, PRA 80, 043601 (2009)
 - A. Recati, N. Pavloff, I. Carusotto, PRA 80, 043603 (2009)
@@ -206,5 +230,6 @@ Main criterion: error in a ≤ 10⁻⁶ in both, and window check (W2 against W3
 - `residual_anatomy/E1_RESULT.md` and `residual_anatomy/GATE_EXT_LRCP_DESIGN.md`: external validation; `residual_anatomy/E1BIS_PREREG.md`: E1-bis criteria.
 - `docs/CORRELATIONS.md` §9: λ ↔ width equivalence.
 - `tests/run_all.py`: all validations.
+- `docs/FASE2_DISENO.md`, `residual_anatomy/FASE2_PREREG.md` (and addenda), `residual_anatomy/FASE2_GATES_RESULT.md` and `residual_anatomy/FASE2_RESULT.md`: phase 2 (in Spanish).
 - `residual_anatomy/P2_RESULT.md`: an archived negative result.
 - `out/`: CSV files and manifests.

@@ -15,6 +15,7 @@ El objetivo era simular en un ordenador un análogo de laboratorio de un agujero
 - A mitad del trabajo apareció un resultado llamativo: la radiación "colapsaba" al cambiar un parámetro del modelo. **No era física: era un error del modelo.** El test de simetría identificó el defecto: el residuo medido coincidía con el predicho en cuatro cifras significativas. Al corregirlo, el "colapso" desapareció.
 - El instrumento reproduce un resultado **exacto** publicado por otro grupo de investigación: primero con un error de 3·10⁻⁵ en el coeficiente principal y, en una segunda prueba con los criterios publicados antes de ejecutarla, con un error de 10⁻⁸.
 - Corregido el error, resultó que el parámetro que se estaba variando no hacía lo que se pretendía: equivale exactamente a cambiar la anchura del horizonte.
+- Una segunda fase, para aislar de verdad la física de escalas pequeñas, terminó **sin veredicto**: un control fijado de antemano detectó que el observable elegido no medía lo que se pretendía, y detuvo una conclusión que los datos no justificaban.
 - Las auditorías detectaron errores reales en los propios controles y en la documentación. Están documentados más abajo, con quién los detectó.
 
 ## Qué demuestra este proyecto
@@ -92,7 +93,7 @@ Las ecuaciones tomadas de los artículos se cotejaron después con su texto lite
 
 ## 6. Lo que falló por el camino
 
-Es la parte más reveladora del método. Siete errores reales, elegidos entre los diecinueve registrados (la lista completa está en el anexo):
+Es la parte más reveladora del método. Siete errores reales, elegidos entre los veintiséis registrados (la lista completa está en el anexo):
 
 | Qué falló | Quién lo detectó | Qué enseñó / qué cambió en el proceso |
 |---|---|---|
@@ -106,17 +107,28 @@ Es la parte más reveladora del método. Siete errores reales, elegidos entre lo
 
 Ninguno de estos errores llegó a una conclusión final. Los dos últimos afectaban a los controles, no a la física: tras corregirlos, los datos recalculados fueron idénticos byte a byte.
 
-## 7. Qué no se afirma
+## 7. Fase 2: un intento de aislar la física de escalas pequeñas, sin veredicto
+
+La sección 3 dejó una pregunta abierta: λ no aísla la física de escalas pequeñas porque solo mueve una escala. La fase 2 lo intentó con una dispersión de **dos escalas**, (ω − vk)² = c²k² + k⁴/4 + γc²k⁶, cuyo segundo número adimensional no lo absorbe ningún reescalado. Es un modelo fenomenológico de dispersión (en la línea de Corley y Jacobson), no una interacción física.
+
+- **El instrumento quedó validado.** Una primera formulación falló sus gates por un problema de redondeo, y así consta. La versión revisada pasó los cinco: modo de Goldstone exacto, convergencia de orden 4, coincidencia con el simulador original a 6·10⁻⁹ cuando el término nuevo se anula, y no degeneración frente a cualquier reescalado.
+- **La medición se pre-registró.** La predicción, las tolerancias y un **control** se pusieron en commit antes de calcular ninguna temperatura. La predicción era que el exponente del horizonte ensanchado pasara de 1/3 a 1/5, según un argumento de escalas que generaliza el de Coutant y Parentani. Tres addenda declararon, antes de medir, lo que se iba viendo, sin cambiar ningún criterio, y el revisor externo lo revisó todo antes de ejecutar.
+- **Resultado: sin veredicto.** El control exigía que, sin el término nuevo, el método diera el exponente conocido (≈ 1/3). Dio 0,62. El observable elegido, la anchura de la ventana que reproduce la temperatura, mezcla la geometría del perfil con el ensanchamiento dispersivo, así que no medía lo que se pretendía. Como el control falló, la predicción no se evaluó.
+- **Por qué importa:** con el término nuevo, el exponente salió 0,51, «en la dirección predicha». Sin un control fijado de antemano, habría sido tentador presentarlo como una confirmación. El control detuvo esa conclusión antes de que existiera. Es el mismo tipo de error que el de la fase 1, pero esta vez lo paró el propio método.
+- *Datos descriptivos, sin conclusión:* con γ = 10, el término k⁶ baja la temperatura un 1,8 % en el horizonte más abrupto (w = 2) y un 0,04 % en el más suave (w = 8).
+
+## 8. Qué no se afirma
 
 - **No hay física nueva.** La robustez de la radiación frente a cambios a escalas pequeñas ya estaba establecida (Macher, Finazzi, Parentani y otros). El proyecto la reproduce; no la descubre.
 - Que el "colapso" era un artefacto está demostrado **dentro del alcance ensayado** (un perfil de flujo, un rango de λ). Con el fondo corregido, los resultados coinciden con el simulador original reescalado hasta el redondeo, de modo que no queda margen para otro mecanismo en el alcance ensayado; la convergencia respecto al tamaño del dominio sigue sin estudiarse.
 - El parámetro λ no estudia la física a escalas pequeñas con la geometría fija: con el fondo corregido es un reescalado de la anchura del horizonte. Las conclusiones sobre correlaciones obtenidas con λ se han retirado.
 - La validación externa cubre el simulador básico (λ = 1), en la configuración y los dos casos ensayados.
 - Algunos resultados intermedios quedaron como inconclusos o negativos, y así constan. Por ejemplo, un gate de referencia de fase terminó en "clase C" (criterio no superado) y se archivó tal cual.
+- La fase 2 no da ningún resultado sobre la física de escalas pequeñas: terminó sin veredicto.
 
-## 8. En una frase
+## 9. En una frase
 
-Una persona organizó a dos IAs con papeles separados y reglas fijadas de antemano. El sistema produjo un resultado engañoso, lo detectó, identificó su origen, lo corrigió y validó el instrumento contra un resultado exacto publicado, con cada paso reproducible.
+Una persona organizó a dos IAs con papeles separados y reglas fijadas de antemano. El sistema produjo un resultado engañoso, lo detectó, identificó su origen, lo corrigió y validó el instrumento contra un resultado exacto publicado, con cada paso reproducible. En una segunda fase, un control fijado de antemano impidió sacar una conclusión que los datos no justificaban.
 
 ---
 
@@ -192,6 +204,18 @@ Criterio principal: error en a ≤ 10⁻⁶ en las dos, y control de ventana (W2
 | Una figura publicada se había generado con una versión del código anterior a la que describía el texto (sin la ventana de suavizado) | El implementador, al regenerarla | Las figuras se regeneran con los scripts del repositorio antes de publicar |
 | Una nota de auditoría atribuía al cálculo E1 un ruido de redondeo medido en otra configuración | El implementador, al medirlo en la configuración correcta | Medir cada magnitud en la configuración a la que se refiere |
 
+**Errores de la fase 2 (7).** Ninguno llegó a una conclusión publicada.
+
+| Qué falló | Quién lo detectó | Qué cambió en el proceso |
+|---|---|---|
+| El *matching* del primer diseño dejaba el sistema casi singular | El implementador, en las pruebas con flujo uniforme, antes de los gates | Contar el estado del sistema discreto antes de fijar las condiciones de contorno |
+| La primera formulación tenía un suelo de redondeo que crecía al refinar la malla (∝ dx⁻⁴) | Los gates F0 y F1 | Reformulación (variables s, d; cuarto orden; mallas más gruesas) con criterios nuevos en commit antes de implementarla |
+| Los coeficientes de las diferencias finitas se creaban con 15 dígitos en vez de 60 | El gate F1′, en su primera ejecución | Registrar el fallo, corregir el error y repetir con los mismos criterios |
+| El modelo se presentó como una interacción física | El asesor | Es un modelo fenomenológico de dispersión; corregido en el diseño |
+| Se dio por «dominado por k⁶» un caso que estaba en la transición | Pregunta del asesor; cálculo del implementador | Comprobar el régimen en papel antes de medir (addendum 2) |
+| Faltaba un término en la expansión de la dispersión | El revisor externo | Análisis de sensibilidad (addendum 3); no cambiaba los casos con k⁶ |
+| El observable no aislaba el ensanchamiento dispersivo | El control K pre-registrado | La medición se declaró sin veredicto |
+
 **Referencias.**
 - J. Macher, R. Parentani, PRA 80, 043601 (2009)
 - A. Recati, N. Pavloff, I. Carusotto, PRA 80, 043603 (2009)
@@ -206,5 +230,6 @@ Criterio principal: error en a ≤ 10⁻⁶ en las dos, y control de ventana (W2
 - `residual_anatomy/E1_RESULT.md` y `residual_anatomy/GATE_EXT_LRCP_DESIGN.md`: validación externa; `residual_anatomy/E1BIS_PREREG.md`: criterios de E1-bis.
 - `docs/CORRELATIONS.md` §9: equivalencia λ ↔ anchura.
 - `tests/run_all.py`: todas las validaciones.
+- `docs/FASE2_DISENO.md`, `residual_anatomy/FASE2_PREREG.md` (y addenda), `residual_anatomy/FASE2_GATES_RESULT.md` y `residual_anatomy/FASE2_RESULT.md`: fase 2.
 - `residual_anatomy/P2_RESULT.md`: un resultado negativo archivado.
 - `out/`: CSV y manifiestos.
