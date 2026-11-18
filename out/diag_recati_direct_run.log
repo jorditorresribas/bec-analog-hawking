@@ -1,0 +1,15 @@
+H homogeneo Mach 0,5 (u: k>0, d1: k<0, omega en [0.004, 1.2]):
+   directo  n/(2pi) Re D  frente a  n int S e^ikdx/2pi (con termino propio):   factor 0.999991, residuo 1.5e-05
+   receta del codigo con 1/(2pi) en vez de 1/(4pi)  frente a  n int (S-1) e^ikdx/2pi: factor 1.000002, residuo 7.1e-06   [132 s]
+
+Z horizonte lam=1, L=30.0, N=3600, 546 omegas hasta 8   [301 s]
+Z1 identidad Re D = P_codigo + K, por omega y canal: max error relativo = 1.5e-11
+Z2 (|x|,|x'| <= 20; 'fuera de diagonal' = |x-x'| > 3)
+   corte | K: max fuera diag / max en diag | Im D antisim.: max/max|Re D| | literal: max|L-L^T| / max|P|
+    0.47 | 3.216e-01                        | 8.178e-01                    | 7.894e-01
+    1.00 | 2.699e-01                        | 7.732e-01                    | 6.878e-01
+    2.00 | 2.129e-01                        | 6.728e-01                    | 6.030e-01
+    4.00 | 1.548e-01                        | 5.173e-01                    | 5.232e-01
+    8.00 | 1.232e-01                        | 3.704e-01                    | 4.492e-01
+fin [301 s]
+exit 0

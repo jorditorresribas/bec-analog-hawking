@@ -1,0 +1,15 @@
+P1 (L=30.0, N=400, MARGIN=10.0): ||r_1||/||s|| = 1.794e-03  (diag_goldstone C lam=1: 1.794e-03 con conveccion)
+   lam=0.25: ||delta||=1.144e-03  ||r_lam||=1.144e-03  cociente=1.0001  (recompuesto con r_1 y angulo: 1.0001)  cos(r_1,delta)=-0.784  no-linealidad=4.4e-11
+   lam=0.5: ||delta||=7.010e-04  ||r_lam||=1.351e-03  cociente=1.9267  (recompuesto con r_1 y angulo: 1.9267)  cos(r_1,delta)=-0.749  no-linealidad=3.9e-11
+   lam=2.0: ||delta||=1.127e-03  ||r_lam||=2.675e-03  cociente=2.3731  (recompuesto con r_1 y angulo: 2.3731)  cos(r_1,delta)=+0.659  no-linealidad=2.6e-11
+   lam=4.0: ||delta||=2.947e-03  ||r_lam||=4.282e-03  cociente=1.4531  (recompuesto con r_1 y angulo: 1.4531)  cos(r_1,delta)=+0.609  no-linealidad=2.3e-11
+   [19 s]
+P2 ||r_1||/||s|| (lam=1) frente a distancia al borde, L, N y Nk:
+   L=  30 N= 400 dx=0.150 Nk=1200: d=5:4.9e-03  d=10:1.8e-03  d=15:9.5e-04  d=20:5.6e-04  d=25:3.3e-04  |r_1(x=0)|=2.1e-04   [23 s]
+   L=  30 N= 800 dx=0.075 Nk=2400: d=5:5.0e-03  d=10:1.8e-03  d=15:9.5e-04  d=20:5.6e-04  d=25:3.4e-04  |r_1(x=0)|=2.1e-04   [60 s]
+   L=  30 N= 400 dx=0.150 Nk=4800: d=5:4.9e-03  d=10:1.8e-03  d=15:9.5e-04  d=20:5.6e-04  d=25:3.3e-04  |r_1(x=0)|=2.1e-04   [76 s]
+   L=  60 N= 800 dx=0.150 Nk=2400: d=5:3.4e-03  d=10:1.2e-03  d=15:6.9e-04  d=20:4.5e-04  d=25:3.2e-04  d=40:1.4e-04  d=50:8.4e-05  |r_1(x=0)|=5.3e-05   [113 s]
+P3 control gaussiana (decae en los bordes): max|K_1 f + f''/2| / max|f''/2| = 1.3e-11
+P4 dominio doble (L=60, mismo dx), evaluado en |x|<=20: ||r_1||/||s|| = 3.1e-04   (frente a L=30, MARGIN=10: 1.8e-03)
+fin (154 s)
+exit 0

@@ -1,0 +1,14 @@
+Banda omega: 0.020..0.450 (140 pts)  L=30.0 N=3600 w=2.0
+HORIZONTE, integrando correlacion...
+convergencia omega (140 vs 70 pts), ventana |x|<15: dif rel max = 1.67e-02
+
+recta x'=-1.26x [companero lento (v-c)]: C medio=-2.444e-03  min=-3.279e-02  frac negativa=0.50
+
+recta x'=-3.78x [companero rapido (v+c)]: C medio=-7.474e-04  min=-1.799e-02  frac negativa=0.64
+
+Bloque cruzado upstream x downstream (|x|<15):
+  min=-3.525e-02  max=2.490e-02  mean=+1.472e-03
+  integral de la parte negativa = -7.141e-01
+
+Fig -> out/correlation_tongue.png   Datos -> out/correlation_lambda1.npz
+exit 0

@@ -79,3 +79,40 @@ La discontinuidad del potencial **no** degradó el orden: es 2 en todas las prue
 los tres CSV, del driver, de `fd_bdg_operator.py`, de `mode_matching.py` y del diseño; verificados tras la ejecución),
 `out/e1_lrcp_run.log`. Un primer intento abortó **al importar**, sin calcular nada ni escribir resultados (había que
 ejecutarlo desde la raíz del proyecto por una ruta relativa de v1.0); su log está en `out/e1_lrcp_run_intento1_import.log`.
+
+## Nota de auditoría (fase 1, 2026-11-17, corregida la misma tarde): de dónde sale el error en a
+
+**Corrección.** Una primera versión de esta nota decía que el error en a (2,4·10⁻⁵) estaba solo 3–4 veces por
+encima de un «suelo de redondeo» de ~7·10⁻⁶. **Era incorrecto:** ese 7·10⁻⁶ se midió en el perfil tanh (w = 1,
+N = 14400; `diag_scaling_equivalence.py`), no en la malla de E1. Medido en la configuración de E1:
+
+- **Redondeo en la malla de E1** (`residual_anatomy/diag_conditioning.py`, `out/diag_conditioning.csv`,
+  m_u = 0,5, L = 30, ventana W1): error del solve `spsolve` frente a una solución con refinamiento iterativo
+  (residuo en long double) de **1,1·10⁻⁹ (dx = 0,02), 1,4·10⁻⁸ (0,01) y 1,1·10⁻⁷ (0,005)**. Mover L en 1 ulp
+  cambia n_L ~10⁻¹² con la solución refinada: el problema está bien condicionado y el ruido es del LU sin
+  equilibrar. En a, el efecto es ~10⁻⁷; el Richardson de E1 sale igual con cualquier solver
+  (2,41·10⁻⁵ con `spsolve`, 2,39·10⁻⁵ con equilibrado + refinamiento).
+- **El error de 2,4·10⁻⁵ es casi entero sesgo de la extrapolación ω → 0** (ventana W1 con ajuste cúbico,
+  fijados antes de ejecutar E1), no discretización ni redondeo (`residual_anatomy/diag_convergence.py`,
+  `out/diag_convergence_e1.csv`). La discretización es de orden 2 limpio y el Richardson la elimina.
+- Con ventanas más bajas u orden 4, a coincide con A8 a 1–2·10⁻⁸ (m_u = 0,5). **Esto se exploró después de
+  conocer el resultado de E1**: es un diagnóstico, no forma parte del veredicto de E1. Para afirmarlo hace
+  falta el gate E1-bis, con criterios fijados y en commit antes de ejecutar (`residual_anatomy/E1BIS_PREREG.md`).
+- El error en b (8·10⁻⁴) no se ha reanalizado; está muy por encima del redondeo.
+- El veredicto de E1 no cambia.
+
+## Gate E1-bis (pre-registrado, 2026-11-17): **PASS**
+Criterios en `residual_anatomy/E1BIS_PREREG.md`, en commit (`001a7ac`) **antes** de ejecutar; el script lo comprobó (I0) y
+guardó el hash en `out/e1bis_manifest.json`. Ventana W2 con ajuste de orden 4, dx = 0,01/0,005/0,0025, solve refinado,
+Richardson con p = 2 (`residual_anatomy/gates/gate_E1bis_lrcp.py`, 110 s).
+
+| m_u | error relativo en a (A8) | \|W2 − W3\| | error relativo en b (A14) | p observado |
+|---|---|---|---|---|
+| 0,6 (confirmatoria) | 5,4·10⁻⁹ | 8,5·10⁻⁹ | 7,9·10⁻⁷ | 2,04 |
+| 0,7 (confirmatoria) | 4,2·10⁻⁸ | 3,7·10⁻⁸ | 3,1·10⁻⁶ | 2,00 |
+| 0,5 (réplica, no cuenta) | 1,1·10⁻⁸ | 2,7·10⁻⁹ | 8,9·10⁻⁷ | 2,01 |
+
+C1 (≤ 10⁻⁶), C2 (control de ventana), C3 (nivel fuerte ≤ 10⁻⁷, solo informativo) y C4 (b ≤ 10⁻³) se cumplen; integridad
+I0–I3 correcta. Con la extrapolación en ω controlada, A8 y A14 quedan confirmadas a 10⁻⁸ y 10⁻⁶ en dos números de Mach que
+no se habían explorado. Salidas: `out/e1bis_nL.csv`, `out/e1bis_fits.csv`, `out/e1bis_result.csv`, `out/e1bis_manifest.json`,
+`out/e1bis_run.log`.

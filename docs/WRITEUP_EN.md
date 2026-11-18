@@ -56,7 +56,7 @@ In total, the project accumulated about twenty documented gates.
 
 ## 3. The result that looked like a discovery
 
-The basic simulator (version 1.0) was validated first and then frozen. It reproduces a theoretical prediction by Finazzi and Parentani (2011) to within 0.75 %.
+The basic simulator (version 1.0) was validated first and then frozen. It reproduces the theoretical prediction by Finazzi and Parentani (2011): the temperature obtained is between 95.7 % and 98.5 % of the ideal Hawking temperature, approaching 100 % as the horizon becomes smoother. (With the corrected temperature those authors propose, the agreement is better than 0.75 %, but that figure depends on a parameter they fitted to their own profiles.)
 
 It was then extended to vary the short-scale physics through a parameter λ. The result was surprising: moving λ away from its original value, in either direction, **made the temperature of the radiation drop to zero**. The expected physical effect was a few per cent; this was a total "collapse".
 

@@ -1,0 +1,5 @@
+Descomposicion, 140 omega-pts, N=3600...
+  d2 (Hawking puro)  recta -1.26x: mean=-1.775e-03 min=-8.767e-03 frac_neg=0.62
+  all                recta -1.26x: mean=-2.649e-03 min=-3.279e-02 frac_neg=0.50
+Fig -> out/correlation_decomp.png
+exit 0

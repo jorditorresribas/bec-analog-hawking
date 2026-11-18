@@ -1,0 +1,36 @@
+I0 criterios en commit: OK  HEAD=001a7ac4876c99d6cdd671e261cba2efad4dd66b  ultimo commit del pre-registro: 001a7ac4876c99d6cdd671e261cba2efad4dd66b 2026-11-17T23:28:59+01:00
+I1 eqref frente a spsolve (m_u=0.6, dx=0.01, omega=5.0012e-03): 1.03e-08
+
+=== m_u=0.6 (confirmatoria)  a_A8=0.0990848968  b_A14=-0.4953014369 ===
+   W2 dx=0.01: a err -1.969e-05  b err +5.774e-05   [3 s]
+   W2 dx=0.005: a err -4.822e-06  b err +8.251e-06   [8 s]
+   W2 dx=0.0025: a err -1.201e-06  b err +1.471e-06   [19 s]
+   W3 dx=0.01: a err -2.184e-05  b err +2.647e-04   [21 s]
+   W3 dx=0.005: a err -4.959e-06  b err +2.114e-05   [26 s]
+   W3 dx=0.0025: a err -1.229e-06  b err +4.928e-06   [37 s]
+
+=== m_u=0.7 (confirmatoria)  a_A8=0.0669077815  b_A14=-0.4979738079 ===
+   W2 dx=0.01: a err +3.207e-05  b err -2.738e-06   [40 s]
+   W2 dx=0.005: a err +8.069e-06  b err -5.154e-06   [44 s]
+   W2 dx=0.0025: a err +2.049e-06  b err -3.636e-06   [55 s]
+   W3 dx=0.01: a err +3.082e-05  b err +1.174e-04   [58 s]
+   W3 dx=0.005: a err +7.959e-06  b err +5.049e-06   [63 s]
+   W3 dx=0.0025: a err +2.049e-06  b err -5.119e-06   [73 s]
+
+=== m_u=0.5 (replica, no cuenta)  a_A8=0.1317341274  b_A14=-0.4897959184 ===
+   W2 dx=0.01: a err -9.784e-05  b err +1.298e-04   [76 s]
+   W2 dx=0.005: a err -2.428e-05  b err +2.425e-05   [81 s]
+   W2 dx=0.0025: a err -6.062e-06  b err +5.394e-06   [92 s]
+   W3 dx=0.01: a err -1.007e-04  b err +4.059e-04   [94 s]
+   W3 dx=0.005: a err -2.446e-05  b err +4.153e-05   [99 s]
+   W3 dx=0.0025: a err -6.106e-06  b err +1.098e-05   [110 s]
+
+================ RESULTADO E1-bis ================
+m_u=0.6 (confirmatoria)        eps_a=5.42e-09  |W2-W3|=8.54e-09  eps_b=7.89e-07  p_obs=2.04
+m_u=0.7 (confirmatoria)        eps_a=4.22e-08  |W2-W3|=3.69e-08  eps_b=3.13e-06  p_obs=2.00
+m_u=0.5 (replica, NO cuenta)   eps_a=1.07e-08  |W2-W3|=2.68e-09  eps_b=8.92e-07  p_obs=2.01
+C1 (eps_a <= 1e-06): True   C2 (ventana <= 1e-06): True
+C3 (nivel fuerte <= 1e-07, solo se informa): True   C4 (b <= 1e-03, secundario): True
+VEREDICTO E1-bis: PASS
+fin (110 s)
+exit 0

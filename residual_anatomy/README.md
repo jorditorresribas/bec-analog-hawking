@@ -159,3 +159,17 @@ corrigió `bg(mode='homog')` (daba Qp=−0.125 por v=0, bug señalado por ChatGP
 - `gate1_homogeneous.py` — Gate 1: dispersión/modos/normas/corrientes en fondo homogéneo.
 - `NONLOCAL_SPEC.md` — especificación teórica (cerrada y aprobada).
 - `out/residual_gate.csv` — tabla del barrido del knob viejo.
+
+## Diagnósticos de la auditoría (2026-11-17) — NO son gates
+No forman parte de ningún veredicto ni de `tests/run_all.py`; no modifican el solver ni los gates.
+- `diag_scaling_equivalence.py` — equivalencia (λ, w) ≡ (1, w/√λ) con el solver v1.0 (ver `docs/CORRELATIONS.md` §9).
+- `diag_conditioning.py` — suelo de redondeo del matching modal (spsolve frente a equilibrado de Ruiz y refinamiento
+  iterativo en long double) en la malla de E1 y en tanh; réplica del ensamblado de `gate_E1_lrcp.solve_d2` verificada bit a bit.
+- `diag_conditioning_equiv.py` — la equivalencia anterior con los dos lados resueltos con equilibrado + refinamiento (3,5·10⁻⁹).
+- `diag_convergence.py` — separa discretización, redondeo y extrapolación en ω para el coeficiente a de E1 y para
+  T/(κ/2π) del benchmark FP (Richardson). Las ventanas y órdenes de E1 que explora se eligieron **después** de E1.
+- `diag_weyl_goldstone.py` — residuo de Goldstone del operador Weyl (`gate0_pseudoherm.py`). **Cerrado:** el residuo
+  1,8·10⁻³ con λ = 1 es un artefacto de caja finita (no depende de N ni de Nk; decae con la distancia al borde; en el
+  centro ∝ 1/L²; sobre una gaussiana el operador acierta a 1,3·10⁻¹¹). Los cocientes 1,45–2,38 de `diag_goldstone.py`
+  son exactamente ‖r₁ + δ_λ‖/‖δ_λ‖. Sin defecto nuevo; el Weyl no se usa en ningún resultado.
+Salidas en `out/diag_*.csv` y `out/diag_*_run.log`.

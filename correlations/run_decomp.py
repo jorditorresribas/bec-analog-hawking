@@ -1,8 +1,8 @@
 """
-Descomposicion de la correlacion de Hawking (Ec.32) en:
+Descomposicion de la correlacion de Hawking (Ec. 25 de arXiv:0907.4305v1) en:
   - d2  : canal ANOMALO (norma negativa) = produccion de pares = lengua Hawking PURA
   - ud1 : canales ordinarios (norma +)
-  - all : suma (Ec.32 completa)
+  - all : suma (Ec. 25 completa)
 Una sola pasada (reusa cada scatter_field una vez). taper Hann en bordes de banda.
 """
 import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), '..', 'solver'))  # layout del repo
@@ -42,7 +42,7 @@ for iw, om in enumerate(omegas):
     acc['ud1'] += (bud+np.conj(bud.T))*dω*win[iw]
     acc['d2'] += (bd2+np.conj(bd2.T))*dω*win[iw]
 
-pref = np.sqrt(np.outer(nc, nc))/(4*np.pi)
+pref = np.sqrt(np.outer(nc, nc))*C.CORR_PREF   # 1/(2 pi) (auditoria 2026-11-18; antes 1/(4 pi))
 Cd2 = np.real(pref*acc['d2'])
 Cud1 = np.real(pref*acc['ud1'])
 Call = Cd2+Cud1
@@ -62,7 +62,7 @@ for nm, Cm in [('d2 (Hawking puro)', Cd2), ('all', Call)]:
 win15 = np.abs(xc) < 15
 vmax = np.percentile(np.abs(Call[np.ix_(win15, win15)]), 99)
 fig, ax = plt.subplots(1, 3, figsize=(17, 5.6), constrained_layout=True)
-for a, (Cm, ti) in zip(ax, [(Call, 'TOTAL (Ec.32)'),
+for a, (Cm, ti) in zip(ax, [(Call, 'TOTAL (Ec. 25)'),
                             (Cd2, 'd2: canal anomalo = Hawking'),
                             (Cud1, 'u,d1: ordinarios')]):
     im = a.pcolormesh(xc, xc, Cm, cmap='RdBu_r', vmin=-vmax, vmax=vmax,

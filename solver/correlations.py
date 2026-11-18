@@ -2,15 +2,19 @@
 RUMBO #1 — Correlacion densidad-densidad de Hawking (la "lengua" de Steinhauer).
 
 Observable: C(x,x') = <delta n(x) delta n(x')>_connected en el vacio-in a T=0.
-Formula (Recati-Pavloff-Carusotto, PRA 80 043603 (2009), arXiv:0907.4305, Ec.32):
+Formula (Recati-Pavloff-Carusotto, PRA 80 043603 (2009), arXiv:0907.4305v1, Ec. 25
+-- numeracion de esa version; antes se citaba por error como "Ec. 32"):
 
-   n G0^(2)(omega,x,x') = (1/4pi)[ sum_{I=u,d1} v*_I(x) r_I(x')
-                                   + u*_d2(x) r_d2(x') + c.c. ]
-   r_I = u_I + v_I ,   {u,d1,d2} = 3 canales ENTRANTES (d2 = norma NEGATIVA).
+   n G0^(2)(omega,x,x') = (1/4pi)[ sum_{I=u,d1} w*_I(x) r_I(x')
+                                   + u*_d2(x) r_d2(x') + c.c. ]   (normalizacion de modos del articulo)
+   r_I = u_I + w_I ,   {u,d1,d2} = 3 canales ENTRANTES (d2 = norma NEGATIVA).
 
-Los modos entrantes se normalizan a |J|=1 (corriente de norma) -> absorben el
-1/4pi (modo_paper = modo_nuestro/sqrt(4pi)). C debe ser REAL y SIMETRICA en x<->x'
-(las densidades conmutan a tiempo igual) -> simetrizamos explicitamente.
+Normalizacion (auditoria 2026-11-18, residual_anatomy/diag_recati_direct.py): aqui los modos entrantes se normalizan
+a |J|=1 (corriente de norma), con lo que int dx (|u|^2-|v|^2) = 2 pi delta(omega-omega'). En esa normalizacion el
+prefactor correcto es 1/(2 pi) (CORR_PREF), NO 1/(4 pi): con 1/(4 pi) la amplitud salia a la mitad (prueba exacta en
+un condensado homogeneo: tests/validate_correlation_norm.py). C debe ser REAL y SIMETRICA en x<->x' (las densidades
+conmutan a tiempo igual) -> se simetriza explicitamente (B + B^dag); por omega, eso es exactamente la correlacion
+fisica menos el termino propio (identidad de completitud, diag_recati_direct.py, Z1).
 
 Reusa el operador BdG FD validado (fd_bdg_operator.build_MBdG) y la logica de
 matching modal exacto de mode_matching.py (JUEZ independiente, validado). Aqui se
@@ -27,6 +31,9 @@ import scipy.sparse.linalg as spla
 import os, sys, contextlib
 with contextlib.redirect_stdout(open(os.devnull, 'w')):   # silencia auto-test import
     from fd_bdg_operator import g, build_MBdG, plane_wave_mode, quartic_roots
+
+# Prefactor de la suma de modos con modos |J| = 1 (ver docstring; antes 1/(4 pi), un factor 2 bajo).
+CORR_PREF = 1.0/(2*np.pi)
 
 n_u, mach_u = 1.0, 0.5
 vLb = mach_u*np.sqrt(g*n_u); jcur = n_u*vLb; mu = g*n_u + 0.5*vLb**2
@@ -234,12 +241,28 @@ def scatter_field(L, N, omega, channel, w=2.0, lam=1.0, mode='horizon', op=None)
 
 
 # --------------------------------------------------------------------------
-# Correlacion densidad-densidad (Ec. 32), integrada en omega, simetrizada.
+# Corchete por omega (Ec. 25 de arXiv:0907.4305v1) ya simetrizado: B + B^dag, con
+#   B = sum_{I=u,d1} v*_I(x) r_I(x') + u*_d2(x) r_d2(x').  modes[ch] = dict(u=, v=, r=u+v).
+# --------------------------------------------------------------------------
+def mode_bracket(modes, terms='all'):
+    n_ = len(next(iter(modes.values()))['u'])
+    br = np.zeros((n_, n_), dtype=complex)
+    if terms in ('all', 'ud1'):
+        for I in ('u', 'd1'):
+            if I in modes:
+                br += np.outer(np.conj(modes[I]['v']), modes[I]['r'])
+    if terms in ('all', 'd2') and 'd2' in modes:
+        br += np.outer(np.conj(modes['d2']['u']), modes['d2']['r'])
+    return br + np.conj(br.T)              # "+ c.c." como conjugado hermitico (x<->x')
+
+
+# --------------------------------------------------------------------------
+# Correlacion densidad-densidad (Ec. 25 de arXiv:0907.4305v1), integrada en omega, simetrizada.
 # --------------------------------------------------------------------------
 def density_correlation(L, N, omegas, w=2.0, lam=1.0, mode='horizon',
                         ncoarse=320, terms='all', taper=True, op=None, verbose=False):
     """Devuelve xc (subgrid), C(xc,xc') simetrica real, y n(xc).
-    terms: 'all' (Ec.32 completa), 'd2' (solo canal anomalo = Hawking puro),
+    terms: 'all' (Ec. 25 completa), 'd2' (solo canal anomalo = Hawking puro),
            'ud1' (canales ordinarios norma+). taper: ventana suave en bordes de
            banda (reduce ringing de Gibbs del corte en omega)."""
     xfull = np.linspace(-L, L, N)
@@ -268,16 +291,10 @@ def density_correlation(L, N, omegas, w=2.0, lam=1.0, mode='horizon',
         if not ok:
             if verbose: print(f"  omega={om:.3f}: fuera de ventana - skip")
             continue
-        br = np.zeros((ncoarse, ncoarse), dtype=complex)
-        if terms in ('all', 'ud1'):
-            for I in ('u', 'd1'):
-                br += np.outer(np.conj(modes[I]['v']), modes[I]['r'])
-        if terms in ('all', 'd2'):
-            br += np.outer(np.conj(modes['d2']['u']), modes['d2']['r'])
-        br = br + np.conj(br.T)               # "+ c.c." simetrizado (x<->x')
+        br = mode_bracket(modes, terms)
         acc += br*dω*win[iw]
         if verbose:
             print(f"  omega={om:.3f}: ok  |bracket|_max={np.abs(br).max():.3e}")
-    pref = np.sqrt(np.outer(nc, nc))/(4*np.pi)
+    pref = np.sqrt(np.outer(nc, nc))*CORR_PREF   # 1/(2 pi): ver diag_recati_direct.py (antes 1/(4 pi))
     C = np.real(pref*acc)
     return xc, C, nc

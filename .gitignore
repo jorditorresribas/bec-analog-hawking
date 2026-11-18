@@ -2,3 +2,6 @@ __pycache__/
 *.pyc
 .DS_Store
 *.bak*
+
+# Intermedio grande de un diagnostico (40 MB); los resultados estan en out/diag_recati_full_run.log
+out/diag_recati_full.npz

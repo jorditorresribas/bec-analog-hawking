@@ -1,0 +1,12 @@
+max dif. relativa n_L, lado A (lam, fondo consistente) vs lado B (v1.0 reescalado):
+  lam=0.25 N= 9600:  base 8.8e-08   eqref 6.2e-10   (A_base vs CSV de T2: 0.0e+00)
+  lam=0.25 N=14400:  base 4.9e-07   eqref 9.5e-10   (A_base vs CSV de T2: 0.0e+00)
+  lam=0.50 N= 9600:  base 1.5e-07   eqref 5.3e-10   (A_base vs CSV de T2: 0.0e+00)
+  lam=0.50 N=14400:  base 8.0e-07   eqref 1.3e-09   (A_base vs CSV de T2: 0.0e+00)
+  lam=1.00 N= 9600:  base 0.0e+00   eqref 0.0e+00   (A_base vs CSV de T2: 0.0e+00)
+  lam=1.00 N=14400:  base 0.0e+00   eqref 0.0e+00   (A_base vs CSV de T2: 0.0e+00)
+  lam=2.00 N= 9600:  base 4.9e-07   eqref 1.2e-09   (A_base vs CSV de T2: 0.0e+00)
+  lam=2.00 N=14400:  base 2.4e-06   eqref 3.2e-09   (A_base vs CSV de T2: 0.0e+00)
+  lam=4.00 N= 9600:  base 2.8e-06   eqref 8.7e-10   (A_base vs CSV de T2: 0.0e+00)
+  lam=4.00 N=14400:  base 3.2e-06   eqref 3.5e-09   (A_base vs CSV de T2: 0.0e+00)
+GLOBAL: base 3.2e-06   eqref 3.5e-09   [139 s]

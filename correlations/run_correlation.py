@@ -1,6 +1,6 @@
 """
 Experimento RUMBO #1 (a): la LENGUA de correlacion de Hawking (refinado).
-C(x,x') = <delta n(x) delta n(x')> en vacio-in, Ec.32 Recati-Pavloff-Carusotto.
+C(x,x') = <delta n(x) delta n(x')> en vacio-in, Ec. 25 de Recati-Pavloff-Carusotto (arXiv:0907.4305v1).
 
 Senal esperada: banda NEGATIVA (anti-correlacion Hawking-companero) en el cuadrante
 upstream(x<0) x downstream(x'>0) a lo largo de la recta x' = slope * x con

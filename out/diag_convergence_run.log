@@ -1,0 +1,27 @@
+  E1 W1 [0.1,0.6] hecho [35 s]
+  E1 W2 [0.05,0.3] hecho [54 s]
+  E1 W3 [0.025,0.15] hecho [74 s]
+  E1 W4 [0.0125,0.075] hecho [94 s]
+
+E1 a_th = 0.1317341274
+(1) redondeo: max |a(base) - a(eqref)|/a_th en W1, por dx y orden:
+   dx=0.02: o2: 1.4e-09  o3: 2.8e-09  o4: 3.3e-09
+   dx=0.01: o2: 1.5e-08  o3: 4.4e-08  o4: 9.7e-08
+   dx=0.005: o2: 5.5e-08  o3: 1.0e-07  o4: 5.4e-07
+   dx=0.0025: o2: 1.3e-06  o3: 2.6e-06  o4: 2.6e-06
+(2) discretizacion: a(dx) con eqref, orden 3, y Richardson con los 3 dx mas finos (p observado):
+   W1 [0.1,0.6]      : -3.66e-04, -7.30e-05, -2.09e-07, +1.80e-05  (err. rel. por dx)  p=2.00  Richardson err +2.40e-05
+   W2 [0.05,0.3]     : -3.96e-04, -9.59e-05, -2.27e-05, -4.46e-06  (err. rel. por dx)  p=2.01  Richardson err +1.56e-06
+   W3 [0.025,0.15]   : -4.28e-04, -9.94e-05, -2.43e-05, -5.97e-06  (err. rel. por dx)  p=2.04  Richardson err -5.84e-08
+   W4 [0.0125,0.075] : -5.53e-04, -1.07e-04, -2.49e-05, -6.10e-06  (err. rel. por dx)  p=2.13  Richardson err -5.63e-07
+(3) extrapolacion en omega: Richardson-dx por ventana y orden (err. rel. frente a a_th):
+   W1 [0.1,0.6]      : o2: -1.03e-04  o3: +2.40e-05  o4: +8.33e-07
+   W2 [0.05,0.3]     : o2: -7.00e-06  o3: +1.61e-06  o4: +1.07e-08
+   W3 [0.025,0.15]   : o2: -4.69e-07  o3: +1.38e-07  o4: +1.34e-08
+   W4 [0.0125,0.075] : o2: +5.84e-08  o3: +1.57e-07  o4: +2.07e-07
+
+FP T_up/(kappa_local/2pi): N0 = L*240 (benchmark), factores 1, 1.5, 2.25
+   w=2.0: eqref 0.95724153, 0.95723155, 0.95722712  p=2.00  Richardson 0.95722358  | redondeo |base-eqref| max 9.2e-07  | discretizacion en N0 1.8e-05   [122 s]
+   w=8.0: eqref 0.98480959, 0.98479351, 0.98478634  p=1.99  Richardson 0.98478057  | redondeo |base-eqref| max 2.2e-05  | discretizacion en N0 2.9e-05   [184 s]
+fin (184 s)
+exit 0

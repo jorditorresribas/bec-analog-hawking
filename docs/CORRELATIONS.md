@@ -12,7 +12,9 @@
 > de Hawking es ROBUSTA frente a k⁴» (§5), las cifras ±10 % / 20–45 % (§7), la tabla w × λ y
 > su lectura (§8). Las secciones se conservan como registro histórico.
 > **No afectados:** §1–§3 (λ = 1, donde ambos operadores son idénticos).
-> Una revisión más completa (incluida la interpretación del parámetro λ) está en curso.
+> **Además (§9):** con el fondo corregido, el knob λ es exactamente un reescalado de la anchura
+> del horizonte, (λ, w) ≡ (1, w/√λ); por tanto no aísla física ultravioleta con la métrica fija,
+> y una rejilla w × λ mide un solo parámetro.
 
 Sesión 2026-11-14 (continuación). Construido SOBRE el solver Hawking cerrado y
 auditado (ver `REPRODUCE.md`). Observable: la correlación densidad-densidad de
@@ -30,7 +32,8 @@ Correlación densidad-densidad en el vacío-in a T=0:
 `C(x,x') = <δn(x) δn(x')>_conectada`.
 
 Fórmula de suma de modos: **Recati, Pavloff, Carusotto, PRA 80, 043603 (2009),
-arXiv:0907.4305, Ec. (32)** (parte de punto cero = la única a T=0):
+arXiv:0907.4305v1, Ec. 25** (parte de punto cero = la única a T=0; numeración de esa versión —
+hasta la auditoría del 2026-11-18 se citaba por error como «Ec. (32)»):
 
 ```
 n·G0(ω,x,x') = (1/4π) [ Σ_{I=u,d1} v*_I(x) r_I(x') + u*_d2(x) r_d2(x') + c.c. ]
@@ -40,10 +43,17 @@ r_I = u_I + v_I
 - `{u, d1, d2}` = 3 canales ENTRANTES de scattering en la ventana de Hawking.
   `d2` = canal de **norma NEGATIVA** (entra con `u*` en vez de `v*`: esa asimetría
   ES la firma de producción de pares de Hawking).
-- Modos normalizados a corriente de norma |J|=1 → absorben el 1/4π
-  (modo_paper = modo_nuestro / √(4π)).
+- Modos normalizados a corriente de norma |J|=1, con lo que ∫dx(|u|²−|v|²) = 2π δ(ω−ω′). **Con esa
+  normalización el prefactor correcto es 1/(2π), no el 1/(4π) del artículo** (que corresponde a su propia
+  normalización de modos). *Corrección de auditoría 2026-11-18:* aquí se decía que los modos |J|=1 «absorben el 1/4π»
+  y el código multiplicaba por 1/(4π): la amplitud absoluta de C salía a la **mitad**. Comprobado con una prueba exacta en
+  un condensado homogéneo (`tests/validate_correlation_norm.py`; antes 0,500001, ahora 1,00001) y con el cálculo directo
+  desde la ordenación del vacío (`residual_anatomy/diag_recati_direct.py`). Ningún número publicado de §1–3 depende de la
+  amplitud absoluta (la pendiente −1,17 se ha recalculado y no cambia); sí las escalas de color de las figuras de §3,
+  regeneradas.
 - `C` es REAL y SIMÉTRICA en x↔x' (las densidades conmutan a tiempo igual);
-  se simetriza explícitamente (`br + conj(br.T)`), equivalente a la Ec.32 + c.c.
+  se simetriza explícitamente (`br + conj(br.T)`, «+ c.c.» como conjugado hermítico). Por ω, esa forma es exactamente
+  la correlación física menos el término propio (identidad de completitud BdG, `diag_recati_direct.py`).
 - Se integra SOLO la ventana de Hawking 0<ω<ω_max → se obtiene la contribución
   ESPECÍFICA de Hawking (la parte ordinaria ω>ω_max queda excluida a propósito).
 
@@ -62,7 +72,7 @@ validado), parametrizada en ω y devolviendo el CAMPO completo (u(x),v(x)).
 
 Gates (λ=1, dispersión física):
 - (A) dispersión λ=1 == cuártico original: dif 0.
-- (B) |U|²−|V|²=1: 2e-16.
+- (B) |U|²−|V|² = sign(Ω) (±1). *Corrección de auditoría 2026-11-17:* la versión anterior del test comparaba con +1 para todos los modos e imprimía «desviación 2.00» (3 de los 4 k de prueba son de norma negativa, cuyo valor correcto es −1); el «2e-16» que figuraba aquí no correspondía a esa comprobación. Con la comprobación corregida: < 1e-12.
 - (C) homogéneo (sin horizonte): transmisión=1.0000, reflexión 2e-15.
 - (D) HORIZONTE ω=0.1: **β²=0.01008** convergido en N, flux_out=+1.0000
   → reproduce EXACTAMENTE el valor validado (memoria).
@@ -74,7 +84,9 @@ Gates (λ=1, dispersión física):
 
 `run_correlation.py`, `run_decomp.py`. L=30, N=3600, w=2, banda ω∈[0.02,0.45]
 (140 pts), ventana Hann en bordes, ncoarse=420. Convergencia en ω (140 vs 70 pts),
-ventana |x|<15: 1.5%.
+ventana |x|<15: 1.7%. *(Auditoría 2026-11-18: el 1.5% y la figura `correlation_tongue.png` anteriores
+se generaron con una versión de `density_correlation` sin la ventana Hann (anterior a añadirla, el mismo 14-11);
+regenerados con la ventana que aquí se describe y con el prefactor corregido 1/(2π).)*
 
 - Aparece estructura de correlación cruzando el horizonte (upstream x<0 subsónico
   = "fuera"; downstream x>0 supersónico = "dentro").
@@ -95,7 +107,7 @@ Datos: `out/correlation_lambda1.npz`, `out/correlation_decomp.npz`.
 
 ## 4. Knob trans-planckiano k⁴ (b): diseño y VALIDACIÓN
 
-> ⚠️ **SECCIÓN AFECTADA** por el operador λ defectuoso — sin validez física (ver aviso inicial).
+> ⚠️ **SECCIÓN AFECTADA** por el operador λ defectuoso — sin validez física (ver aviso inicial y §9).
 
 Dispersión modificada manteniendo la MÉTRICA acústica (c,v) FIJA:
 ```
@@ -135,7 +147,7 @@ lados (0.125 en λ=0.25; 0.048 en λ=4) — pero β² a ω fija no es la medida 
 
 ## 5. Resultado (b): robustez de la lengua vs λ
 
-> ⚠️ **SECCIÓN AFECTADA** por el operador λ defectuoso — sin validez física (ver aviso inicial).
+> ⚠️ **SECCIÓN AFECTADA** por el operador λ defectuoso — sin validez física (ver aviso inicial y §9).
 
 `run_lambda_sweep.py`. L=30, N=3000, ncoarse=360, banda ω adaptada a ω_max(λ)
 (90 pts), op='lambda' para todos. Medida de robustez: integral de la parte negativa
@@ -175,7 +187,7 @@ Figura: `out/lambda_sweep.png`. Datos: `out/lambda_sweep.npz`.
 
 | Archivo | Qué hace |
 |---|---|
-| `correlations.py` | módulo: modos IN full-grid + Ec.32 + knob λ (operador modificado) |
+| `correlations.py` | módulo: modos IN full-grid + Ec. 25 (arXiv v1) + knob λ (operador modificado) |
 | `validate_correlations.py` | gates A-F de la maquinaria de correlación (λ=1) |
 | `validate_lambda.py` | gates A-E del operador modificado k⁴ |
 | `run_correlation.py` | lengua de Hawking λ=1 + sondeo de pendiente |
@@ -186,7 +198,7 @@ Figura: `out/lambda_sweep.png`. Datos: `out/lambda_sweep.npz`.
 
 ## 7. Profundización de la robustez (sesión 2026-11-14 cont.)
 
-> ⚠️ **SECCIÓN AFECTADA** por el operador λ defectuoso — sin validez física (ver aviso inicial).
+> ⚠️ **SECCIÓN AFECTADA** por el operador λ defectuoso — sin validez física (ver aviso inicial y §9).
 
 Tres pasos sobre §5 para cerrar los caveats (1) métrica que mezcla franjas y
 (2) sin convergencia / solo 3 λ / 1 config.
@@ -252,7 +264,7 @@ orden, pico en el valor físico, sin cambio cualitativo al variar la completaci�
 
 ## 8. Opción A: dependencia con w (sesión 2026-11-14 cont.) — CERRADA, resultado NULO
 
-> ⚠️ **SECCIÓN AFECTADA** por el operador λ defectuoso — sin validez física (ver aviso inicial).
+> ⚠️ **SECCIÓN AFECTADA** por el operador λ defectuoso — sin validez física (ver aviso inicial y §9).
 
 Recomendación del referee (ChatGPT): ¿la lengua de Hawking se vuelve menos sensible
 a la dispersión UV (λ) al suavizar el horizonte (w grande, más hidrodinámico)?
@@ -330,3 +342,62 @@ de robustez con w. La asimetría de ramas es sustancialmente normalización. For
 defendible (ChatGPT): "la señal sobrevive a variaciones de λ" — NO "robustez
 trans-planckiana confirmada por el suavizado del horizonte". Limitado por covariación
 w–κ–T_H (familia, no suavidad aislada).
+
+---
+
+## 9. Auditoría fase 1 (2026-11-17): el knob λ con fondo consistente es un reescalado
+
+**Afirmación.** Con el fondo consistente (Qp_λ = √λ·Qp, variante `QP_LAM` de
+`residual_anatomy/diag_T2_qp_consistent.py`), el operador BdG con dispersión
+(ω − vk)² = c²k² + λk⁴/4 sobre el perfil tanh de anchura w es exactamente el operador físico
+v1.0 (λ = 1) sobre el perfil de anchura w/√λ:
+
+```
+x' = x/√λ ,  k' = √λ k ,  ω' = √λ ω ,  M_1(x') = √λ · M_λ(x)
+```
+
+Término a término: cinético √λ/2·k² → k'²/2; acoplo gn/√λ → gn; convección vk → vk';
+Qp_λ = √λ·Qp → λ·Qp = Qp' (Qp escala como 1/w²). n, v y c no cambian, y T/T_H es
+adimensional. En la malla, con L' = L/√λ y el mismo N, D2' = λ·D2 y D1' = √λ·D1: la
+identidad también es exacta en el operador discreto.
+
+**Comprobación** (`residual_anatomy/diag_scaling_equivalence.py`, ~30 s,
+`out/diag_scaling_equivalence.csv`): para los 90 puntos (λ, N, ω) de `QP_LAM` en
+`out/diag_T2_nL.csv` se recalcula n_L con el solver v1.0 (`op='validated'`, **sin**
+`build_op_lambda`) en w' = 2/√λ, L' = 40/√λ, mismo N, ω' = √λ·ω.
+
+| λ | w equivalente | máx. dif. relativa en n_L (N = 9600) | (N = 14400) |
+|---|---|---|---|
+| 0.25 | 4.000 | 8.8e-08 | 4.9e-07 |
+| 0.5 | 2.828 | 1.5e-07 | 8.0e-07 |
+| 1 | 2.000 | 0 | 0 |
+| 2 | 1.414 | 4.9e-07 | 2.4e-06 |
+| 4 | 1.000 | 2.8e-06 | 3.2e-06 |
+
+El suelo de redondeo del propio solver v1.0 (n_L al mover L en 1 ulp, λ = 4, N = 14400) es
+7·10⁻⁶: las diferencias están por debajo, así que la identidad se cumple hasta el redondeo.
+(Declaración: la tolerancia se fijó primero en 1e-8 y falló; se cambió a 1e-5 **después** de
+medir ese suelo.)
+
+**Confirmación con un solve más preciso** (diagnóstico, misma tarde;
+`residual_anatomy/diag_conditioning_equiv.py`, `out/diag_conditioning_equiv.csv`): resolviendo los dos
+lados con equilibrado de Ruiz y refinamiento iterativo (residuo en long double), sin tocar el
+operador ni la malla, la diferencia máxima en los 90 puntos baja de 3,2·10⁻⁶ a **3,5·10⁻⁹**. El
+7·10⁻⁶ era pérdida de precisión del LU sin equilibrar, no del problema
+(`residual_anatomy/diag_conditioning.py`: con la solución refinada, 1 ulp en L cambia n_L ~10⁻¹²).
+El solver v1.0 no se ha modificado.
+
+En T/T_H, con el benchmark v1.0 en la anchura equivalente: λ = 0.25 ↔ w = 4: 0.97900 frente a
+0.97893 (`FP_BENCHMARK.md`, 0.9789); λ = 1: 0.95724 en ambos. Ese cálculo usa la malla del
+benchmark y no la reescalada, de ahí la diferencia de 7·10⁻⁵.
+
+**Consecuencias.**
+1. Confirma T2 por una vía independiente del código de λ, y que el «colapso» era un
+   artefacto: con el fondo consistente se recupera exactamente la física de λ = 1.
+2. El knob λ **no** estudia física trans-planckiana con la métrica fija: es el mismo parámetro
+   que la anchura del horizonte en unidades de la longitud de curación (lo que ya cubre la
+   familia w de Finazzi–Parentani).
+3. Si se quiere estudiar la lengua frente a la «suavidad UV», basta λ = 1 con distintos w.
+   Una rejilla w × λ (como la de §8) es degenerada.
+4. Alcance: la identidad se ha comprobado numéricamente para n_L; para C(x, x′) es una
+   consecuencia del mismo argumento de escala, todavía no ejecutada.

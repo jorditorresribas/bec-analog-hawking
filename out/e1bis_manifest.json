@@ -1,0 +1,60 @@
+{
+  "gate": "E1-bis",
+  "veredicto": "PASS",
+  "git_HEAD": "001a7ac4876c99d6cdd671e261cba2efad4dd66b",
+  "commit_pre_registro": "001a7ac4876c99d6cdd671e261cba2efad4dd66b 2026-11-17T23:28:59+01:00",
+  "sha256": {
+    "residual_anatomy/E1BIS_PREREG.md": "1e239eca58453b7edee5842efdbab0656bf1afccb5ecf84b556dad8b9538391a",
+    "residual_anatomy/gates/gate_E1bis_lrcp.py": "f678866ec65432ac5f7fbadee61581e73b0d7785f5819945f3772ba19721baf7",
+    "residual_anatomy/diag_conditioning.py": "6486439b55fbfc2e2b10c9e2d8e75ac09b1da8011aec065ccf7cda2e0a345093",
+    "residual_anatomy/gates/gate_E1_lrcp.py": "800d99e2a0f42ca6a823017e8069e6491aee526f7a6d26a70834486f04f79666",
+    "solver/fd_bdg_operator.py": "083f2a822e91b14401bf1388306ddc3d67daae712ba87a06b763d107517262b8",
+    "out/e1bis_nL.csv": "59d62a117b09e38f4e76bc41ac7c3c246583a55e23b2e0931c3bdcf0dcdc640b",
+    "out/e1bis_fits.csv": "b7551d393fed337576c23f7cc8ee3a40e6ce67c339a76670874002d1fddba432",
+    "out/e1bis_result.csv": "91d95f6f9585603d5c2fece6d1f2772f70c479b738542d8e9016147f13bb9861"
+  },
+  "resumen": {
+    "0.6": {
+      "eps_a": 5.42184900302465e-09,
+      "win": 8.541769711426669e-09,
+      "eps_b": 7.887762643500663e-07,
+      "aR": 0.09908489737591068,
+      "aR3": 0.09908489822227105,
+      "bR": -0.49530182758330815,
+      "p_obs": 2.0374664893017527
+    },
+    "0.7": {
+      "eps_a": 4.220182493922485e-08,
+      "win": 3.6859672051170374e-08,
+      "eps_b": 3.130423940925824e-06,
+      "aR": 0.06690778433008096,
+      "aR3": 0.06690778679627984,
+      "bR": -0.4979753667402745,
+      "p_obs": 1.9950295240729197
+    },
+    "0.5": {
+      "eps_a": 1.0697849053533805e-08,
+      "win": 2.6773603578261304e-09,
+      "eps_b": 8.921290806281531e-07,
+      "aR": 0.13173412883129282,
+      "aR3": 0.13173412918399255,
+      "bR": -0.4897963553285293,
+      "p_obs": 2.013521668118197
+    }
+  },
+  "tolerancias": {
+    "I1": 1e-07,
+    "p_lo": 1.5,
+    "p_hi": 2.5,
+    "C1": 1e-06,
+    "C2": 1e-06,
+    "C3": 1e-07,
+    "C4": 0.001
+  },
+  "python": "3.9.6",
+  "numpy": "2.0.2",
+  "scipy": "1.13.1",
+  "plataforma": "macOS-12.7.6-x86_64-i386-64bit",
+  "segundos": 109.8,
+  "fecha": "2026-11-17T23:31:02"
+}

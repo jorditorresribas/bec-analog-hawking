@@ -1,0 +1,21 @@
+R0 replica vs gate solve_d2: |dn_L| = 0.0e+00  -> OK
+   backward error base : ||rhs-Az||/||rhs|| = 7.4e-11
+   backward error eq   : ||rhs-Az||/||rhs|| = 4.0e-11
+   backward error ref  : ||rhs-Az||/||rhs|| = 1.2e-11
+   backward error eqref: ||rhs-Az||/||rhs|| = 2.5e-11
+E1 dx=0.02: err_solve max vs ref -> base:1.1e-09  eq:1.0e-10  eqref:8.0e-11 | ulp(L): base 1.7e-09  ref 1.8e-12   [3 s]
+E1 dx=0.01: err_solve max vs ref -> base:1.4e-08  eq:4.6e-10  eqref:2.2e-10 | ulp(L): base 2.2e-08  ref 3.1e-12   [9 s]
+E1 dx=0.005: err_solve max vs ref -> base:1.1e-07  eq:7.9e-10  eqref:1.1e-09 | ulp(L): base 1.6e-07  ref 6.1e-12   [21 s]
+
+E1 coeficiente a (W1, cubico) — a_th = 0.131734127
+  base    : a(dx)=0.131685968, 0.131724500, 0.131734113  p=2.003  Richardson(p obs)=0.131737308 err 2.41e-05  (p=2: err 2.42e-05)
+  eq      : a(dx)=0.131685967, 0.131724506, 0.131734100  p=2.006  Richardson(p obs)=0.131737280 err 2.39e-05  (p=2: err 2.41e-05)
+  ref     : a(dx)=0.131685967, 0.131724506, 0.131734100  p=2.006  Richardson(p obs)=0.131737280 err 2.39e-05  (p=2: err 2.41e-05)
+  eqref   : a(dx)=0.131685967, 0.131724506, 0.131734100  p=2.006  Richardson(p obs)=0.131737280 err 2.39e-05  (p=2: err 2.41e-05)
+  base_ulp: a(dx)=0.131685967, 0.131724506, 0.131734107  p=2.005  Richardson(p obs)=0.131737292 err 2.40e-05  (p=2: err 2.41e-05)
+  ref_ulp : a(dx)=0.131685967, 0.131724506, 0.131734100  p=2.006  Richardson(p obs)=0.131737280 err 2.39e-05  (p=2: err 2.41e-05)
+
+TANH w=1 N=14400: err_solve max vs ref -> base:3.8e-06  eq:3.6e-08  eqref:1.6e-09 | ulp(L): base 7.0e-06  ref 7.1e-12 | equivalencia lam=4: T2 vs base 3.2e-06, T2 vs ref 2.2e-06
+
+fin (31 s). CSV: out/diag_conditioning.csv, out/diag_conditioning_a.csv
+exit 0

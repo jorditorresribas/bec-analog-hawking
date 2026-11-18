@@ -9,10 +9,17 @@ independiente pueda reproducir y verificar el resultado sin reconstruir la conve
 Resultado principal, en la formulación precisa (**no se afirma reproducción íntegra del
 artículo**): **la simulación reproduce, PARA LA FAMILIA DE PERFILES ESTUDIADA Y BAJO LAS
 CONVENCIONES ESPECIFICADAS, la relación de temperatura de horizonte ensanchado de
-Finazzi–Parentani (T_0 = κ̄/2π) con una desviación inferior al 0.75 % en cinco anchuras,
-usando el observable que FP define (el cuanto Hawking upstream n_ω=|β_ω|²), y el acuerdo
-es robusto en banda de ajuste y resolución numérica.** Es validación numérica, no nueva
-física (ver §8–9).
+Finazzi–Parentani: T_upstream/(κ_local/2π) = 0.957 → 0.985 en cinco anchuras (w = 2…8),
+acercándose a 1 al suavizar el horizonte, usando el observable que FP define (el cuanto
+Hawking upstream n_ω=|β_ω|²), robusto en banda de ajuste y resolución numérica. Con la κ̄
+de horizonte ensanchado de FP (T_0 = κ̄/2π) y su anchura de ventana d = 1.58 el acuerdo es
+≤ 0.75 %, pero esa cifra depende de d (ajustado por FP a sus perfiles) y de la ventana
+simétrica: con d = 1 o 2 sube al 2–3 % (tabla de sensibilidad en §5b).** Es validación
+numérica, no nueva física (ver §8–9).
+
+> **Titular revisado (auditoría fase 1, 2026-11-17).** El resultado principal pasa a ser el
+> rango T/(κ_local/2π) = 0.957–0.985, que no depende de ningún parámetro importado. El
+> «≤ 0.75 %» se conserva como resultado condicional a d = 1.58.
 
 Documentos de apoyo (derivaciones y auditorías por paso): `FP_SCALES.md` (escalas),
 `FP_STEP2.md` (κ̄ + techo del gradiente), `FP_STEP3.md` (auditoría de canales S),
@@ -126,10 +133,26 @@ las dos últimas son COCIENTES adimensionales del mismo T_upstream sobre dos ref
 | 6 | 0.090094 | 0.014339 | 0.014175 | 0.014099 | **0.9947** | 0.9833 |
 | 8 | 0.067571 | 0.010754 | 0.010670 | 0.010591 | **0.9926** | 0.9848 |
 
-- **T_upstream ≈ κ̄/2π a ≤ 0.75 %** en las cinco anchuras (desv.: +0.50, +0.14, −0.16,
+- **T_upstream ≈ κ̄/2π a ≤ 0.75 % CON d = 1.58** (condicional; ver tabla de sensibilidad abajo) en las cinco anchuras (desv.: +0.50, +0.14, −0.16,
   −0.53, −0.74 %). Reproduce la relación T_0 = κ̄/2π de FP.
 - T_upstream < κ_local/2π siempre, y el déficit ENCOGE con w (0.957→0.985): T_0 → κ_K/2π
   al suavizar el horizonte, como FP (T_0 → T_H para D_p grande).
+
+**Sensibilidad a d (auditoría fase 1, 2026-11-17).** T_up/(κ̄(d)/2π) con ventana simétrica,
+mismo T_upstream de la tabla de §5b (`python3 benchmarks/fp_v1/FP_d_sensitivity.py`, ~1 s):
+
+| d | w=2 | w=3 | w=4 | w=6 | w=8 |
+|---|---|---|---|---|---|
+| →0 (= κ_local) | 0.9573 | 0.9730 | 0.9789 | 0.9833 | 0.9848 |
+| 1.0 | 0.9764 | 0.9844 | 0.9867 | 0.9878 | 0.9879 |
+| **1.58 (FP)** | **1.0050** | **1.0014** | **0.9984** | **0.9947** | **0.9926** |
+| 2.0 | 1.0335 | 1.0184 | 1.0101 | 1.0015 | 0.9973 |
+| 3.0 | 1.1268 | 1.0744 | 1.0487 | 1.0242 | 1.0128 |
+
+El acuerdo «≤ 0.75 %» es **condicional** a importar d = 1.58 (ajustado por FP a SUS
+perfiles) y a la ventana simétrica elegida aquí: con d = 1 o d = 2 la desviación llega al
+2–3 %. El resultado que no depende de ningún parámetro importado es
+**T_up/(κ_local/2π) = 0.957 → 0.985, que tiende a 1 al suavizar el horizonte.**
 
 ## 6. Resultado secundario y por qué NO es la T de FP
 T_total = T_0(n_tot) con n_tot = n_{−ω} (compañero): T_total/(κ_local/2π) = 1.009, 1.026,

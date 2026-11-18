@@ -72,6 +72,9 @@ def correlation_with_pu(L, N, omegas, w, lam, ncoarse=360):
         br = np.outer(np.conj(modes['d2']['u']), modes['d2']['r'])
         br = br + np.conj(br.T)
         acc += br*dω*win[iw]
+    # NOTA (auditoria 2026-11-18): prefactor ANTIGUO 1/(4 pi), un factor 2 bajo en amplitud absoluta (el correcto con
+    # modos |J|=1 es 1/(2 pi) = correlations.CORR_PREF; ver residual_anatomy/diag_recati_direct.py). Se deja sin cambiar
+    # a proposito: este script es de §8 (retirada) y solo usa cocientes, que no dependen del prefactor.
     pref = np.sqrt(np.outer(nc, nc))/(4*np.pi)
     return xc, np.real(pref*acc), eps, valid
 

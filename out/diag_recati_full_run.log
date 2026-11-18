@@ -1,0 +1,44 @@
+P1 base de modos, condensado homogeneo Mach 0,5 (los mismos ajustes que diag_recati_norm B):
+   omega   canal  k        Om=w-vk  norma  vg       (|U|^2-|V|^2)|vg|  V(U+V)|vg|   (S-1)/2      Rin_neg
+   0.004  u     +0.0027  +0.0027  +1    +1.5000  1.000000           -0.499333    -0.499333   ninguno
+   0.004  d1    -0.0080  +0.0080  +1    -0.5000  1.000000           -0.498000    -0.498000   ninguno
+   0.050  u     +0.0333  +0.0333  +1    +1.5004  1.000000           -0.491669    -0.491669   ninguno
+   0.050  d1    -0.0998  +0.0999  +1    -0.5037  1.000000           -0.475093    -0.475093   ninguno
+   0.300  u     +0.1993  +0.2003  +1    +1.5148  1.000000           -0.450410    -0.450410   ninguno
+   0.300  d1    -0.5575  +0.5787  +1    -0.6130  1.000000           -0.365745    -0.365745   ninguno
+   0.800  u     +0.5217  +0.5392  +1    +1.5993  1.000000           -0.373799    -0.373799   ninguno
+   0.800  d1    -1.2006  +1.4003  +1    -0.9753  1.000000           -0.242660    -0.242660   ninguno
+   1.200  u     +0.7641  +0.8180  +1    +1.7068  1.000000           -0.321557    -0.321557   ninguno
+   1.200  d1    -1.5613  +1.9806  +1    -1.2490  1.000000           -0.192330    -0.192330   ninguno
+   omega(k) = v k + E_k monotona en k>0: True;  en k<0 (en |k|): True  -> cada k aparece una sola vez
+   [2 s]
+
+P2 horizonte lam=1, L=30.0, N=3600, 546 omegas en [0.004, 8.00] ...
+   ventana de Hawking hasta omega = 0.466; canales por encima: [('d1', 'u')]  [148 s]
+   corte en omega | asim. literal max|L-L^T|/max|L| | asim. literal rms | dif. literal-codigo (rel. max)
+    ventana 0.466 | 7.915e-01 | 1.115e+00 | 3.959e-01
+                1 | 6.891e-01 | 1.008e+00 | 3.445e-01
+                2 | 6.045e-01 | 9.366e-01 | 3.023e-01
+                4 | 5.261e-01 | 9.012e-01 | 2.631e-01
+                8 | 4.517e-01 | 8.880e-01 | 2.258e-01
+   canal u   (ventana): asim. literal max = 2.235e-01
+   canal d1  (ventana): asim. literal max = 1.165e+00
+   canal d2  (ventana): asim. literal max = 1.167e+00
+   solo omega > omega_max (u+d1): asim. literal max = 1.612e-01  [148 s]
+
+P3 pendiente de la cresta (metodo original), configuracion original de §3:
+   reproduccion de out/correlation_decomp.npz (Cd2): dif rel max = 1.2e-15
+   d2, receta del codigo (como §3)            umbral -5.0e-04: pendiente mediana -1.17  (77 puntos)
+   d2, receta del codigo (como §3)            umbral -1.0e-03: pendiente mediana -1.17  (77 puntos)
+   d2, receta del codigo (como §3)            umbral -2.0e-03: pendiente mediana -1.17  (77 puntos)
+   d2, lectura literal 2 Re B                 umbral -5.0e-04: pendiente mediana -1.18  (77 puntos)
+   d2, lectura literal 2 Re B                 umbral -1.0e-03: pendiente mediana -1.18  (77 puntos)
+   d2, lectura literal 2 Re B                 umbral -2.0e-03: pendiente mediana -1.18  (77 puntos)
+   d2, codigo con amplitud corregida (x2)     umbral -5.0e-04: pendiente mediana -1.17  (77 puntos)
+   d2, codigo con amplitud corregida (x2)     umbral -1.0e-03: pendiente mediana -1.17  (77 puntos)
+   d2, codigo con amplitud corregida (x2)     umbral -2.0e-03: pendiente mediana -1.17  (77 puntos)
+   forma de la lengua (cuadrante cruzado |x|<15): correlacion codigo-literal = 0.9804; dif rel max = 2.04e+00
+   TOTAL integracion completa, codigo         umbral -1.0e-03: pendiente mediana -0.57  (77 puntos)
+   TOTAL integracion completa, literal        umbral -1.0e-03: pendiente mediana -0.49  (77 puntos)
+fin [188 s]
+exit 0

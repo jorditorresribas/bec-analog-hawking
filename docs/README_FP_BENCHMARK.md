@@ -12,8 +12,10 @@ y qué mirar.
 ## 0. Qué se afirma (y qué no)
 **Afirmación (acotada):** para la familia de perfiles estudiada y bajo las convenciones
 especificadas, la simulación reproduce la relación de temperatura de horizonte ensanchado
-de Finazzi–Parentani, **T₀ = κ̄/2π**, con desviación **≤ 0.75 %** en cinco anchuras de
-horizonte, usando el observable que FP define (el cuanto Hawking upstream n_ω = |β_ω|²).
+de Finazzi–Parentani: **T_upstream/(κ_local/2π) = 0.957 → 0.985** en cinco anchuras de
+horizonte (tiende a 1 al suavizar el horizonte), usando el observable que FP define (el
+cuanto Hawking upstream n_ω = |β_ω|²). Con la κ̄ de FP (T₀ = κ̄/2π) y d = 1.58 la desviación
+es ≤ 0.75 %, **condicional a d** (con d = 1 o 2 llega al 2–3 %; tabla en `FP_BENCHMARK.md` §5b).
 Es **validación numérica**, NO nueva física, y **NO una reproducción íntegra del
 artículo** (perfiles distintos; d≈1.58 es ajuste de FP, no universal).
 
@@ -50,7 +52,8 @@ redondear). Salida esperada (columnas clave; comparar con el CSV para plena prec
  8     0.067571   0.010754  0.010670  0.010591  0.011166  0.9848     0.9926     1.0383
 ```
 **Lo que hay que mirar:** la columna `T_up/kbar` = T_upstream/(κ̄/2π) ∈ [0.9926, 1.0050]
-→ acuerdo ≤ 0.75 % con la predicción de FP. `T_up` es el observable de FP (canal Hawking
+→ acuerdo ≤ 0.75 % con la predicción de FP **para d = 1.58** (condicional a d; la columna
+`T_up/kloc` = 0.957–0.985 es el resultado que no depende de d). `T_up` es el observable de FP (canal Hawking
 upstream); `T_tot` es un resultado SECUNDARIO (temperatura de la ocupación del compañero),
 que **no** es la temperatura Hawking de FP.
 

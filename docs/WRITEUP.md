@@ -56,7 +56,7 @@ En total, el proyecto acumuló una veintena de gates documentados.
 
 ## 3. El resultado que parecía un descubrimiento
 
-El simulador básico (versión 1.0) se validó primero y quedó congelado. Reproduce una predicción teórica de Finazzi y Parentani (2011) con un error inferior al 0,75 %.
+El simulador básico (versión 1.0) se validó primero y quedó congelado. Reproduce la predicción teórica de Finazzi y Parentani (2011): la temperatura obtenida es entre el 95,7 % y el 98,5 % de la temperatura de Hawking ideal, y se acerca al 100 % a medida que el horizonte es más suave. (Con la temperatura corregida que proponen esos autores, el acuerdo es mejor que el 0,75 %, pero esa cifra depende de un parámetro ajustado por ellos para sus propios perfiles.)
 
 Después se extendió para variar la física a escalas pequeñas mediante un parámetro λ. El resultado fue sorprendente: al alejar λ de su valor original, en cualquiera de los dos sentidos, **la temperatura de la radiación caía a cero**. El efecto físico esperado era de unos pocos por ciento; aquello era un "colapso" total.
 

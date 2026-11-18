@@ -1,0 +1,5 @@
+omegas usadas 117: [0.004, 0.468]  (resto fuera de la ventana de Hawking: omitidas por el codigo)
+literal (2 Re B integrado): asimetria max|L-L^T|/max|L| = 7.93e-01
+codigo  (B+B^dag integrado): asimetria = 0.0e+00
+max|codigo - literal|/max|literal| (|x|<=25) = 3.97e-01
+max|codigo - sim(literal)|/max = 7.1e-16

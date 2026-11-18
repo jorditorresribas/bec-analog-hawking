@@ -22,10 +22,11 @@ points.
 
 | Result | Value | Reproduce |
 |---|---|---|
-| Benchmark v1.0 vs Finazzi & Parentani, PRD 83, 084010 (2011) | T_up/(κ̄/2π) ∈ [0.9926, 1.0050] for w ∈ {2,3,4,6,8} (≤ 0.75 %) | `python3 benchmarks/fp_v1/FP_check_reproduction.py` (~30 s) |
+| Benchmark v1.0 vs Finazzi & Parentani, PRD 83, 084010 (2011) | T_up/(κ/2π) = 0.957 → 0.985 for w = 2 → 8, approaching 1 as the horizon gets smoother. With FP's broadened-horizon κ̄ the agreement is ≤ 0.75 %, but only for their window width d = 1.58 (fitted to their profiles); with d = 1 or 2 it is 2–3 % (`docs/FP_BENCHMARK.md` §5b) | `python3 benchmarks/fp_v1/FP_check_reproduction.py` (~30 s) |
 | External validation vs Larré, Recati, Carusotto & Pavloff, PRA 85, 013621 (2012) | leading coefficient: relative error 2.4–2.9·10⁻⁵; secondary: < 10⁻³ | `python3 residual_anatomy/gates/gate_E1_lrcp.py` (~1 min) |
-| The "collapse" was an artefact (inconsistent background) | with a consistent background T_eff/T_H varies smoothly 0.979 → 0.892 for λ = 0.25 → 4 | `python3 residual_anatomy/diag_T2_qp_consistent.py` (~1 min) |
+| The "collapse" was an artefact (inconsistent background) | with a consistent background T_eff/T_H varies smoothly 0.979 → 0.892 for λ = 0.25 → 4. By the exact equivalence (λ, w) ≡ (1, w/√λ) (next row), this is the effect of the horizon width w/√λ = 4 → 1 in healing lengths, **not** of short-scale (UV) physics | `python3 residual_anatomy/diag_T2_qp_consistent.py` (~1 min) |
 | Goldstone (symmetry) test identifying the defect | measured / predicted residual = 1.0000 | `python3 residual_anatomy/diag_goldstone.py` (~7 min) |
+| With a consistent background, λ is an exact rescaling: (λ, w) ≡ (1, w/√λ) | the λ-solver and the v1.0 solver on the rescaled profile agree to ≤ 3.2·10⁻⁶ (rounding floor of the plain sparse solve ~7·10⁻⁶) in 90 points; with an equilibrated, iteratively refined solve of both sides, to ≤ 3.5·10⁻⁹ (`residual_anatomy/diag_conditioning_equiv.py`, ~2 min). So λ does **not** isolate short-scale physics | `python3 residual_anatomy/diag_scaling_equivalence.py` (~30 s) |
 
 **Scope.** No new physics is claimed: the robustness of the radiation against short-scale
 modifications was already established (Macher, Finazzi, Parentani and others). The
@@ -45,6 +46,9 @@ python3 -m pip install -r requirements.txt
 
 # Always run from the repository root:
 python3 benchmarks/fp_v1/FP_check_reproduction.py
+
+# All validations with pass/fail exit codes (~2 min):
+python3 tests/run_all.py
 ```
 
 `gate_E1_lrcp.py` refuses to overwrite existing results: move `out/e1_lrcp_*` aside first

@@ -106,3 +106,6 @@ if __name__ == "__main__":
     print(f"  TEST 2 (Thomas-Fermi):  {'PASA' if ok2 else 'FALLA'}")
     print("="*50)
     print("PNGs en out/")
+    # Codigo de salida (auditoria fase 1, 2026-11-17): un test que falla debe fallar.
+    # Tolerancias: las que ya usaba este archivo (soliton err RMS < 1e-2; TF err < 0.05).
+    _sys.exit(0 if (ok1 and ok2) else 1)

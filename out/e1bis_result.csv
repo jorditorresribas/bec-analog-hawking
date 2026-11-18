@@ -1,0 +1,17 @@
+tipo,prueba,m_u,valor,criterio,ok
+integridad,I0_criterios_en_commit,,HEAD=001a7ac4876c99d6cdd671e261cba2efad4dd66b,archivos en git y sin cambios,True
+integridad,I1_eqref_vs_spsolve,0.6,1.0307889896846154e-08,<= 1e-07,True
+integridad,I2_canales,0.6,todas las omega,Lin=1 Rin=2 Rin_neg=1 Lout=1 Rout=2,True
+integridad,I2_canales,0.7,todas las omega,Lin=1 Rin=2 Rin_neg=1 Lout=1 Rout=2,True
+integridad,I2_canales,0.5,todas las omega,Lin=1 Rin=2 Rin_neg=1 Lout=1 Rout=2,True
+integridad,I3_orden_observado_W2,0.6,2.0374664893017527,"in [1.5,2.5]",True
+integridad,I3_orden_observado_W2,0.7,1.9950295240729197,"in [1.5,2.5]",True
+integridad,I3_orden_observado_W2,0.5,2.013521668118197,"in [1.5,2.5]",True
+criterio,C1,0.6,5.42184900302465e-09,<= 1e-06,True
+criterio,C2,0.6,8.541769711426669e-09,<= 1e-06,True
+criterio,C3,0.6,5.42184900302465e-09,<= 1e-07,True
+criterio,C4,0.6,7.887762643500663e-07,<= 0.001,True
+criterio,C1,0.7,4.220182493922485e-08,<= 1e-06,True
+criterio,C2,0.7,3.6859672051170374e-08,<= 1e-06,True
+criterio,C3,0.7,4.220182493922485e-08,<= 1e-07,True
+criterio,C4,0.7,3.130423940925824e-06,<= 0.001,True
