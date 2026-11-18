@@ -85,18 +85,27 @@ def lderiv(p): return {o-1: c*o for o, c in p.items() if o != 0}
 
 
 MP = mpmath.mp
-MPS1 = {-2: MP.mpf(1)/12, -1: MP.mpf(-8)/12, 1: MP.mpf(8)/12, 2: MP.mpf(-1)/12}
-MPS2 = {-2: MP.mpf(-1)/12, -1: MP.mpf(16)/12, 0: MP.mpf(-30)/12, 1: MP.mpf(16)/12, 2: MP.mpf(-1)/12}
-MPS4 = {-3: MP.mpf(-1)/6, -2: MP.mpf(12)/6, -1: MP.mpf(-39)/6, 0: MP.mpf(56)/6, 1: MP.mpf(-39)/6, 2: MP.mpf(12)/6, 3: MP.mpf(-1)/6}
+# Coeficientes de los esténciles como RACIONALES EXACTOS (numerador, denominador); se convierten a mpf dentro de
+# workdps. (Ejecucion 1 de F1': se crearon como mpf al importar, con 15 digitos, y el redondeo, multiplicado por
+# gamma g/h^4 ~ 1e7, desplazaba las raices de la red como h^-4.)
+RS1 = {-2: (1, 12), -1: (-8, 12), 1: (8, 12), 2: (-1, 12)}
+RS2 = {-2: (-1, 12), -1: (16, 12), 0: (-30, 12), 1: (16, 12), 2: (-1, 12)}
+RS4 = {-3: (-1, 6), -2: (12, 6), -1: (-39, 6), 0: (56, 6), 1: (-39, 6), 2: (12, 6), 3: (-1, 6)}
+
+
+def mpst(rs):
+    return {o: MP.mpf(a)/b for o, (a, b) in rs.items()}
+
+
 DPS = 60
 
 
 def symbols(n0, v0, a0, gamma, h):
     """Simbolos de la red en alta precision (los datos double se toman como exactos)."""
     n0, v0, a0, gamma, h = (MP.mpf(float(q)) for q in (n0, v0, a0, gamma, h))
-    At = ladd(lpoly(MPS2, -MP.mpf(1)/2/h**2), {0: a0})
-    Bt = lpoly(MPS1, -1j*v0/h)                                 # -iB(z), con v' = 0 en la region asintotica
-    Kt = ladd({0: g*n0}, lpoly(MPS4, gamma*g*n0/h**4) if gamma else {})
+    At = ladd(lpoly(mpst(RS2), -MP.mpf(1)/2/h**2), {0: a0})
+    Bt = lpoly(mpst(RS1), -1j*v0/h)                                 # -iB(z), con v' = 0 en la region asintotica
+    Kt = ladd({0: g*n0}, lpoly(mpst(RS4), gamma*g*n0/h**4) if gamma else {})
     return At, Bt, Kt
 
 
