@@ -64,3 +64,30 @@ gates. La medición física sigue bloqueada hasta que pasen.
 Durante la depuración del *matching* y en estos gates se calcularon: n_L en el horizonte w = 2 para γ = 1 y 10 en
 ω ≈ 0,01, 0,05·T₀, 0,15·T₀ y 0,27·T₀ (para el defecto de pseudo-unitariedad), y casos homogéneos. **No se ha calculado
 ninguna temperatura T_up, ningún κ̄ ni ninguna anchura d\*, ni se ha ajustado ningún exponente.**
+
+---
+
+## Gates revisados F0′–F3′ (formulación de `docs/FASE2_DISENO.md` §6; criterios en commit `39f7607`)
+Código: `residual_anatomy/fase2/sextic4.py` y `gates_F4.py` (en commit `80014e4` antes de ejecutar).
+
+### Ejecución 1: F1′ FALLA (se paró ahí, como exigen los criterios)
+`out/fase2p_gates_run1_FALLA.log`. El criterio (a) falló: las raíces de la red se alejaban del continuo como h⁻⁴ (error de
+2·10⁻⁹ a 4·10⁻⁸ con γ = 10). **Causa: un error mío de implementación.** Los coeficientes de los esténciles en alta precisión
+se creaban al importar el módulo con los 15 dígitos por defecto de mpmath, y su redondeo, multiplicado por γg/h⁴ ≈ 10⁷,
+desplazaba las raíces. Se comprobó que la referencia del continuo era exacta (mpmath frente a `np.roots`: 10⁻¹⁶) y que
+`polyroots` convergía (error estimado 10⁻⁶¹). Corrección en `f64c58e`: coeficientes como racionales exactos convertidos
+dentro de `workdps`. **Criterios sin cambios.**
+
+### Ejecución 2: TODOS PASAN (`out/fase2p_gates_run.log`, `out/fase2p_F*.csv`)
+| Gate | Veredicto | Datos |
+|---|---|---|
+| F1′ homogéneo | **PASA** | raíces de la red → continuo con orden 4,00 (γ = 1 y 10, sub/supersónico); normas exactas; 10 raíces y 5 «away» por lado; \|T − 1\| ≤ 1,6·10⁻¹¹ y resto ≤ 2·10⁻¹⁵; suelo 0 |
+| F0′ Goldstone | **PASA** | residuo idéntico para γ = 0, 1, 10 (dif. 0); 1,03·10⁻⁹ → 3,27·10⁻¹⁰ → 6,47·10⁻¹¹, orden 4,00; fondo NO consistente: 1,4·10⁻² (γ = 1) y 0,14 (γ = 10), 10⁷–10⁸ veces mayor |
+| F1′(e) horizonte | **PASA** | defecto de pseudo-unitariedad 4,8·10⁻⁷ → 3,0·10⁻⁸ (γ = 1) y 2,1·10⁻⁷ → 1,3·10⁻⁸ (γ = 10), orden 4,0; suelo de n_L ≤ 3,7·10⁻⁹ |
+| F2′ γ → 0 | **PASA** | γ = 0: orden 4,00; límite del continuo frente al de v1.0: 5,9·10⁻⁹ (tol. 10⁻⁶). Informativo: n_L(γ) − n_L(0) = −1,0·10⁻⁴ / −2,7·10⁻⁴ / −6,7·10⁻⁴ para γ = 0,01 / 0,03 / 0,1 (orden en γ 0,8–0,9) |
+| F3′ no degeneración | **PASA** | γ = 10: D_min = 3,1·10⁻⁴ en s = 1,303, ruido 5,9·10⁻⁸ → 5340 × ruido; control λ = 4: D_min = 6·10⁻⁷ en s = 1,9999 (degenerado, como debe) |
+
+**Advertencia para la medición física (ver `FASE2_PREREG_ADDENDUM.md`):** la no degeneración es clara numéricamente
+(5340 veces el ruido), pero **pequeña en magnitud**: con γ = 10 y w = 2, el espectro n_L(ω) coincide a 3·10⁻⁴ con un
+reescalado del modelo γ = 0 (s ≈ 1,30). El efecto de la forma k⁶ sobre el espectro, en esta anchura, es casi un cambio de
+escala efectivo.
