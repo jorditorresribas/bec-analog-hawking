@@ -1,0 +1,22 @@
+I0: OK  HEAD=df1faf534dadebbc139b933ce72f5d48aad2cd18
+gamma=0.0  w=2.0: T_up/(kappa/2pi) = 0.957224  conv 1.2e-07   [6 s]
+gamma=0.0  w=3.0: T_up/(kappa/2pi) = 0.972997  conv 1.3e-07   [13 s]
+gamma=0.0  w=4.0: T_up/(kappa/2pi) = 0.978904  conv 1.3e-07   [19 s]
+gamma=0.0  w=6.0: T_up/(kappa/2pi) = 0.983241  conv 1.3e-07   [27 s]
+gamma=0.0  w=8.0: T_up/(kappa/2pi) = 0.984777  conv 1.3e-07   [36 s]
+gamma=1.0  w=2.0: T_up/(kappa/2pi) = 0.956481  conv 1.1e-08   [47 s]
+gamma=1.0  w=3.0: T_up/(kappa/2pi) = 0.972383  conv 1.2e-08   [58 s]
+gamma=1.0  w=4.0: T_up/(kappa/2pi) = 0.978519  conv 1.2e-08   [69 s]
+gamma=1.0  w=6.0: T_up/(kappa/2pi) = 0.983117  conv 1.0e-08   [82 s]
+gamma=1.0  w=8.0: T_up/(kappa/2pi) = 0.984732  conv 1.0e-08   [96 s]
+gamma=10.0 w=2.0: T_up/(kappa/2pi) = 0.939891  conv 1.4e-08   [107 s]
+gamma=10.0 w=3.0: T_up/(kappa/2pi) = 0.968957  conv 2.3e-08   [119 s]
+gamma=10.0 w=4.0: T_up/(kappa/2pi) = 0.976891  conv 2.6e-08   [131 s]
+gamma=10.0 w=6.0: T_up/(kappa/2pi) = 0.982414  conv 1.9e-08   [145 s]
+gamma=10.0 w=8.0: T_up/(kappa/2pi) = 0.984412  conv 2.1e-08   [159 s]
+p(gamma=0.0) = 0.6200  [16-84 %: 0.5600, 0.7040]  (d* en 5/5 anchuras)
+p(gamma=1.0) = 0.6135  [16-84 %: 0.5552, 0.6937]  (d* en 5/5 anchuras)
+p(gamma=10.0) = 0.5077  [16-84 %: 0.4238, 0.6435]  (d* en 5/5 anchuras)
+K: max |T_up/(k/2pi) - benchmark| = 3.2e-05 (<= 1e-4); p(0) = 0.6200 en [0.25, 0.42] -> FALLA
+VEREDICTO: SIN VEREDICTO (falla el control K)
+exit 0

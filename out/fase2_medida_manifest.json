@@ -1,0 +1,31 @@
+{
+  "medicion": "fase2",
+  "veredicto": "SIN VEREDICTO (falla el control K)",
+  "git_HEAD": "df1faf534dadebbc139b933ce72f5d48aad2cd18",
+  "tolerancias": {
+    "conv": 0.0001,
+    "K_T": 0.0001,
+    "K_p": [
+      0.25,
+      0.42
+    ],
+    "P1_dev": 0.05,
+    "P1_sep": 0.07,
+    "P0": 0.03,
+    "min_dstar": 4
+  },
+  "sha256": {
+    "residual_anatomy/FASE2_PREREG.md": "90874604079d6a8a5698beb5aa9db3e1b831b2412f76fbb35b643a696754ff09",
+    "residual_anatomy/FASE2_PREREG_ADDENDUM.md": "09c11586e8900e4e59c5c60f668db5a7d8fe71c07361bf111aeb46be22aac80b",
+    "residual_anatomy/fase2/measure_F2.py": "3fa2dfe8d61a536324396fba4ec8af1c69680fe7dbe1de59e78bfbb0b20b4e62",
+    "residual_anatomy/fase2/sextic4.py": "eb33b0b0864708c81a85c77f3d85ac996805daa204c207cceebc917f5ff7e7c0",
+    "out/fase2_medida_T.csv": "db421f047fc57ce1497987066db8f71b5a6b12624f050be4269c1a72dc9471df",
+    "out/fase2_medida_dstar.csv": "b6a542e926ea313318f62b0de6713fc4e72607da21cb791a3f5eca6c6615d5ca",
+    "out/fase2_medida_resultado.csv": "a55b90eaba242b08d9474fae0da2ac825db44c6d883b890f9b9ddfd1204b4142"
+  },
+  "python": "3.9.6",
+  "numpy": "2.0.2",
+  "scipy": "1.13.1",
+  "segundos": 159.2,
+  "fecha": "2026-11-18T17:55:40"
+}
